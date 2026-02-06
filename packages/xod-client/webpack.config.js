@@ -93,6 +93,7 @@ module.exports = pkgDir => ({
           {
             loader: 'sass-loader',
             options: {
+              implementation: require('sass'),
               outputStyle: 'expanded',
             },
           },

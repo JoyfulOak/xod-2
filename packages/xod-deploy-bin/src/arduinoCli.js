@@ -565,6 +565,23 @@ export const compile = async (onProgress, cli, payload) => {
 };
 
 /**
+ * Returns installed boards only.
+ *
+ * :: Path -> Path -> ArduinoCli -> Promise [InstalledBoard] Error
+ */
+export const listInstalledBoards = async (wsBundledPath, wsPath, cli) => {
+  await ensureWorkspace(wsBundledPath, wsPath);
+  await syncAdditionalPackages(wsPath, cli);
+
+  return cli.listInstalledBoardsRaw().catch(err => {
+    throw createError('LIST_INSTALLED_BOARDS_ERROR', {
+      pkgPath: getArduinoPackagesPath(wsPath),
+      error: err && err.message ? err.message : String(err),
+    });
+  });
+};
+
+/**
  * Compiles and uploads sketch through USB.
  *
  * payload object:

@@ -100,6 +100,14 @@
       @include deploymentPanelButton();
       @extend .icon-quick-upload;
     }
+    .board-select-button {
+      @include deploymentPanelButton();
+      font-size: 16px;
+      &:before {
+        display: block;
+        margin-top: -2px;
+      }
+    }
     .debug-button {
       @include deploymentPanelButton();
       @extend .icon-debug;
@@ -128,6 +136,29 @@
         line-height: 24px;
         opacity: 0.4;
       }
+    }
+  }
+
+  .BoardSelectPopup {
+    .board-selector {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    select {
+      width: 100%;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .error {
+      color: $red-bright;
     }
   }
 

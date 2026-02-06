@@ -6,6 +6,7 @@ import { loadWorkspacePath } from './workspaceActions';
 import { getPathToBundledWorkspace } from './utils';
 import {
   LIST_BOARDS,
+  LIST_INSTALLED_BOARDS,
   UPLOAD_TO_ARDUINO,
   UPDATE_INDEXES,
   CHECK_ARDUINO_DEPENDENCY_UPDATES,
@@ -40,6 +41,15 @@ export const subscribeListBoards = cli =>
         xdb.listBoards(getPathToBundledWorkspace(), ws, cli)
       ),
     LIST_BOARDS
+  );
+
+export const subscribeListInstalledBoards = cli =>
+  subscribeIpc(
+    () =>
+      loadWorkspacePath().then(ws =>
+        xdb.listInstalledBoards(getPathToBundledWorkspace(), ws, cli)
+      ),
+    LIST_INSTALLED_BOARDS
   );
 
 export const subscribeUpload = cli =>

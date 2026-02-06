@@ -13,7 +13,7 @@ import parseProgressLog from './parseProgressLog';
 const spawn = (bin, args, options) =>
   promisifyChildProcess(crossSpawn(bin, args, options), {
     encoding: 'utf8',
-    maxBuffer: 10 * 1024 * 1024,
+    maxBuffer: 50 * 1024 * 1024,
   });
 
 const noop = () => {};
@@ -39,7 +39,7 @@ const ArduinoCli = (pathToBin, config = null) => {
 
   const runWithProgress = async (onProgress, args) => {
     const spawnArgs = R.compose(
-      R.concat([`--config-file`, configDir]),
+      R.concat([`--config-file`, configPath]),
       R.reject(R.isEmpty)
     )(args);
     const proc = spawn(pathToBin, spawnArgs, {
@@ -56,20 +56,53 @@ const ArduinoCli = (pathToBin, config = null) => {
 
   const sketch = name => resolve(cfg.directories.user, name);
 
-  const runAndParseJson = args => runWithProgress(noop, args).then(JSON.parse);
+  const parseJsonOutput = text => {
+    const trimmed = (text || '').trim();
+    const jsonStart = trimmed.search(/[\[{]/);
+    if (jsonStart === -1) {
+      throw new Error('No JSON found in arduino-cli output');
+    }
+    const jsonText = jsonStart > 0 ? trimmed.slice(jsonStart) : trimmed;
+    return JSON.parse(jsonText);
+  };
+
+  const runAndParseJson = args => {
+    const spawnArgs = R.compose(
+      R.concat([`--config-file`, configPath]),
+      R.reject(R.isEmpty)
+    )(args);
+    const proc = spawn(pathToBin, spawnArgs, {
+      stdio: ['inherit', 'pipe', 'pipe'],
+    });
+    return proc.then(({ stdout, stderr }) =>
+      parseJsonOutput(`${stdout || ''}\n${stderr || ''}`)
+    );
+  };
 
   const listCores = () =>
     runWithProgress(noop, ['core', 'list', '--format=json'])
       .then(R.when(R.isEmpty, R.always('[]')))
       .then(JSON.parse);
 
-  const listBoardsWith = (listCmd, boardsGetter) =>
-    Promise.all([
-      listCores(),
-      runAndParseJson(['board', listCmd, '--format=json']),
-    ]).then(([cores, boards]) =>
-      patchBoardsWithOptions(cfg.directories.data, cores, boardsGetter(boards))
+  const normalizeBoards = boards =>
+    R.map(
+      board =>
+        R.has('FQBN', board)
+          ? R.merge({ fqbn: board.FQBN }, R.omit(['FQBN'], board))
+          : board,
+      boards
     );
+
+  const listBoardsRaw = listCmd =>
+    runAndParseJson(['board', listCmd, '--format=json'])
+      .then(R.propOr([], 'boards'))
+      .then(normalizeBoards);
+
+  const listBoardsWith = (listCmd, boardsGetter) =>
+    Promise.all([listCores(), runAndParseJson(['board', listCmd, '--format=json'])])
+      .then(([cores, boards]) =>
+        patchBoardsWithOptions(cfg.directories.data, cores, boardsGetter(boards))
+      );
 
   const getConfig = () =>
     runWithProgress(noop, ['config', 'dump']).then(YAML.parse);
@@ -93,6 +126,7 @@ const ArduinoCli = (pathToBin, config = null) => {
     },
     listConnectedBoards: () => listBoardsWith('list', R.prop('serialBoards')),
     listInstalledBoards: () => listBoardsWith('listall', R.prop('boards')),
+    listInstalledBoardsRaw: () => listBoardsRaw('listall'),
     listAvailableBoards: () =>
       listAvailableBoards(getConfig, cfg.directories.data),
     compile: (onProgress, fqbn, sketchName, verbose = false) =>

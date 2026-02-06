@@ -23,6 +23,7 @@ import {
 } from './arduinoActions';
 import {
   subscribeListBoards,
+  subscribeListInstalledBoards,
   subscribeUpload,
   subscribeUpdateIndexes,
   subscribeCheckUpdates,
@@ -348,6 +349,7 @@ const onReady = () => {
         unsubscribers = [
           subscribeSwitchWorkspace(),
           subscribeListBoards(arduinoCli),
+          subscribeListInstalledBoards(arduinoCli),
           subscribeUpload(arduinoCli),
           subscribeUpdateIndexes(arduinoCli),
           subscribeCheckUpdates(arduinoCli),

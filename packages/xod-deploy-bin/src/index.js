@@ -4,6 +4,7 @@ export {
   checkUpdates,
   compile,
   createCli,
+  listInstalledBoards,
   listBoards,
   patchFqbnWithOptions,
   prepareSketchDir,
