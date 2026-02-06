@@ -1,12 +1,12 @@
 import * as R from 'ramda';
-import { resolve } from 'path';
+import path, { resolve } from 'path';
 import { promisifyChildProcess } from 'promisify-child-process';
 import crossSpawn from 'cross-spawn';
 import YAML from 'yamljs';
 import { remove } from 'fs-extra';
 
 import { saveConfig, configure, setPackageIndexUrls } from './config';
-import { patchBoardsWithOptions } from './optionParser';
+import { patchBoardsWithOptions, getBoardsTxtPath } from './optionParser';
 import listAvailableBoards from './listAvailableBoards';
 import parseProgressLog from './parseProgressLog';
 
@@ -79,6 +79,16 @@ const ArduinoCli = (pathToBin, config = null) => {
     );
   };
 
+  const runAndParseJsonGlobal = args => {
+    const spawnArgs = R.reject(R.isEmpty)(args);
+    const proc = spawn(pathToBin, spawnArgs, {
+      stdio: ['inherit', 'pipe', 'pipe'],
+    });
+    return proc.then(({ stdout, stderr }) =>
+      parseJsonOutput(`${stdout || ''}\n${stderr || ''}`)
+    );
+  };
+
   const listCores = () =>
     runWithProgress(noop, ['core', 'list', '--format=json'])
       .then(R.when(R.isEmpty, R.always('[]')))
@@ -93,6 +103,22 @@ const ArduinoCli = (pathToBin, config = null) => {
       boards
     );
 
+  const addLegacyFqbn = board =>
+    board && board.fqbn && !board.FQBN ? R.assoc('FQBN', board.fqbn, board) : board;
+
+  const getInstalledBoardsFromListAll = boards =>
+    R.filter(R.pathEq(['platform', 'release', 'installed'], true), boards);
+
+  const getCoresFromBoards = boards =>
+    R.compose(
+      R.uniqBy(R.prop('ID')),
+      R.reject(R.anyPass([R.propEq('ID', undefined), R.propEq('Installed', undefined)])),
+      R.map(board => ({
+        ID: R.path(['platform', 'metadata', 'id'], board),
+        Installed: R.path(['platform', 'release', 'version'], board),
+      }))
+    )(boards);
+
   const listBoardsRaw = listCmd =>
     runAndParseJson(['board', listCmd, '--format=json'])
       .then(R.propOr([], 'boards'))
@@ -106,6 +132,26 @@ const ArduinoCli = (pathToBin, config = null) => {
 
   const getConfig = () =>
     runWithProgress(noop, ['config', 'dump']).then(YAML.parse);
+
+  const getGlobalConfig = () =>
+    runAndParseJsonGlobal(['config', 'dump', '--format=json']);
+
+  const ensureBoardsTxtFiles = async (workspaceDataDir, globalDataDir, boards) => {
+    if (!globalDataDir) return;
+    const cores = getCoresFromBoards(boards);
+    await Promise.all(
+      R.map(async core => {
+        const dest = getBoardsTxtPath(workspaceDataDir, core.ID, core.Installed);
+        const destExists = await fse.pathExists(dest);
+        if (destExists) return;
+        const src = getBoardsTxtPath(globalDataDir, core.ID, core.Installed);
+        const srcExists = await fse.pathExists(src);
+        if (!srcExists) return;
+        await fse.ensureDir(path.dirname(dest));
+        await fse.copy(src, dest);
+      }, cores)
+    );
+  };
 
   return {
     getPathToBin: () => pathToBin,
@@ -126,7 +172,26 @@ const ArduinoCli = (pathToBin, config = null) => {
     },
     listConnectedBoards: () => listBoardsWith('list', R.prop('serialBoards')),
     listInstalledBoards: () => listBoardsWith('listall', R.prop('boards')),
-    listInstalledBoardsRaw: () => listBoardsRaw('listall'),
+    listInstalledBoardsRaw: () =>
+      runAndParseJson(['board', 'listall', '--format=json'])
+        .then(R.propOr([], 'boards'))
+        .then(getInstalledBoardsFromListAll)
+        .then(R.map(addLegacyFqbn))
+        .then(async boards => {
+          let globalDataDir = null;
+          try {
+            const globalCfg = await getGlobalConfig();
+            globalDataDir = R.path(['config', 'directories', 'data'], globalCfg);
+          } catch (err) {
+            globalDataDir = null;
+          }
+          await ensureBoardsTxtFiles(cfg.directories.data, globalDataDir, boards);
+          return patchBoardsWithOptions(
+            cfg.directories.data,
+            getCoresFromBoards(boards),
+            boards
+          );
+        }),
     listAvailableBoards: () =>
       listAvailableBoards(getConfig, cfg.directories.data),
     compile: (onProgress, fqbn, sketchName, verbose = false) =>

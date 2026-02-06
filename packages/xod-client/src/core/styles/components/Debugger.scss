@@ -100,13 +100,9 @@
       @include deploymentPanelButton();
       @extend .icon-quick-upload;
     }
-    .board-select-button {
+    .abort-upload-button {
       @include deploymentPanelButton();
-      font-size: 16px;
-      &:before {
-        display: block;
-        margin-top: -2px;
-      }
+      @extend .icon-abort-upload;
     }
     .debug-button {
       @include deploymentPanelButton();

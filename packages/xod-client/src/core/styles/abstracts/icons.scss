@@ -36,6 +36,9 @@
 .icon-quick-upload {
   @include icon('../assets/icons/quick-upload.svg');
 }
+.icon-abort-upload {
+  @include icon('../assets/icons/abort-upload-x.svg');
+}
 .icon-debug {
   @include icon('../assets/icons/debug.svg');
 }

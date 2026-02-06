@@ -86,6 +86,15 @@ const moveEntities = (positionLens, deltaPosition) =>
     )
   );
 
+const MANAGED_LIBRARY = 'my/nodes';
+const MANAGED_LIBRARY_PATCH = `${MANAGED_LIBRARY}/index`;
+
+const ensureManagedLibraryPatch = project => {
+  if (XP.hasPatch(MANAGED_LIBRARY_PATCH, project)) return project;
+  const patch = XP.createPatch();
+  return XP.assocPatch(MANAGED_LIBRARY_PATCH, patch, project);
+};
+
 // :: LibName -> Project -> Project
 const omitLibPatches = R.curry((libName, project) =>
   R.compose(
@@ -158,7 +167,10 @@ export default (state = {}, action) => {
 
       const newProject = XP.createProject();
 
-      return XP.mergePatchesList([mainPatch, ...libraryPatches], newProject);
+      return R.compose(
+        ensureManagedLibraryPatch,
+        XP.mergePatchesList([mainPatch, ...libraryPatches], newProject)
+      )();
     }
 
     case AT.PROJECT_IMPORT: {
@@ -181,7 +193,36 @@ export default (state = {}, action) => {
           setterFn(action.payload[propName])
         )(_state)
       );
+      const updateRemovedLibraries = _state =>
+        R.has('removedLibraries', action.payload)
+          ? R.assoc(
+              'removedLibraries',
+              R.uniq(
+                R.concat(
+                  R.pathOr([], ['removedLibraries'], _state),
+                  action.payload.removedLibraries || []
+                )
+              ),
+              _state
+            )
+          : _state;
+      const updateRemovedLibraryPatches = _state =>
+        R.has('removedLibraryPatches', action.payload)
+          ? R.assoc(
+              'removedLibraryPatches',
+              R.uniq(
+                R.concat(
+                  R.pathOr([], ['removedLibraryPatches'], _state),
+                  action.payload.removedLibraryPatches || []
+                )
+              ),
+              _state
+            )
+          : _state;
+
       return R.compose(
+        updateRemovedLibraryPatches,
+        updateRemovedLibraries,
         updateMeta('name', XP.setProjectName),
         updateMeta('version', XP.setProjectVersion),
         updateMeta('license', XP.setProjectLicense),
@@ -223,8 +264,25 @@ export default (state = {}, action) => {
 
     case AT.PATCH_DELETE: {
       const { patchPath } = action.payload;
+      const nextState = XP.dissocPatch(patchPath, state);
+      if (XP.isPathLocal(patchPath)) {
+        return nextState;
+      }
 
-      return XP.dissocPatch(patchPath, state);
+      const removedLibraryPatches = R.pathOr(
+        [],
+        ['removedLibraryPatches'],
+        nextState
+      );
+      return R.assoc(
+        'removedLibraryPatches',
+        R.uniq(R.append(patchPath, removedLibraryPatches)),
+        nextState
+      );
+    }
+    case AT.LIBRARY_DELETE: {
+      const { libName } = action.payload;
+      return omitLibPatches(libName, state);
     }
 
     case AT.PATCH_DESCRIPTION_UPDATE: {
@@ -244,11 +302,19 @@ export default (state = {}, action) => {
     }
 
     case INSTALL_LIBRARIES_COMPLETE: {
+      const removedLibraryPatches = R.pathOr(
+        [],
+        ['removedLibraryPatches'],
+        state
+      );
       const patches = R.compose(
         R.unnest,
         R.values,
         R.mapObjIndexed((proj, name) =>
           R.compose(
+            R.reject(patch =>
+              R.contains(XP.getPatchPath(patch), removedLibraryPatches)
+            ),
             XP.prepareLibPatchesToInsertIntoProject(R.__, proj),
             getLibName
           )(name)

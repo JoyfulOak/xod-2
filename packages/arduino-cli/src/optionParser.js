@@ -154,13 +154,20 @@ export const patchBoardsWithOptions = R.curry(
   async (dataPath, cores, boards) => {
     if (!boards) return [];
 
-    // Map CoreID Object
+    // Map CoreID Object; ignore cores without boards.txt
     const boardTxtContentsByCoreId = await R.compose(
       promiseAllProperties,
-      R.map(txtPath => fse.readFile(txtPath, 'utf8')),
-      R.map(core => getBoardsTxtPath(dataPath, core.ID, core.Installed)),
+      R.map(core => fse.readFile(core.txtPath, 'utf8')),
       R.indexBy(R.prop('ID'))
-    )(cores);
+    )(
+      await Promise.all(
+        R.map(async core => {
+          const txtPath = getBoardsTxtPath(dataPath, core.ID, core.Installed);
+          const exists = await fse.pathExists(txtPath);
+          return exists ? R.assoc('txtPath', txtPath, core) : null;
+        }, cores)
+      ).then(R.reject(R.isNil))
+    );
 
     const optionsByCoreAndBoard = R.map(
       boardsTxtContents => ({

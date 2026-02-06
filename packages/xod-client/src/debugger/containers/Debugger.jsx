@@ -23,7 +23,6 @@ import {
 
 import Log from './Log';
 import SerialInput from '../components/SerialInput';
-import PopupForm from '../../utils/components/PopupForm';
 
 import * as EditorSelectors from '../../editor/selectors';
 import * as EditorActions from '../../editor/actions';
@@ -57,20 +56,8 @@ class Debugger extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isBoardSelectorOpen: false,
-      isBoardsLoading: false,
-      boards: [],
-      selectedBoard: null,
-      boardsError: '',
-    };
-
     this.onCopyLogClicked = this.onCopyLogClicked.bind(this);
     this.onSaveLogClicked = this.onSaveLogClicked.bind(this);
-    this.openBoardSelector = this.openBoardSelector.bind(this);
-    this.closeBoardSelector = this.closeBoardSelector.bind(this);
-    this.onBoardChange = this.onBoardChange.bind(this);
-    this.onBoardSave = this.onBoardSave.bind(this);
   }
 
   onCopyLogClicked() {
@@ -112,93 +99,6 @@ class Debugger extends React.PureComponent {
     }
   }
 
-  getIpcRenderer() {
-    if (typeof window === 'undefined') return null;
-    try {
-      if (window.require) {
-        // Electron renderer (contextIsolation disabled)
-        return window.require('electron').ipcRenderer;
-      }
-    } catch (err) {
-      return null;
-    }
-    return null;
-  }
-
-  openBoardSelector() {
-    const ipcRenderer = this.getIpcRenderer();
-    if (!ipcRenderer) {
-      this.setState({
-        isBoardSelectorOpen: true,
-        boardsError: 'Board list is available only in the Electron app.',
-      });
-      return;
-    }
-
-    this.setState({
-      isBoardSelectorOpen: true,
-      isBoardsLoading: true,
-      boardsError: '',
-    });
-
-    const LIST_BOARDS = 'EVENT_LIST_INSTALLED_BOARDS';
-    const LIST_BOARDS_COMPLETE = `${LIST_BOARDS}:complete`;
-    const LIST_BOARDS_ERROR = `${LIST_BOARDS}:error`;
-    const GET_SELECTED_BOARD = 'EVENT_GET_SELECTED_BOARD';
-
-    ipcRenderer.once(LIST_BOARDS_COMPLETE, (_, payload) => {
-      const installed = payload && payload.installed;
-      const boards = Array.isArray(installed) ? installed : payload || [];
-
-      this.setState({
-        isBoardsLoading: false,
-        boards,
-      });
-    });
-
-    ipcRenderer.once(LIST_BOARDS_ERROR, (_, payload) => {
-      this.setState({
-        isBoardsLoading: false,
-        boardsError: payload && payload.message ? payload.message : 'Failed to load boards list.',
-      });
-    });
-
-    ipcRenderer.once(GET_SELECTED_BOARD, (_, payload) => {
-      if (payload && payload.err) return;
-      this.setState({
-        selectedBoard: payload ? payload.data : null,
-      });
-    });
-
-    ipcRenderer.send(LIST_BOARDS);
-    ipcRenderer.send(GET_SELECTED_BOARD);
-  }
-
-  closeBoardSelector() {
-    this.setState({
-      isBoardSelectorOpen: false,
-      boardsError: '',
-    });
-  }
-
-  onBoardChange(event) {
-    const { boards } = this.state;
-    const idx = Number(event.target.value);
-    const selectedBoard = Number.isNaN(idx) ? null : boards[idx] || null;
-    this.setState({ selectedBoard });
-  }
-
-  onBoardSave() {
-    const ipcRenderer = this.getIpcRenderer();
-    if (!ipcRenderer) {
-      this.closeBoardSelector();
-      return;
-    }
-
-    const SET_SELECTED_BOARD = 'EVENT_SET_SELECTED_BOARD';
-    ipcRenderer.send(SET_SELECTED_BOARD, this.state.selectedBoard);
-    this.closeBoardSelector();
-  }
 
   renderControlsForExpandedState() {
     const {
@@ -319,12 +219,6 @@ class Debugger extends React.PureComponent {
     );
 
     const isDebuggerTab = currentTab === LOG_TAB_TYPE.DEBUGGER;
-    const { isBoardSelectorOpen, boards, isBoardsLoading, boardsError, selectedBoard } = this.state;
-
-    const selectedIndex = selectedBoard
-      ? boards.findIndex(b => b.fqbn === selectedBoard.fqbn && b.name === selectedBoard.name)
-      : -1;
-
     return (
       <div className={cn('Debugger', { isCollapsed: !isExpanded })}>
         <div className="titlebar">
@@ -385,13 +279,6 @@ class Debugger extends React.PureComponent {
             onClick={onUploadClick}
             title="Upload to Arduino"
           />
-          <Icon
-            Component="button"
-            name="list-alt"
-            className="board-select-button"
-            title="Select Board"
-            onClick={this.openBoardSelector}
-          />
           <button
             className="debug-button"
             onClick={onUploadAndDebugClick}
@@ -403,6 +290,11 @@ class Debugger extends React.PureComponent {
             className="simulation-button"
             title="Simulate"
             onClick={onRunSimulationClick}
+          />
+          <button
+            className="abort-upload-button"
+            title="Stop Upload"
+            onClick={this.props.onAbortUploadClick}
           />
           <Icon
             Component="button"
@@ -427,47 +319,6 @@ class Debugger extends React.PureComponent {
           </React.Fragment>
         ) : null}
 
-        <PopupForm
-          className="BoardSelectPopup"
-          title="Select Arduino Board"
-          isVisible={isBoardSelectorOpen}
-          onClose={this.closeBoardSelector}
-        >
-          {isBoardsLoading ? (
-            <p>Loading boards…</p>
-          ) : null}
-          {boardsError ? <p className="error">{boardsError}</p> : null}
-          {!isBoardsLoading && !boardsError ? (
-            <div className="board-selector">
-              <label htmlFor="board-selector-dropdown">Board</label>
-              <select
-                id="board-selector-dropdown"
-                value={selectedIndex}
-                onChange={this.onBoardChange}
-              >
-                <option value={-1}>Select a board…</option>
-                {boards.map((board, idx) => {
-                  const label = board.fqbn
-                    ? `${board.name} (${board.fqbn})`
-                    : board.name || 'Unknown board';
-                  return (
-                    <option key={board.fqbn || `${board.name}-${idx}`} value={idx}>
-                      {label}
-                    </option>
-                  );
-                })}
-              </select>
-              <div className="actions">
-                <button type="button" onClick={this.onBoardSave} disabled={!selectedBoard}>
-                  Save
-                </button>
-                <button type="button" onClick={this.closeBoardSelector}>
-                  Cancel
-                </button>
-              </div>
-            </div>
-          ) : null}
-        </PopupForm>
       </div>
     );
   }
@@ -490,6 +341,7 @@ Debugger.propTypes = {
   actions: PropTypes.objectOf(PropTypes.func),
   onUploadClick: PropTypes.func.isRequired,
   onUploadAndDebugClick: PropTypes.func.isRequired,
+  onAbortUploadClick: PropTypes.func,
   onRunSimulationClick: PropTypes.func.isRequired,
   stopDebuggerSession: PropTypes.func.isRequired,
 };

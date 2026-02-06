@@ -68,10 +68,55 @@ const copy = (from, to) =>
     return fse.ensureDir(to).then(() => to);
   });
 
+const LIBS_SYNC_FILENAME = '.xod-libs-sync.json';
+
+const getLibsFingerprint = async libDir => {
+  const exists = await fse.pathExists(libDir);
+  if (!exists) return [];
+  const entries = await fse.readdir(libDir);
+  const stats = await Promise.all(
+    entries.map(async name => {
+      const fullPath = path.join(libDir, name);
+      const stat = await fse.stat(fullPath);
+      return {
+        name,
+        mtimeMs: stat.mtimeMs,
+        size: stat.size,
+        isDir: stat.isDirectory(),
+      };
+    })
+  );
+  return stats.sort((a, b) => a.name.localeCompare(b.name));
+};
+
+const shouldSyncLibraries = async (bundledLibDir, userLibDir, sketchbookLibDir) => {
+  const markerPath = path.join(sketchbookLibDir, LIBS_SYNC_FILENAME);
+  const [bundledFingerprint, userFingerprint] = await Promise.all([
+    getLibsFingerprint(bundledLibDir),
+    getLibsFingerprint(userLibDir),
+  ]);
+  const fingerprint = {
+    bundled: bundledFingerprint,
+    user: userFingerprint,
+  };
+
+  const markerExists = await fse.pathExists(markerPath);
+  if (!markerExists) return { shouldSync: true, fingerprint, markerPath };
+
+  const previous = await fse.readJson(markerPath).catch(() => null);
+  const same = previous && JSON.stringify(previous) === JSON.stringify(fingerprint);
+  return { shouldSync: !same, fingerprint, markerPath };
+};
+
 // :: Path -> Path -> Path -> Promise Path Error
 const copyLibraries = async (bundledLibDir, userLibDir, sketchbookLibDir) => {
-  await copy(bundledLibDir, sketchbookLibDir);
-  await copy(userLibDir, sketchbookLibDir);
+  const { shouldSync, fingerprint, markerPath } =
+    await shouldSyncLibraries(bundledLibDir, userLibDir, sketchbookLibDir);
+  if (shouldSync) {
+    await copy(bundledLibDir, sketchbookLibDir);
+    await copy(userLibDir, sketchbookLibDir);
+    await fse.writeJson(markerPath, fingerprint);
+  }
   return sketchbookLibDir;
 };
 
@@ -280,8 +325,14 @@ export const wrapUploadError = err =>
  *
  * :: _ -> Promise Path Error
  */
-export const prepareSketchDir = () =>
-  fse.mkdtemp(path.resolve(os.tmpdir(), 'xod_temp_sketchbook'));
+export const prepareSketchDir = async (wsPath = null) => {
+  if (!wsPath) {
+    return fse.mkdtemp(path.resolve(os.tmpdir(), 'xod_temp_sketchbook'));
+  }
+  const sketchDir = path.join(getArduinoPackagesPath(wsPath), 'sketchbook');
+  await fse.ensureDir(sketchDir);
+  return sketchDir;
+};
 
 /**
  * Prepare `__packages__` directory inside user's workspace if
@@ -340,6 +391,8 @@ export const createCli = async (
     wsBundledPath,
     wsPath
   );
+  const buildCachePath = path.join(packagesDirPath, 'build_cache');
+  await fse.ensureDir(buildCachePath);
 
   if (!await fse.pathExists(arduinoCliPath)) {
     throw createError('ARDUINO_CLI_NOT_FOUND', {
@@ -352,6 +405,9 @@ export const createCli = async (
     directories: {
       user: sketchDir,
       data: packagesDirPath,
+    },
+    build_cache: {
+      path: buildCachePath,
     },
   });
 
@@ -544,7 +600,8 @@ export const compile = async (onProgress, cli, payload) => {
     tab: 'compiler',
   });
 
-  const compileLog = await cli
+  let compileLog;
+  compileLog = await cli
     .compile(
       stdout =>
         onProgress({
@@ -556,6 +613,12 @@ export const compile = async (onProgress, cli, payload) => {
       sketchName
     )
     .catch(wrapCompileError);
+
+  onProgress({
+    percentage: 100,
+    message: '',
+    tab: 'compiler',
+  });
 
   return {
     sketchName,
@@ -607,7 +670,7 @@ export const uploadThroughUSB = async (onProgress, cli, payload) => {
   );
 
   onProgress({
-    percentage: 50,
+    percentage: 100,
     message: UPLOAD_PROCESS_BEGINS,
     tab: 'uploader',
   });
@@ -616,7 +679,7 @@ export const uploadThroughUSB = async (onProgress, cli, payload) => {
     .upload(
       stdout =>
         onProgress({
-          percentage: 60,
+          percentage: 100,
           message: stdout,
           tab: 'uploader',
         }),

@@ -27,12 +27,24 @@ const PatchGroupItemContextMenu = props => {
     </MenuItem>
   ) : null;
 
-  const deletePatch = trigger.isLocalPatch ? (
+  const isManagedIndex = trigger.patchPath === 'my/nodes/index';
+  const canDelete = !isManagedIndex;
+
+  const deletePatch = canDelete ? (
     <MenuItem
       onClick={onContextMenuItemClick(props.onPatchDelete)}
       attributes={{ 'data-id': 'delete' }}
     >
       Delete
+    </MenuItem>
+  ) : null;
+
+  const moveToMyNodes = trigger.isLocalPatch ? (
+    <MenuItem
+      onClick={onContextMenuItemClick(props.onPatchMoveToMyNodes)}
+      attributes={{ 'data-id': 'move-to-mynodes' }}
+    >
+      Move
     </MenuItem>
   ) : null;
 
@@ -71,6 +83,7 @@ const PatchGroupItemContextMenu = props => {
       </MenuItem>
       {clonePatch}
       {renamePatch}
+      {moveToMyNodes}
       {deletePatch}
       <MenuItem divider />
       <MenuItem
@@ -90,6 +103,7 @@ PatchGroupItemContextMenu.propTypes = {
     patchPath: PropTypes.string.isRequired,
     canAdd: PropTypes.bool.isRequired,
     isLocalPatch: PropTypes.bool.isRequired,
+    libraryName: PropTypes.string.isRequired,
     /* eslint-enable react/no-unused-prop-types */
   }),
   onPatchAdd: PropTypes.func.isRequired,
@@ -98,6 +112,7 @@ PatchGroupItemContextMenu.propTypes = {
   onPatchRename: PropTypes.func.isRequired,
   onPatchHelp: PropTypes.func.isRequired,
   onPatchClone: PropTypes.func.isRequired,
+  onPatchMoveToMyNodes: PropTypes.func.isRequired,
 };
 
 export default connectMenu(PATCH_GROUP_CONTEXT_MENU_ID)(

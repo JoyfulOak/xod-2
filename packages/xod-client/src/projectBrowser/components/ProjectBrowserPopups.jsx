@@ -10,7 +10,9 @@ import { isPopupVisible } from '../../popups/selectors';
 
 import PopupPrompt from '../../utils/components/PopupPrompt';
 import PopupConfirm from '../../utils/components/PopupConfirm';
+import PopupAlert from '../../utils/components/PopupAlert';
 import { patchBasenameMask } from '../../utils/inputFormatting';
+import LibraryManagerPopup from './LibraryManagerPopup';
 
 class ProjectBrowserPopups extends React.PureComponent {
   constructor(props) {
@@ -70,6 +72,18 @@ class ProjectBrowserPopups extends React.PureComponent {
     );
   }
 
+  renderMovedToMyNodesPopup() {
+    return (
+      <PopupAlert
+        key="moved_to_mynodes"
+        title="Moved"
+        onClose={this.props.onCloseAllPopups}
+      >
+        Moved to my/nodes.
+      </PopupAlert>
+    );
+  }
+
   render() {
     if (isPopupVisible(POPUP_ID.RENAMING_PATCH, this.props.popups)) {
       return this.renderPatchRenamingPopup();
@@ -77,7 +91,23 @@ class ProjectBrowserPopups extends React.PureComponent {
     if (isPopupVisible(POPUP_ID.DELETING_PATCH, this.props.popups)) {
       return this.renderPatchDeletingPopup();
     }
-
+    if (isPopupVisible(POPUP_ID.MOVED_TO_MYNODES, this.props.popups)) {
+      return this.renderMovedToMyNodesPopup();
+    }
+    if (isPopupVisible(POPUP_ID.LIBRARY_MANAGER, this.props.popups)) {
+      return (
+        <LibraryManagerPopup
+          isVisible
+          onClose={this.props.onCloseAllPopups}
+          onMovePatch={this.props.onMovePatchToLibrary}
+          onDeleteLibrary={this.props.onDeleteLibrary}
+          onSwitchPatch={this.props.onSwitchPatch}
+          currentPatchPath={this.props.currentPatchPath}
+          localPatches={this.props.localPatches}
+          libraryNames={this.props.libraryNames}
+        />
+      );
+    }
     return null;
   }
 }
@@ -87,15 +117,22 @@ ProjectBrowserPopups.propTypes = {
   selectedPatchName: PropTypes.string,
   popups: PropTypes.object,
   projectName: PropTypes.string,
-
+  currentPatchPath: PropTypes.object,
+  localPatches: PropTypes.array,
+  libraryNames: PropTypes.array,
   onPatchRename: PropTypes.func.isRequired,
   onPatchDelete: PropTypes.func.isRequired,
+  onMovePatchToLibrary: PropTypes.func.isRequired,
+  onDeleteLibrary: PropTypes.func.isRequired,
+  onSwitchPatch: PropTypes.func.isRequired,
 
   onCloseAllPopups: PropTypes.func.isRequired,
 };
 
 ProjectBrowserPopups.defaultProps = {
   selectedPatchPath: null,
+  localPatches: [],
+  libraryNames: [],
 };
 
 export default ProjectBrowserPopups;

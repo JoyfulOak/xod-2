@@ -201,6 +201,71 @@ export const deletePatch = patchPath => ({
   },
 });
 
+export const movePatchToLibrary = (patchPath, libName) => (
+  dispatch,
+  getState
+) => {
+  const targetLib = 'my/nodes';
+  if (libName && libName !== targetLib) {
+    // Ignore any external input and force managed library
+    // to keep moves consistent across projects.
+  }
+  if (!XP.isLibName(targetLib)) {
+    return dispatch(
+      addError(composeMessage('Invalid library name. Use owner/lib'))
+    );
+  }
+
+  if (XP.isPathBuiltIn(patchPath)) {
+    return dispatch(addError(composeMessage('Can not move built-in patch')));
+  }
+
+  const newPatchPath = `${targetLib}/${XP.getBaseName(patchPath)}`;
+  const state = getState();
+
+  if (newPatchPath !== patchPath && isPatchPathTaken(state, newPatchPath)) {
+    return dispatch(addError(PROJECT_BROWSER_ERRORS.PATCH_NAME_TAKEN));
+  }
+
+  return dispatch({
+    type: ActionType.PATCH_RENAME,
+    payload: {
+      newPatchPath,
+      oldPatchPath: patchPath,
+    },
+    meta: { autoSave: true },
+  });
+};
+
+export const deleteLibrary = libName => dispatch => {
+  if (!XP.isLibName(libName)) {
+    return dispatch(
+      addError(composeMessage('Invalid library name. Use owner/lib'))
+    );
+  }
+
+  if (libName === 'my/nodes') {
+    return dispatch(addError(composeMessage('Can not delete managed library')));
+  }
+
+  if (XP.isBuiltInLibName(libName)) {
+    return dispatch(addError(composeMessage('Can not delete built-in library')));
+  }
+
+  dispatch({
+    type: ActionType.PROJECT_UPDATE_META,
+    payload: {
+      removedLibraries: [libName],
+    },
+  });
+
+  return dispatch({
+    type: ActionType.LIBRARY_DELETE,
+    payload: { libName },
+    meta: { autoSave: true },
+  });
+};
+
 export const updatePatchDescription = (patchDescription, patchPath) => ({
   type: ActionType.PATCH_DESCRIPTION_UPDATE,
   payload: {

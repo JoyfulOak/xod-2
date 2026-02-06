@@ -45,6 +45,9 @@ const rawItems = {
   addLibrary: {
     label: 'Add Library...',
   },
+  manageLibraries: {
+    label: 'Manage Libraries...',
+  },
   publish: {
     label: 'Publish Library...',
   },

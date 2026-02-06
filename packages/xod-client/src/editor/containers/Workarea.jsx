@@ -93,6 +93,7 @@ class Workarea extends React.Component {
             stopDebuggerSession={this.props.stopDebuggerSession}
             onUploadClick={this.props.onUploadClick}
             onUploadAndDebugClick={this.props.onUploadAndDebugClick}
+            onAbortUploadClick={this.props.onAbortUploadClick}
             onRunSimulationClick={this.props.onRunSimulationClick}
           />
         </ReflexElement>
@@ -114,6 +115,7 @@ Workarea.propTypes = {
   stopDebuggerSession: PropTypes.func.isRequired,
   onUploadClick: PropTypes.func.isRequired,
   onUploadAndDebugClick: PropTypes.func.isRequired,
+  onAbortUploadClick: PropTypes.func,
   onRunSimulationClick: PropTypes.func.isRequired,
   // Actions binded with connect
   actions: PropTypes.shape({

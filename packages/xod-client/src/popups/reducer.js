@@ -6,6 +6,8 @@ import {
   PATCH_CREATE_REQUESTED,
   PATCH_RENAME_REQUESTED,
   PATCH_DELETE_REQUESTED,
+  LIBRARY_MANAGER_REQUESTED,
+  PATCH_MOVE_TO_MYNODES_DONE,
 } from '../projectBrowser/actionTypes';
 import {
   HIDE_ALL_POPUPS,
@@ -81,6 +83,10 @@ const popupsReducer = (state = initialState, action) => {
       return showOnlyPopup(POPUP_ID.RENAMING_PATCH, {}, state);
     case PATCH_DELETE_REQUESTED:
       return showOnlyPopup(POPUP_ID.DELETING_PATCH, {}, state);
+    case PATCH_MOVE_TO_MYNODES_DONE:
+      return showOnlyPopup(POPUP_ID.MOVED_TO_MYNODES, {}, state);
+    case LIBRARY_MANAGER_REQUESTED:
+      return showOnlyPopup(POPUP_ID.LIBRARY_MANAGER, {}, state);
 
     case PROJECT_OPEN_REQUESTED:
       return showOnlyPopup(POPUP_ID.OPENING_PROJECT, action.payload, state);

@@ -250,6 +250,11 @@ const onReady = () => {
   ipcMain.on(EVENTS.LIST_PORTS, listPortsHandler);
   ipcMain.on(EVENTS.GET_SELECTED_BOARD, loadTargetBoardHandler);
   ipcMain.on(EVENTS.SET_SELECTED_BOARD, saveTargetBoardHandler);
+  ipcMain.on(EVENTS.ABORT_ARDUINO_UPLOAD, () => {
+    if (arduinoCliInstance) {
+      arduinoCliInstance.killProcesses();
+    }
+  });
   ipcMain.on(EVENTS.CONFIRM_CLOSE_WINDOW, () => {
     confirmedWindowClose = true;
     win.close();
@@ -290,7 +295,7 @@ const onReady = () => {
     )
       .then(() => WA.loadWorkspacePath())
       .then(tapP(wsPath => migrateArduinoPackages(wsPath)))
-      .then(wsPath => Promise.all([wsPath, xdb.prepareSketchDir()]))
+      .then(wsPath => Promise.all([wsPath, xdb.prepareSketchDir(wsPath)]))
       .then(([wsPath, sketchDir]) =>
         xdb.createCli(getPathToBundledWorkspace(), wsPath, sketchDir, IS_DEV)
       )

@@ -34,6 +34,8 @@ export const getProjectBrowserPopups = createSelector(
     POPUP_ID.CREATING_PATCH,
     POPUP_ID.RENAMING_PATCH,
     POPUP_ID.DELETING_PATCH,
+    POPUP_ID.MOVED_TO_MYNODES,
+    POPUP_ID.LIBRARY_MANAGER,
     POPUP_ID.RENAMING_PROJECT,
   ])
 );

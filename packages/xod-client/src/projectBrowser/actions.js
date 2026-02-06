@@ -4,6 +4,8 @@ import {
   PATCH_CREATE_REQUESTED,
   PATCH_RENAME_REQUESTED,
   PATCH_DELETE_REQUESTED,
+  PATCH_MOVE_TO_MYNODES_DONE,
+  LIBRARY_MANAGER_REQUESTED,
   SET_SELECTION,
   REMOVE_SELECTION,
   TOGGLE_DEPRECATED_FILTER,
@@ -42,6 +44,15 @@ export const requestDeletePatch = patchPath => (dispatch, getState) => {
     payload: { patchPath: selectedPatchPath },
   });
 };
+
+
+export const requestManageLibraries = () => ({
+  type: LIBRARY_MANAGER_REQUESTED,
+});
+
+export const notifyMovedToMyNodes = () => ({
+  type: PATCH_MOVE_TO_MYNODES_DONE,
+});
 
 export const setSelection = selectedPatchPath => ({
   type: SET_SELECTION,

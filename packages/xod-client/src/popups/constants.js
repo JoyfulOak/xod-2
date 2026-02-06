@@ -3,6 +3,8 @@ export const POPUP_ID = {
   CREATING_PATCH: 'creatingPatch',
   RENAMING_PATCH: 'renamingPatch',
   DELETING_PATCH: 'deletingPatch',
+  MOVED_TO_MYNODES: 'movedToMyNodes',
+  LIBRARY_MANAGER: 'libraryManager',
 
   CREATING_PROJECT: 'creatingProject',
   RENAMING_PROJECT: 'renamingProject',

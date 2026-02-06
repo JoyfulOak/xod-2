@@ -301,6 +301,7 @@ class Editor extends React.Component {
             stopDebuggerSession={this.props.stopDebuggerSession}
             onUploadClick={this.props.onUploadClick}
             onUploadAndDebugClick={this.props.onUploadAndDebugClick}
+            onAbortUploadClick={this.props.onAbortUploadClick}
             onRunSimulationClick={this.props.onRunSimulationClick}
             windowSize={this.props.size}
           >
@@ -342,6 +343,7 @@ Editor.propTypes = {
   stopDebuggerSession: PropTypes.func,
   onUploadClick: PropTypes.func.isRequired,
   onUploadAndDebugClick: PropTypes.func.isRequired,
+  onAbortUploadClick: PropTypes.func,
   isTabtestRunning: PropTypes.bool.isRequired,
   onRunSimulationClick: PropTypes.func.isRequired,
   actions: PropTypes.shape({

@@ -131,6 +131,7 @@ class ProjectBrowser extends React.Component {
       patchPath,
       canAdd,
       isLocalPatch: isPathLocal(patchPath),
+      libraryName: getLibraryName(patchPath),
     });
   }
 
@@ -342,8 +343,14 @@ class ProjectBrowser extends React.Component {
           selectedPatchName={this.props.selectedPatchLabel}
           projectName={this.props.projectName}
           popups={this.props.popups}
+          currentPatchPath={this.props.currentPatchPath}
+          localPatches={this.props.localPatches}
+          libraryNames={this.props.libraryNames}
           onPatchDelete={this.props.actions.deletePatch}
           onPatchRename={this.props.actions.renamePatch}
+          onMovePatchToLibrary={this.props.actions.movePatchToLibrary}
+          onDeleteLibrary={this.props.actions.deleteLibrary}
+          onSwitchPatch={this.props.actions.switchPatch}
           onCloseAllPopups={this.props.actions.closeAllPopups}
         />
         <SidebarPanel
@@ -365,6 +372,10 @@ class ProjectBrowser extends React.Component {
           onPatchRename={this.props.actions.requestRename}
           onPatchHelp={this.onPatchHelpClicked}
           onPatchClone={this.props.actions.clonePatch}
+          onPatchMoveToMyNodes={patchPath => {
+            this.props.actions.movePatchToLibrary(patchPath, 'my/nodes');
+            this.props.actions.notifyMovedToMyNodes();
+          }}
         />
         <ContextMenu id={FILTER_CONTEXT_MENU_ID}>
           <MenuItem onClick={this.props.actions.toggleDeprecatedFilter}>
@@ -389,6 +400,7 @@ ProjectBrowser.propTypes = {
   selectedPatchPath: PropTypes.string,
   selectedPatchLabel: PropTypes.string.isRequired,
   localPatches: sanctuaryPropType($.Array(Patch)),
+  libraryNames: PropTypes.array,
   popups: PropTypes.object.isRequired,
   libs: sanctuaryPropType($.StrMap($.Array(Patch))),
   installingLibs: PropTypes.array,
@@ -408,6 +420,9 @@ ProjectBrowser.propTypes = {
     renamePatch: PropTypes.func.isRequired,
     deletePatch: PropTypes.func.isRequired,
     clonePatch: PropTypes.func.isRequired,
+    movePatchToLibrary: PropTypes.func.isRequired,
+    notifyMovedToMyNodes: PropTypes.func.isRequired,
+    deleteLibrary: PropTypes.func.isRequired,
     startDraggingPatch: PropTypes.func.isRequired,
     closeAllPopups: PropTypes.func.isRequired,
     showLibSuggester: PropTypes.func.isRequired,
@@ -423,6 +438,7 @@ const mapStateToProps = R.applySpec({
   selectedPatchPath: ProjectBrowserSelectors.getSelectedPatchPath,
   selectedPatchLabel: ProjectBrowserSelectors.getSelectedPatchLabel,
   localPatches: ProjectBrowserSelectors.getLocalPatches,
+  libraryNames: ProjectBrowserSelectors.getLibraryNames,
   popups: PopupSelectors.getProjectBrowserPopups,
   libs: ProjectBrowserSelectors.getLibs,
   installingLibs: ProjectBrowserSelectors.getInstallingLibraries,
@@ -448,6 +464,9 @@ const mapDispatchToProps = dispatch => ({
       renamePatch: ProjectActions.renamePatch,
       deletePatch: ProjectActions.deletePatch,
       clonePatch: ProjectActions.clonePatch,
+      movePatchToLibrary: ProjectActions.movePatchToLibrary,
+      notifyMovedToMyNodes: ProjectBrowserActions.notifyMovedToMyNodes,
+      deleteLibrary: ProjectActions.deleteLibrary,
 
       closeAllPopups: PopupActions.hideAllPopups,
 

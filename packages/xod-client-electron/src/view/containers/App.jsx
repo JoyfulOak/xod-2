@@ -111,6 +111,7 @@ class App extends client.App {
       this
     );
     this.onUploadToArduino = this.onUploadToArduino.bind(this);
+    this.onAbortUploadClicked = this.onAbortUploadClicked.bind(this);
     this.onConnectSerial = this.onConnectSerial.bind(this);
     this.onSerialPortChange = this.onSerialPortChange.bind(this);
     this.onShowCodeArduino = this.onShowCodeArduino.bind(this);
@@ -158,11 +159,15 @@ class App extends client.App {
       this.defaultHotkeyHandlers
     );
 
+    this.uploadAbortRequested = false;
+    this.currentUploadProcess = null;
+
     this.urlActions = {
       // actionPathName: params => this.props.actions.someAction(params.foo, params.bar),
       [client.URL_ACTION_TYPES.OPEN_TUTORIAL]: this.onOpenTutorialProject,
     };
   }
+
 
   shouldComponentUpdate(nextProps, nextState) {
     const props = this.props;
@@ -294,11 +299,25 @@ class App extends client.App {
     this.props.actions.uploadToArduinoConfig(true);
   }
 
+  onAbortUploadClicked() {
+    this.uploadAbortRequested = true;
+    ipcRenderer.send(EVENTS.ABORT_ARDUINO_UPLOAD);
+
+    if (this.currentUploadProcess) {
+      this.currentUploadProcess.fail('Upload aborted', 0);
+      this.currentUploadProcess.delete();
+      this.currentUploadProcess = null;
+    }
+  }
+
   onUploadToArduino(board, port, cloud, debug, processActions = null) {
     const proc =
       processActions !== null
         ? processActions
         : this.props.actions.uploadToArduino();
+
+    this.uploadAbortRequested = false;
+    this.currentUploadProcess = proc;
 
     const eitherTProject = this.transformProjectForTranspiler(
       debug ? LIVENESS.DEBUG : LIVENESS.NONE
@@ -355,6 +374,7 @@ class App extends client.App {
       .then(([code, ws]) =>
         upload(
           progressData => {
+            if (this.uploadAbortRequested) return;
             proc.progress(
               progressData.message,
               progressData.percentage,
@@ -432,6 +452,11 @@ class App extends client.App {
         }
       })
       .catch(err => {
+        if (this.uploadAbortRequested) {
+          proc.fail('Upload aborted', 0);
+          proc.delete();
+          return;
+        }
         if (err.type === 'ARDUINO_DEPENDENCIES_MISSING') {
           proc.progress(formatLogError(err), 0, client.LOG_TAB_TYPE.INSTALLER);
           proc.delete();
@@ -678,6 +703,10 @@ class App extends client.App {
         onClick(items.newPatch, this.props.actions.createPatch),
         items.separator,
         onClick(items.addLibrary, this.props.actions.showLibSuggester),
+        onClick(
+          items.manageLibraries,
+          this.props.actions.requestManageLibraries
+        ),
         onClick(items.publish, this.props.actions.requestPublishProject),
         ...exitItems,
       ]),
@@ -1000,6 +1029,7 @@ class App extends client.App {
           stopDebuggerSession={this.onStopDebuggerSessionClicked}
           onUploadClick={this.onUploadToArduinoClicked}
           onUploadAndDebugClick={this.onUploadToArduinoAndDebugClicked}
+          onAbortUploadClick={this.onAbortUploadClicked}
           onRunSimulationClick={this.onRunSimulation}
         />
         {this.renderPopupShowCode()}
