@@ -280,9 +280,41 @@ export default (state = {}, action) => {
         nextState
       );
     }
+
+    case AT.PATCH_HIDE: {
+      const { patchPath } = action.payload;
+      if (XP.isPathLocal(patchPath)) return state;
+
+      const removedLibraryPatches = R.pathOr(
+        [],
+        ['removedLibraryPatches'],
+        state
+      );
+      return R.assoc(
+        'removedLibraryPatches',
+        R.uniq(R.append(patchPath, removedLibraryPatches)),
+        state
+      );
+    }
     case AT.LIBRARY_DELETE: {
       const { libName } = action.payload;
       return omitLibPatches(libName, state);
+    }
+    case AT.LIBRARY_UNHIDE: {
+      const { libName } = action.payload;
+      const removedLibraryPatches = R.pathOr(
+        [],
+        ['removedLibraryPatches'],
+        state
+      );
+      return R.assoc(
+        'removedLibraryPatches',
+        R.reject(
+          patchPath => XP.getLibraryName(patchPath) === libName,
+          removedLibraryPatches
+        ),
+        state
+      );
     }
 
     case AT.PATCH_DESCRIPTION_UPDATE: {

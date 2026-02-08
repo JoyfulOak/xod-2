@@ -1,8 +1,0 @@
-IN	IS_ERR	OUT
-// if IS_ERR is false, error is not raised, input value is passed as is
-12345	false	12345
-42	false	42
-// if IS_ERR is true, error is raised
-	true	error
-// after recovery from error
-	false	42

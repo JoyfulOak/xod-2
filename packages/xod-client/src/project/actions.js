@@ -201,6 +201,20 @@ export const deletePatch = patchPath => ({
   },
 });
 
+export const hidePatch = patchPath => ({
+  type: ActionType.PATCH_HIDE,
+  payload: {
+    patchPath,
+  },
+});
+
+export const unhideLibraryNodes = libName => ({
+  type: ActionType.LIBRARY_UNHIDE,
+  payload: {
+    libName,
+  },
+});
+
 export const movePatchToLibrary = (patchPath, libName) => (
   dispatch,
   getState

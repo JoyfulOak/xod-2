@@ -28,7 +28,8 @@ const PatchGroupItemContextMenu = props => {
   ) : null;
 
   const isManagedIndex = trigger.patchPath === 'my/nodes/index';
-  const canDelete = !isManagedIndex;
+  const isMyNodes = trigger.libraryName === 'my/nodes';
+  const canDelete = !isManagedIndex && (trigger.isLocalPatch || isMyNodes);
 
   const deletePatch = canDelete ? (
     <MenuItem
@@ -36,6 +37,16 @@ const PatchGroupItemContextMenu = props => {
       attributes={{ 'data-id': 'delete' }}
     >
       Delete
+    </MenuItem>
+  ) : null;
+
+  const canHide = !trigger.isLocalPatch && !isMyNodes && !isManagedIndex;
+  const hidePatch = canHide ? (
+    <MenuItem
+      onClick={onContextMenuItemClick(props.onPatchHide)}
+      attributes={{ 'data-id': 'hide' }}
+    >
+      Hide
     </MenuItem>
   ) : null;
 
@@ -84,6 +95,7 @@ const PatchGroupItemContextMenu = props => {
       {clonePatch}
       {renamePatch}
       {moveToMyNodes}
+      {hidePatch}
       {deletePatch}
       <MenuItem divider />
       <MenuItem
@@ -109,6 +121,7 @@ PatchGroupItemContextMenu.propTypes = {
   onPatchAdd: PropTypes.func.isRequired,
   onPatchOpen: PropTypes.func.isRequired,
   onPatchDelete: PropTypes.func.isRequired,
+  onPatchHide: PropTypes.func.isRequired,
   onPatchRename: PropTypes.func.isRequired,
   onPatchHelp: PropTypes.func.isRequired,
   onPatchClone: PropTypes.func.isRequired,

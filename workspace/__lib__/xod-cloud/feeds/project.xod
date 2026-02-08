@@ -1,9 +1,0 @@
-{
-  "authors": [
-    "XOD"
-  ],
-  "description": "Nodes for communicating with the XOD Cloud Feeds service",
-  "license": "AGPL-3.0",
-  "name": "feeds",
-  "version": "0.38.0"
-}

@@ -15,34 +15,50 @@ class LibraryManagerPopup extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    const { defaultPatchPath, defaultLibName } = this.getDefaults(props);
+    const {
+      defaultPatchPath,
+      defaultLibName,
+      defaultHiddenLibName,
+    } = this.getDefaults(props);
 
     this.state = {
       patchPath: defaultPatchPath,
       libName: defaultLibName,
+      hiddenLibName: defaultHiddenLibName,
     };
 
     this.onPatchChange = this.onPatchChange.bind(this);
     this.onLibNameChange = this.onLibNameChange.bind(this);
     this.onMoveClicked = this.onMoveClicked.bind(this);
     this.onDeleteLibrary = this.onDeleteLibrary.bind(this);
+    this.onHiddenLibChange = this.onHiddenLibChange.bind(this);
+    this.onUnhideLibraryNodes = this.onUnhideLibraryNodes.bind(this);
   }
 
   componentDidUpdate(prevProps) {
     if (!prevProps.isVisible && this.props.isVisible) {
-      const { defaultPatchPath, defaultLibName } = this.getDefaults(this.props);
+      const {
+        defaultPatchPath,
+        defaultLibName,
+        defaultHiddenLibName,
+      } = this.getDefaults(this.props);
       this.setState({
         patchPath: defaultPatchPath,
         libName: defaultLibName,
+        hiddenLibName: defaultHiddenLibName,
       });
     }
   }
 
   getDefaults(props) {
     const patchOptions = this.getEditablePatchOptions(props);
+    const hiddenLibraryOptions = this.getHiddenLibraryOptions(props);
     return {
       defaultPatchPath: patchOptions.length ? patchOptions[0].value : '',
       defaultLibName: MANAGED_LIBRARY,
+      defaultHiddenLibName: hiddenLibraryOptions.length
+        ? hiddenLibraryOptions[0].value
+        : '',
     };
   }
 
@@ -65,12 +81,26 @@ class LibraryManagerPopup extends React.PureComponent {
     )(libraryNames);
   }
 
+  getHiddenLibraryOptions(props = this.props) {
+    const { removedLibraryPatches } = props;
+    const libraryNames = R.compose(
+      R.sortBy(R.identity),
+      R.uniq,
+      R.map(XP.getLibraryName)
+    )(removedLibraryPatches);
+    return R.map(name => ({ value: name, label: name }))(libraryNames);
+  }
+
   onPatchChange(event) {
     this.setState({ patchPath: event.target.value });
   }
 
   onLibNameChange(event) {
     this.setState({ libName: event.target.value });
+  }
+
+  onHiddenLibChange(event) {
+    this.setState({ hiddenLibName: event.target.value });
   }
 
   onMoveClicked() {
@@ -100,11 +130,19 @@ class LibraryManagerPopup extends React.PureComponent {
     this.props.onDeleteLibrary(libName);
   }
 
+  onUnhideLibraryNodes() {
+    const { hiddenLibName } = this.state;
+    if (!hiddenLibName) return;
+    this.props.onUnhideLibraryNodes(hiddenLibName);
+  }
+
   render() {
     const patchOptions = this.getEditablePatchOptions();
     const libraryOptions = this.getLibraryOptions().filter(
       option => option.value !== MANAGED_LIBRARY
     );
+    const hiddenLibraryOptions = this.getHiddenLibraryOptions();
+    const hasHiddenLibraries = hiddenLibraryOptions.length > 0;
 
     return (
       <PopupForm
@@ -146,6 +184,41 @@ class LibraryManagerPopup extends React.PureComponent {
         </div>
 
         <div className="LibraryManagerPopup-section">
+          <div className="LibraryManagerPopup-sectionTitle">Hidden Nodes</div>
+          <div className="LibraryManagerPopup-row">
+            <label>Library</label>
+            <select
+              value={this.state.hiddenLibName}
+              onChange={this.onHiddenLibChange}
+              disabled={!hasHiddenLibraries}
+            >
+              {!hasHiddenLibraries ? (
+                <option value="" disabled>
+                  No hidden nodes
+                </option>
+              ) : null}
+              {hiddenLibraryOptions.map(option => (
+                <option key={option.value} value={option.value}>
+                  {option.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="LibraryManagerPopup-actions">
+            <button
+              className="LibraryManagerPopup-primary"
+              onClick={this.onUnhideLibraryNodes}
+              disabled={!this.state.hiddenLibName}
+            >
+              Unhide
+            </button>
+          </div>
+          <div className="LibraryManagerPopup-hint">
+            Hidden nodes are removed from the library list only.
+          </div>
+        </div>
+
+        <div className="LibraryManagerPopup-section">
           <div className="LibraryManagerPopup-sectionTitle">Delete Library</div>
           <div className="LibraryManagerPopup-row">
             <label>Library</label>
@@ -174,10 +247,12 @@ LibraryManagerPopup.propTypes = {
   onClose: PropTypes.func.isRequired,
   onMovePatch: PropTypes.func.isRequired,
   onDeleteLibrary: PropTypes.func.isRequired,
+  onUnhideLibraryNodes: PropTypes.func.isRequired,
   onSwitchPatch: PropTypes.func.isRequired,
   currentPatchPath: PropTypes.object,
   localPatches: PropTypes.array.isRequired,
   libraryNames: PropTypes.array.isRequired,
+  removedLibraryPatches: PropTypes.array.isRequired,
 };
 
 LibraryManagerPopup.defaultProps = {

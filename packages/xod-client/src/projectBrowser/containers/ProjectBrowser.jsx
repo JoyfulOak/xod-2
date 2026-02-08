@@ -23,6 +23,7 @@ import * as EditorActions from '../../editor/actions';
 import * as PopupActions from '../../popups/actions';
 
 import * as ProjectBrowserSelectors from '../selectors';
+import * as ProjectSelectors from '../../project/selectors';
 import * as PopupSelectors from '../../popups/selectors';
 import * as EditorSelectors from '../../editor/selectors';
 
@@ -54,6 +55,7 @@ const pickPropsForComparsion = R.compose(
   }),
   R.omit(['actions'])
 );
+
 
 class ProjectBrowser extends React.Component {
   constructor(props) {
@@ -346,10 +348,12 @@ class ProjectBrowser extends React.Component {
           currentPatchPath={this.props.currentPatchPath}
           localPatches={this.props.localPatches}
           libraryNames={this.props.libraryNames}
+          removedLibraryPatches={this.props.removedLibraryPatches}
           onPatchDelete={this.props.actions.deletePatch}
           onPatchRename={this.props.actions.renamePatch}
           onMovePatchToLibrary={this.props.actions.movePatchToLibrary}
           onDeleteLibrary={this.props.actions.deleteLibrary}
+          onUnhideLibraryNodes={this.props.actions.unhideLibraryNodes}
           onSwitchPatch={this.props.actions.switchPatch}
           onCloseAllPopups={this.props.actions.closeAllPopups}
         />
@@ -369,6 +373,7 @@ class ProjectBrowser extends React.Component {
           onPatchAdd={this.onAddNode}
           onPatchOpen={this.props.actions.switchPatch}
           onPatchDelete={this.props.actions.requestDelete}
+          onPatchHide={this.props.actions.hidePatch}
           onPatchRename={this.props.actions.requestRename}
           onPatchHelp={this.onPatchHelpClicked}
           onPatchClone={this.props.actions.clonePatch}
@@ -401,6 +406,7 @@ ProjectBrowser.propTypes = {
   selectedPatchLabel: PropTypes.string.isRequired,
   localPatches: sanctuaryPropType($.Array(Patch)),
   libraryNames: PropTypes.array,
+  removedLibraryPatches: PropTypes.array,
   popups: PropTypes.object.isRequired,
   libs: sanctuaryPropType($.StrMap($.Array(Patch))),
   installingLibs: PropTypes.array,
@@ -419,10 +425,12 @@ ProjectBrowser.propTypes = {
     removeSelection: PropTypes.func.isRequired,
     renamePatch: PropTypes.func.isRequired,
     deletePatch: PropTypes.func.isRequired,
+    hidePatch: PropTypes.func.isRequired,
     clonePatch: PropTypes.func.isRequired,
     movePatchToLibrary: PropTypes.func.isRequired,
     notifyMovedToMyNodes: PropTypes.func.isRequired,
     deleteLibrary: PropTypes.func.isRequired,
+    unhideLibraryNodes: PropTypes.func.isRequired,
     startDraggingPatch: PropTypes.func.isRequired,
     closeAllPopups: PropTypes.func.isRequired,
     showLibSuggester: PropTypes.func.isRequired,
@@ -439,6 +447,7 @@ const mapStateToProps = R.applySpec({
   selectedPatchLabel: ProjectBrowserSelectors.getSelectedPatchLabel,
   localPatches: ProjectBrowserSelectors.getLocalPatches,
   libraryNames: ProjectBrowserSelectors.getLibraryNames,
+  removedLibraryPatches: ProjectSelectors.getRemovedLibraryPatches,
   popups: PopupSelectors.getProjectBrowserPopups,
   libs: ProjectBrowserSelectors.getLibs,
   installingLibs: ProjectBrowserSelectors.getInstallingLibraries,
@@ -463,10 +472,12 @@ const mapDispatchToProps = dispatch => ({
       addNode: ProjectActions.addNode,
       renamePatch: ProjectActions.renamePatch,
       deletePatch: ProjectActions.deletePatch,
+      hidePatch: ProjectActions.hidePatch,
       clonePatch: ProjectActions.clonePatch,
       movePatchToLibrary: ProjectActions.movePatchToLibrary,
       notifyMovedToMyNodes: ProjectBrowserActions.notifyMovedToMyNodes,
       deleteLibrary: ProjectActions.deleteLibrary,
+      unhideLibraryNodes: ProjectActions.unhideLibraryNodes,
 
       closeAllPopups: PopupActions.hideAllPopups,
 

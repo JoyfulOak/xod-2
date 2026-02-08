@@ -1,4 +1,0 @@
-IN	OUT
-false	0
-true	error
-false	0	// succesfully "recovers" from error

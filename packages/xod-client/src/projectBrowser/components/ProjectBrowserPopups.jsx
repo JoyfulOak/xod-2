@@ -101,10 +101,12 @@ class ProjectBrowserPopups extends React.PureComponent {
           onClose={this.props.onCloseAllPopups}
           onMovePatch={this.props.onMovePatchToLibrary}
           onDeleteLibrary={this.props.onDeleteLibrary}
+          onUnhideLibraryNodes={this.props.onUnhideLibraryNodes}
           onSwitchPatch={this.props.onSwitchPatch}
           currentPatchPath={this.props.currentPatchPath}
           localPatches={this.props.localPatches}
           libraryNames={this.props.libraryNames}
+          removedLibraryPatches={this.props.removedLibraryPatches}
         />
       );
     }
@@ -120,10 +122,12 @@ ProjectBrowserPopups.propTypes = {
   currentPatchPath: PropTypes.object,
   localPatches: PropTypes.array,
   libraryNames: PropTypes.array,
+  removedLibraryPatches: PropTypes.array,
   onPatchRename: PropTypes.func.isRequired,
   onPatchDelete: PropTypes.func.isRequired,
   onMovePatchToLibrary: PropTypes.func.isRequired,
   onDeleteLibrary: PropTypes.func.isRequired,
+  onUnhideLibraryNodes: PropTypes.func.isRequired,
   onSwitchPatch: PropTypes.func.isRequired,
 
   onCloseAllPopups: PropTypes.func.isRequired,
@@ -133,6 +137,7 @@ ProjectBrowserPopups.defaultProps = {
   selectedPatchPath: null,
   localPatches: [],
   libraryNames: [],
+  removedLibraryPatches: [],
 };
 
 export default ProjectBrowserPopups;

@@ -40,7 +40,8 @@ const BOARDS_FNAME = 'boards.txt';
 export const getLines = R.compose(
   R.reject(R.test(/^(#|$)/)),
   R.map(R.trim),
-  R.split(/$/gm)
+  R.split(/$/gm),
+  R.defaultTo('')
 );
 
 const menuRegExp = /^menu\./;
@@ -52,6 +53,14 @@ const boardOptionRegExp = /^([a-zA-Z0-9_]+)\.menu\.([a-zA-Z0-9_]+)\.([a-zA-Z0-9_
 const disableRtsOptionRegExp = /^([a-zA-Z0-9_]+)\.serial\.disableRTS=(.+)$/;
 
 const osRegExp = /(linux|macosx|windows)/;
+
+const getCoreId = core => R.propOr(null, 'ID', core) || R.propOr(null, 'id', core);
+const getCoreInstalled = core =>
+  R.propOr(null, 'Installed', core) ||
+  R.propOr(null, 'installed', core) ||
+  R.propOr(null, 'installed_version', core) ||
+  R.path(['release', 'version'], core) ||
+  R.path(['Release', 'Version'], core);
 
 // =============================================================================
 //
@@ -155,18 +164,29 @@ export const patchBoardsWithOptions = R.curry(
     if (!boards) return [];
 
     // Map CoreID Object; ignore cores without boards.txt
-    const boardTxtContentsByCoreId = await R.compose(
-      promiseAllProperties,
-      R.map(core => fse.readFile(core.txtPath, 'utf8')),
-      R.indexBy(R.prop('ID'))
-    )(
-      await Promise.all(
-        R.map(async core => {
-          const txtPath = getBoardsTxtPath(dataPath, core.ID, core.Installed);
-          const exists = await fse.pathExists(txtPath);
-          return exists ? R.assoc('txtPath', txtPath, core) : null;
-        }, cores)
-      ).then(R.reject(R.isNil))
+    const coresWithTxt = await Promise.all(
+      R.map(async core => {
+        const coreId = getCoreId(core);
+        const coreInstalled = getCoreInstalled(core);
+        if (!coreId || !coreInstalled) return null;
+        const txtPath = getBoardsTxtPath(dataPath, coreId, coreInstalled);
+        const exists = await fse.pathExists(txtPath);
+        return exists
+          ? R.merge(core, { ID: coreId, Installed: coreInstalled, txtPath })
+          : null;
+      }, cores)
+    ).then(R.reject(R.isNil));
+
+    const boardTxtContentsByCoreId = {};
+    await Promise.all(
+      R.map(async core => {
+        try {
+          const contents = await fse.readFile(core.txtPath, 'utf8');
+          boardTxtContentsByCoreId[core.ID] = contents;
+        } catch (err) {
+          // Skip cores with unreadable boards.txt to avoid breaking board listing
+        }
+      }, coresWithTxt)
     );
 
     const optionsByCoreAndBoard = R.map(

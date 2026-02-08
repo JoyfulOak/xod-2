@@ -96,9 +96,15 @@ export const getSelectedPatchLabel = createSelector(
 );
 
 const getLibraryPatchesList = createSelector(
-  ProjectSelectors.getProject,
-  R.reject(R.compose(R.equals('my/nodes/index'), XP.getPatchPath)),
-  XP.listLibraryPatches
+  [ProjectSelectors.getProject, ProjectSelectors.getRemovedLibraryPatches],
+  (project, removedLibraryPatches) =>
+    R.compose(
+      R.reject(patch =>
+        R.contains(XP.getPatchPath(patch), removedLibraryPatches)
+      ),
+      R.reject(R.compose(R.equals('my/nodes/index'), XP.getPatchPath)),
+      XP.listLibraryPatches
+    )(project)
 );
 
 export const getLibs = createMemoizedSelector(

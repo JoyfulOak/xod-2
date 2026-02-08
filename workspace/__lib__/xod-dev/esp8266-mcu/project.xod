@@ -1,9 +1,0 @@
-{
-  "authors": [
-    "XOD"
-  ],
-  "description": "Support for ESP8266-based MCUs.",
-  "license": "AGPL-3.0",
-  "name": "esp8266-mcu",
-  "version": "0.38.0"
-}

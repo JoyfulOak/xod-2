@@ -1,44 +1,61 @@
-0 silly input [ 'start' ]
+0 silly input [ 'build' ]
 1 silly flags {
 1 silly flags   _: [ 'run' ],
 1 silly flags   'reject-cycles': false,
 1 silly flags   rejectCycles: false,
 1 silly flags   stream: true,
-1 silly flags   scope: 'xod-client-electron',
-1 silly flags   script: 'start',
+1 silly flags   script: 'build',
 1 silly flags   args: []
 1 silly flags }
-2 verbose rootPath /Users/justin/Documents/xod
+2 verbose rootPath /Users/justin/xod
 3 info version 2.11.0
-4 silly existsSync /Users/justin/Documents/xod/VERSION
-5 info scope xod-client-electron
-6 silly initialize attempt
-7 silly initialize success
-8 silly execute attempt
-9 silly runScriptInPackageStreaming [ 'start', [], 'xod-client-electron' ]
-10 silly getExecOpts { cwd: '/Users/justin/Documents/xod/packages/xod-client-electron' }
-11 error execute callback with error
-12 error Error: Command failed: yarn run start
-12 error /Users/justin/Documents/xod/node_modules/electron/index.js:14
-12 error     throw new Error('Electron failed to install correctly, please delete node_modules/electron and try installing again')
-12 error     ^
-12 error
-12 error Error: Electron failed to install correctly, please delete node_modules/electron and try installing again
-12 error     at getElectronPath (/Users/justin/Documents/xod/node_modules/electron/index.js:14:11)
-12 error     at Object.<anonymous> (/Users/justin/Documents/xod/node_modules/electron/index.js:18:18)
-12 error     at Module._compile (node:internal/modules/cjs/loader:1688:14)
-12 error     at Object..js (node:internal/modules/cjs/loader:1820:10)
-12 error     at Module.load (node:internal/modules/cjs/loader:1423:32)
-12 error     at Function._load (node:internal/modules/cjs/loader:1246:12)
-12 error     at TracingChannel.traceSync (node:diagnostics_channel:322:14)
-12 error     at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
-12 error     at Module.require (node:internal/modules/cjs/loader:1445:12)
-12 error     at require (node:internal/modules/helpers:135:16)
-12 error
-12 error Node.js v22.18.0
-12 error error Command failed with exit code 1.
-12 error
-12 error $ electron .
-12 error info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
-12 error
-12 error     at /Users/justin/Documents/xod/node_modules/lerna/node_modules/execa/index.js:236:11
+4 silly existsSync /Users/justin/xod/VERSION
+5 silly initialize attempt
+6 silly initialize success
+7 silly execute attempt
+8 silly runScriptInPackageStreaming [ 'build', [], 'arduino-cli' ]
+9 silly getExecOpts { cwd: '/Users/justin/xod/packages/arduino-cli' }
+10 silly runScriptInPackageStreaming [ 'build', [], 'belt-holes' ]
+11 silly getExecOpts { cwd: '/Users/justin/xod/packages/belt-holes' }
+12 silly runScriptInPackageStreaming [ 'build', [], 'xod-func-tools' ]
+13 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-func-tools' }
+14 silly runScriptInPackageStreaming [ 'build', [], 'xod-project' ]
+15 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-project' }
+16 silly runScriptInPackageStreaming [ 'build', [], 'xod-tethering-inet' ]
+17 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-tethering-inet' }
+18 silly runScriptInPackageStreaming [ 'build', [], 'xod-fs' ]
+19 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-fs' }
+20 silly runScriptInPackageStreaming [ 'build', [], 'xod-pm' ]
+21 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-pm' }
+22 silly runScriptInPackageStreaming [ 'build', [], 'xod-arduino' ]
+23 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-arduino' }
+24 silly runScriptInPackageStreaming [ 'build', [], 'xod-deploy-bin' ]
+25 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-deploy-bin' }
+26 silly runScriptInPackageStreaming [ 'build', [], 'xod-deploy' ]
+27 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-deploy' }
+28 silly runScriptInPackageStreaming [ 'build', [], 'xod-patch-search' ]
+29 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-patch-search' }
+30 silly runScriptInPackageStreaming [ 'build', [], 'xod-tabtest' ]
+31 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-tabtest' }
+32 silly runScriptInPackageStreaming [ 'build', [], 'xod-cli' ]
+33 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-cli' }
+34 silly runScriptInPackageStreaming [ 'build', [], 'xod-cloud-compile' ]
+35 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-cloud-compile' }
+36 silly runScriptInPackageStreaming [ 'build', [], 'xod-client' ]
+37 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-client' }
+38 silly runScriptInPackageStreaming [ 'build', [], 'xod-client-browser' ]
+39 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-client-browser' }
+40 silly runScriptInPackageStreaming [ 'build', [], 'xod-client-electron' ]
+41 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-client-electron' }
+42 error execute callback with error
+43 error Error: Command failed: yarn run build
+43 error Tried to open not a xod file: /Users/justin/xod/workspace/welcome-to-xoderror Command failed with exit code 1.
+43 error error Command failed with exit code 1.
+43 error
+43 error $ yarn run build:tutorial-project && webpack --colors
+43 error $ node ./tools/loadTutorialProject.js
+43 error info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+43 error info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+43 error
+43 error     at /Users/justin/xod/node_modules/lerna/node_modules/execa/index.js:236:11
+43 error     at runMicrotasks (<anonymous>)

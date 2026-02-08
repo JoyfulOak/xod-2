@@ -41,6 +41,10 @@ import { createMemoizedSelector } from '../utils/selectorTools';
 
 export const getProject = R.prop('project');
 export const projectLens = R.lensProp('project');
+export const getRemovedLibraryPatches = createSelector(
+  getProject,
+  R.pathOr([], ['removedLibraryPatches'])
+);
 
 //
 // Patch

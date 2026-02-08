@@ -1,7 +1,0 @@
-ERR	TICK	CHECK	OUT
-false	pulse	no-pulse	""
-		pulse	"1.00"
-true	pulse
-	pulse
-	pulse
-		pulse	"1.00"

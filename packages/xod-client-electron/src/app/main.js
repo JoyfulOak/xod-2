@@ -39,6 +39,7 @@ import {
   setUserDataArg,
   getUserDataDir,
 } from './utils';
+import ensureArduinoCli from './ensureArduinoCli';
 import * as WA from './workspaceActions';
 import {
   subscribeOnCheckArduinoDependencies,
@@ -59,10 +60,13 @@ import { STATES, getEventNameWithState } from '../shared/eventStates';
 // =============================================================================
 
 const DEFAULT_APP_TITLE = 'XOD IDE';
+const AUTOUPDATE_ENABLED = false;
 
 app.setName('xod');
 
-configureAutoUpdater(autoUpdater, log);
+if (AUTOUPDATE_ENABLED) {
+  configureAutoUpdater(autoUpdater, log);
+}
 
 if (process.env.USERDATA_DIR) {
   app.setPath('userData', process.env.USERDATA_DIR);
@@ -297,6 +301,9 @@ const onReady = () => {
       .then(tapP(wsPath => migrateArduinoPackages(wsPath)))
       .then(wsPath => Promise.all([wsPath, xdb.prepareSketchDir(wsPath)]))
       .then(([wsPath, sketchDir]) =>
+        ensureArduinoCli().then(() => [wsPath, sketchDir])
+      )
+      .then(([wsPath, sketchDir]) =>
         xdb.createCli(getPathToBundledWorkspace(), wsPath, sketchDir, IS_DEV)
       )
       .then(
@@ -371,16 +378,18 @@ const onReady = () => {
         );
       });
 
-    subscribeOnAutoUpdaterEvents(
-      (eventName, data) => win.webContents.send(eventName, data),
-      ipcMain,
-      autoUpdater
-    );
+    if (AUTOUPDATE_ENABLED) {
+      subscribeOnAutoUpdaterEvents(
+        (eventName, data) => win.webContents.send(eventName, data),
+        ipcMain,
+        autoUpdater
+      );
 
-    // On Linux XOD auto updates are not supported.
-    // Use of OS package manager is encouraged there.
-    if (process.platform === 'win32' || process.platform === 'darwin') {
-      autoUpdater.checkForUpdates();
+      // On Linux XOD auto updates are not supported.
+      // Use of OS package manager is encouraged there.
+      if (process.platform === 'win32' || process.platform === 'darwin') {
+        autoUpdater.checkForUpdates();
+      }
     }
   });
 };

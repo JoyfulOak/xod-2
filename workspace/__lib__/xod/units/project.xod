@@ -1,9 +1,0 @@
-{
-  "authors": [
-    "XOD"
-  ],
-  "description": "Units of measurement conversions",
-  "license": "AGPL-3.0",
-  "name": "units",
-  "version": "0.38.0"
-}

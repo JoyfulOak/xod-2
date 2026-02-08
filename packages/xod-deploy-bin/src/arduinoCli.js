@@ -464,6 +464,17 @@ const updateIndexesInternal = (wsPath, cli) =>
     });
   });
 
+const getCliErrorMessage = err => {
+  const stdout = R.pathOr('', ['stdout'], err);
+  if (R.isEmpty(stdout)) return err.message;
+  try {
+    const errContents = JSON.parse(stdout);
+    return R.propOr(err.message, 'Cause', errContents);
+  } catch (e) {
+    return stdout;
+  }
+};
+
 /**
  * It creates a workspace file and packages directory if needed.
  *
@@ -488,14 +499,14 @@ const ensureWorkspace = (wsBundledPath, wsPath) =>
  *
  * :: Path -> Path -> ArduinoCli -> Promise { installed :: [InstalledBoard], available :: [AvailableBoard] } Error
  */
-export const listBoards = async (wsBundledPath, wsPath, cli) => {
+export const listBoards = async (wsBundledPath, wsPath, cli, retried = false) => {
   await ensureWorkspace(wsBundledPath, wsPath);
   await syncAdditionalPackages(wsPath, cli);
+  const debugBoards = process.env.XOD_BOARD_LIST_DEBUG === '1';
 
   return Promise.all([
     cli.listInstalledBoards().catch(err => {
-      const errContents = JSON.parse(err.stdout);
-      const normalizedError = new Error(errContents.Cause);
+      const normalizedError = new Error(getCliErrorMessage(err));
       normalizedError.code = err.code;
       throw normalizedError;
     }),
@@ -505,7 +516,26 @@ export const listBoards = async (wsBundledPath, wsPath, cli) => {
       installed: res[0],
       available: res[1],
     }))
+    .then(result => {
+      if (debugBoards) {
+        // eslint-disable-next-line no-console
+        console.log(
+          `[xod] listBoards: installed=${result.installed.length} ` +
+            `available=${result.available.length} ws=${wsPath}`
+        );
+      }
+      if (!retried && result.available.length === 0) {
+        return updateIndexesInternal(wsPath, cli).then(() =>
+          listBoards(wsBundledPath, wsPath, cli, true)
+        );
+      }
+      return result;
+    })
     .catch(async err => {
+      if (debugBoards) {
+        // eslint-disable-next-line no-console
+        console.log(`[xod] listBoards error: ${err && err.message ? err.message : String(err)}`);
+      }
       if (R.propEq('code', 'ENOENT', err)) {
         // When User added a new URL into `extra.txt` file it causes that
         // arduino-cli tries to read new JSON but it's not existing yet
@@ -513,7 +543,7 @@ export const listBoards = async (wsBundledPath, wsPath, cli) => {
         // To avoid this and make a good UX, we'll force call `updateIndexes`
         // and then run `listBoards` again.
         return updateIndexesInternal(wsPath, cli).then(() =>
-          listBoards(wsPath, cli)
+          listBoards(wsBundledPath, wsPath, cli)
         );
       }
 
@@ -550,9 +580,17 @@ export const updateIndexes = async (wsBundledPath, wsPath, cli) => {
  *
  * :: ArduinoCli -> String -> Promise { sketchName: String, sketchPath: Path } Error
  */
-export const saveSketch = async (cli, code) => {
-  const sketchName = `xod_${Date.now()}_sketch`;
-  const sketchPath = await cli.createSketch(sketchName);
+export const saveSketch = async (cli, code, cacheKey = null) => {
+  const sketchName = cacheKey || `xod_${Date.now()}_sketch`;
+  const config = await cli.dumpConfig();
+  const sketchDir = path.join(config.directories.user, sketchName);
+  const sketchPath = path.join(sketchDir, `${sketchName}.ino`);
+  const exists = await fse.pathExists(sketchPath);
+  if (!exists) {
+    await cli.createSketch(sketchName);
+  } else {
+    await fse.ensureDir(sketchDir);
+  }
   await fse.writeFile(sketchPath, code);
   return { sketchName, sketchPath };
 };
@@ -578,13 +616,26 @@ const UPLOAD_PROCESS_BEGINS = 'Uploading compiled code to the board...';
  * :: (Object -> _) -> ArduinoCli -> CompilePayload -> Promise { sketchName: String, sketchPath: Path, compileLog: String } Error
  */
 export const compile = async (onProgress, cli, payload) => {
+  const compileStart = Date.now();
   onProgress({
     percentage: 0,
     message: compilationBegun(payload.board.name),
     tab: 'compiler',
   });
 
-  const { sketchName, sketchPath } = await saveSketch(cli, payload.code);
+  const cacheKey = R.compose(
+    R.replace(/[^a-z0-9_-]/gi, '_'),
+    R.join('_'),
+    R.reject(R.isEmpty)
+  )([
+    path.basename(payload.ws || ''),
+    R.pathOr('', ['board', 'fqbn'], payload),
+  ]);
+  const { sketchName, sketchPath } = await saveSketch(
+    cli,
+    payload.code,
+    cacheKey || null
+  );
 
   onProgress({
     percentage: 10,
@@ -592,7 +643,9 @@ export const compile = async (onProgress, cli, payload) => {
     tab: 'compiler',
   });
 
+  const libsStart = Date.now();
   await copyLibrariesToSketchbook(cli, payload.wsBundledPath, payload.ws);
+  const libsMs = Date.now() - libsStart;
 
   onProgress({
     percentage: 20,
@@ -619,11 +672,16 @@ export const compile = async (onProgress, cli, payload) => {
     message: '',
     tab: 'compiler',
   });
+  const compileMs = Date.now() - compileStart;
 
   return {
     sketchName,
     sketchPath,
     compileLog,
+    timing: {
+      libsMs,
+      compileMs,
+    },
   };
 };
 
@@ -663,7 +721,8 @@ export const listInstalledBoards = async (wsBundledPath, wsPath, cli) => {
  * :: (Object -> _) -> ArduinoCli -> UploadPayload -> Promise { sketchName: String, sketchPath: Path, uploadLog: String } Error
  */
 export const uploadThroughUSB = async (onProgress, cli, payload) => {
-  const { sketchName, sketchPath, compileLog } = await compile(
+  const uploadStart = Date.now();
+  const { sketchName, sketchPath, compileLog, timing } = await compile(
     onProgress,
     cli,
     payload
@@ -672,6 +731,11 @@ export const uploadThroughUSB = async (onProgress, cli, payload) => {
   onProgress({
     percentage: 100,
     message: UPLOAD_PROCESS_BEGINS,
+    tab: 'uploader',
+  });
+  onProgress({
+    percentage: 100,
+    message: `[XOD_DEPLOY_TIME] FQBN: ${payload.board.fqbn}`,
     tab: 'uploader',
   });
 
@@ -692,6 +756,22 @@ export const uploadThroughUSB = async (onProgress, cli, payload) => {
   onProgress({
     percentage: 100,
     message: '',
+    tab: 'uploader',
+  });
+  const uploadMs = Date.now() - uploadStart;
+  const libsSec = Math.floor(timing.libsMs / 1000);
+  const libsRemMs = timing.libsMs % 1000;
+  const compileSec = Math.floor(timing.compileMs / 1000);
+  const compileRemMs = timing.compileMs % 1000;
+  const uploadSec = Math.floor(uploadMs / 1000);
+  const uploadRemMs = uploadMs % 1000;
+  onProgress({
+    percentage: 100,
+    message: [
+      `[XOD_DEPLOY_TIME] Libraries sync: ${libsSec}s ${libsRemMs}ms`,
+      `[XOD_DEPLOY_TIME] Compile total: ${compileSec}s ${compileRemMs}ms`,
+      `[XOD_DEPLOY_TIME] Compile+upload total: ${uploadSec}s ${uploadRemMs}ms`,
+    ].join('\n'),
     tab: 'uploader',
   });
 

@@ -1,9 +1,0 @@
-{
-  "authors": [
-    "XOD"
-  ],
-  "description": "The very basic nodes of XOD",
-  "license": "AGPL-3.0",
-  "name": "core",
-  "version": "0.38.0"
-}

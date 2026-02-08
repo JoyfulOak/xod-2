@@ -3,7 +3,7 @@ import path, { resolve } from 'path';
 import { promisifyChildProcess } from 'promisify-child-process';
 import crossSpawn from 'cross-spawn';
 import YAML from 'yamljs';
-import { remove } from 'fs-extra';
+import * as fse from 'fs-extra';
 
 import { saveConfig, configure, setPackageIndexUrls } from './config';
 import { patchBoardsWithOptions, getBoardsTxtPath } from './optionParser';
@@ -89,10 +89,22 @@ const ArduinoCli = (pathToBin, config = null) => {
     );
   };
 
+  const normalizeCoresList = parsed => {
+    if (R.is(Array, parsed)) return parsed;
+    if (R.pathSatisfies(R.is(Array), ['platforms'], parsed)) {
+      return R.path(['platforms'], parsed);
+    }
+    if (R.pathSatisfies(R.is(Array), ['installed_platforms'], parsed)) {
+      return R.path(['installed_platforms'], parsed);
+    }
+    return [];
+  };
+
   const listCores = () =>
     runWithProgress(noop, ['core', 'list', '--format=json'])
       .then(R.when(R.isEmpty, R.always('[]')))
-      .then(JSON.parse);
+      .then(JSON.parse)
+      .then(normalizeCoresList);
 
   const normalizeBoards = boards =>
     R.map(
@@ -215,7 +227,7 @@ const ArduinoCli = (pathToBin, config = null) => {
         // TODO:
         // Get rid of `remove` the staging directory when
         // arduino-cli fix issue https://github.com/arduino/arduino-cli/issues/43
-        remove(resolve(cfg.directories.data, 'staging')).then(() =>
+        fse.remove(resolve(cfg.directories.data, 'staging')).then(() =>
           runWithProgress(parseProgressLog(onProgress), [
             'core',
             'download',
@@ -226,7 +238,7 @@ const ArduinoCli = (pathToBin, config = null) => {
         // TODO:
         // Get rid of `remove` the staging directory when
         // arduino-cli fix issue https://github.com/arduino/arduino-cli/issues/43
-        remove(resolve(cfg.directories.data, 'staging')).then(() =>
+        fse.remove(resolve(cfg.directories.data, 'staging')).then(() =>
           runWithProgress(parseProgressLog(onProgress), [
             'core',
             'install',

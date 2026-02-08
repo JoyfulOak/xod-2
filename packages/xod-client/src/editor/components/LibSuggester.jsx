@@ -58,6 +58,8 @@ class LibSuggester extends React.Component {
       value: '',
       suggestions: [],
       loading: false,
+      defaultLoaded: false,
+      defaultSuggestions: [],
     };
 
     this.input = null;
@@ -73,6 +75,7 @@ class LibSuggester extends React.Component {
     this.onSuggestionSelected = this.onSuggestionSelected.bind(this);
     this.storeInputReference = this.storeInputReference.bind(this);
     this.renderContent = this.renderContent.bind(this);
+    this.fetchDefaultLibs = this.fetchDefaultLibs.bind(this);
 
     // call it once to prepare debounced function
     this.fetchLibData = debounce(500, this.fetchLibData.bind(this));
@@ -86,6 +89,7 @@ class LibSuggester extends React.Component {
         this.props.onInitialFocus();
       }, 1);
     }
+    this.fetchDefaultLibs();
   }
 
   componentWillUnmount() {
@@ -99,6 +103,8 @@ class LibSuggester extends React.Component {
     this.setState({
       value: newValue,
       notFound: newValue === '' ? false : this.state.notFound,
+      suggestions:
+        newValue === '' ? this.state.defaultSuggestions : this.state.suggestions,
     });
   }
 
@@ -108,12 +114,17 @@ class LibSuggester extends React.Component {
 
   onSuggestionsFetchRequested({ reason, value }) {
     if (reason !== 'input-changed') return;
-    if (value.length > 3) this.fetchLibData();
+    if (value.length === 0) {
+      this.fetchDefaultLibs();
+      return;
+    }
+    if (value.length >= 1) this.fetchLibData();
   }
 
   onSuggestionsClearRequested() {
     this.setState({
-      suggestions: [],
+      suggestions:
+        this.state.value === '' ? this.state.defaultSuggestions : [],
     });
   }
 
@@ -169,6 +180,29 @@ class LibSuggester extends React.Component {
         })
       )
     );
+  }
+
+  fetchDefaultLibs() {
+    if (this.state.defaultLoaded) return;
+
+    this.setState({
+      loading: true,
+      suggestions: [],
+      notFound: false,
+    });
+
+    const swaggerUrl = getPmSwaggerUrl();
+    return searchLibraries(swaggerUrl, '')
+      .catch(R.always([]))
+      .then(data =>
+        this.setState({
+          loading: false,
+          suggestions: data,
+          defaultSuggestions: data,
+          defaultLoaded: true,
+          notFound: false,
+        })
+      );
   }
 
   storeInputReference(autosuggest) {
