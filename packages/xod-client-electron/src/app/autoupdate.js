@@ -20,6 +20,17 @@ export const configureAutoUpdater = (autoUpdater, logger) => {
   /* eslint-disable no-param-reassign */
   autoUpdater.autoDownload = false;
 
+  // Use separate mac update channels for arm64 and x64 artifacts.
+  if (process.platform === 'darwin') {
+    const macChannelByArch = {
+      arm64: 'mac-arm64',
+      x64: 'mac-x64',
+    };
+    const channel = macChannelByArch[process.arch] || 'latest';
+    autoUpdater.channel = channel;
+    autoUpdater.allowDowngrade = true;
+  }
+
   autoUpdater.logger = logger;
   autoUpdater.logger.transports.file.level = 'info';
   autoUpdater.logger.transports.console.level = 'info';

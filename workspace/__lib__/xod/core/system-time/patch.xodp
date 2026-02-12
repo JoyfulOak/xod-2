@@ -1,0 +1,51 @@
+{
+  "description": "Outputs time spent since the program start",
+  "nodes": [
+    {
+      "boundLiterals": {
+        "__out__": "Continuously"
+      },
+      "description": "Triggers new time read",
+      "id": "Bk74I0_SPyb",
+      "label": "UPD",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "boundLiterals": {
+        "__in__": "0"
+      },
+      "description": "The last time read in seconds",
+      "id": "BkEVI0uHwJb",
+      "label": "TIME",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 2.15
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "id": "H1HcY0DyE",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/tabtest"
+    },
+    {
+      "id": "noNativeImpl",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    }
+  ]
+}

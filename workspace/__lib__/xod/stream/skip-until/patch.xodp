@@ -1,0 +1,238 @@
+{
+  "description": "Lets values pass through only after the value specified in S is encountered",
+  "links": [
+    {
+      "id": "ByFqJd70b7",
+      "input": {
+        "nodeId": "r1M51O7Rbm",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "H1VqydXA-X",
+        "pinKey": "HyqbI70-7"
+      }
+    },
+    {
+      "id": "HJ5qydQCbX",
+      "input": {
+        "nodeId": "BJmqJ_XRb7",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "H1VqydXA-X",
+        "pinKey": "SkgG870bX"
+      }
+    },
+    {
+      "id": "HJh5kd7R-X",
+      "input": {
+        "nodeId": "H1VqydXA-X",
+        "pinKey": "rJ5aSXCWm"
+      },
+      "output": {
+        "nodeId": "HJec1dQCZ7",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "Hy0vOo0bm",
+      "input": {
+        "nodeId": "HkDc1OQCWX",
+        "pinKey": "rJXICuSwyW"
+      },
+      "output": {
+        "nodeId": "Skc1_Q0-X",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "Hyj9kOQAZm",
+      "input": {
+        "nodeId": "H1VqydXA-X",
+        "pinKey": "S1618X0bX"
+      },
+      "output": {
+        "nodeId": "Skc1_Q0-X",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "S1lguX0b7",
+      "input": {
+        "nodeId": "SJLcyuXRWm",
+        "pinKey": "B1RU0OrDkb"
+      },
+      "output": {
+        "nodeId": "B1S9JuXRbX",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SkT-uYRWX",
+      "input": {
+        "nodeId": "SJLcyuXRWm",
+        "pinKey": "Bkh8A_Sv1-"
+      },
+      "output": {
+        "nodeId": "B1L-OKCZ7",
+        "pinKey": "HJhXDIY9-"
+      }
+    },
+    {
+      "id": "rJFWuFR-Q",
+      "input": {
+        "nodeId": "B1L-OKCZ7",
+        "pinKey": "BJI7P8t9Z"
+      },
+      "output": {
+        "nodeId": "r1dcyumC-m",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "rJldusC-m",
+      "input": {
+        "nodeId": "HkDc1OQCWX",
+        "pinKey": "HJG8C_SPkb"
+      },
+      "output": {
+        "nodeId": "BJ-qyu70ZX",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "rkJec1OXR-m",
+      "input": {
+        "nodeId": "r1dcyumC-m",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "HkDc1OQCWX",
+        "pinKey": "H1E8AuSPkZ"
+      }
+    },
+    {
+      "id": "ryT5kdmCZm",
+      "input": {
+        "nodeId": "H1VqydXA-X",
+        "pinKey": "SyN0S7RZ7"
+      },
+      "output": {
+        "nodeId": "SJLcyuXRWm",
+        "pinKey": "HkyxURuSPyW"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "B1L-OKCZ7",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 3
+      },
+      "type": "xod/core/defer"
+    },
+    {
+      "description": "Do not let values through until another S",
+      "id": "B1S9JuXRbX",
+      "label": "RST",
+      "position": {
+        "units": "slots",
+        "x": 11,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "description": "All values after this one will be passed through",
+      "id": "BJ-qyu70ZX",
+      "label": "S",
+      "position": {
+        "units": "slots",
+        "x": 8,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-t1"
+    },
+    {
+      "description": "Pulses when a value passes through",
+      "id": "BJmqJ_XRb7",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 6
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "id": "H1VqydXA-X",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 5
+      },
+      "type": "@/pass-if"
+    },
+    {
+      "description": "Try to push a new value through",
+      "id": "HJec1dQCZ7",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "HkDc1OQCWX",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": 1
+      },
+      "type": "xod/core/equal"
+    },
+    {
+      "boundLiterals": {
+        "HkyxURuSPyW": "False"
+      },
+      "id": "SJLcyuXRWm",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 4
+      },
+      "type": "xod/core/flip-flop"
+    },
+    {
+      "description": "A value to be pushed through",
+      "id": "Skc1_Q0-X",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-t1"
+    },
+    {
+      "description": "The last value passed through",
+      "id": "r1M51O7Rbm",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 6
+      },
+      "type": "xod/patch-nodes/output-t1"
+    },
+    {
+      "id": "r1dcyumC-m",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/core/pulse-on-true"
+    }
+  ]
+}

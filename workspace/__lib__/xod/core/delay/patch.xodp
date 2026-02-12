@@ -1,0 +1,81 @@
+{
+  "description": "Delays triggering of an incoming pulse by specified time",
+  "nodes": [
+    {
+      "boundLiterals": {
+        "__in__": "Never"
+      },
+      "description": "Pulses once the delay is over",
+      "id": "Bk4gU0drwJ-",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "description": "Resets current countdown, i.e. cancels the delay",
+      "id": "H1mlUC_HDJZ",
+      "label": "RST",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "description": "Outputs true when delay is in progress",
+      "id": "HkU3vNoTW",
+      "label": "ACT",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-boolean"
+    },
+    {
+      "id": "SJfgF0D1E",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/tabtest"
+    },
+    {
+      "description": "Resets current countdown, starts new countdown",
+      "id": "SkSuD6LMb",
+      "label": "SET",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "description": "Time to delay in seconds",
+      "id": "Skre8ROSv1-",
+      "label": "T",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "noNativeImpl",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    }
+  ]
+}

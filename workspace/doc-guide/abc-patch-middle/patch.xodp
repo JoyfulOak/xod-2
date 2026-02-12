@@ -1,0 +1,22 @@
+{
+  "nodes": [
+    {
+      "id": "HyLOd9HtW",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-boolean"
+    },
+    {
+      "id": "r12dOcBt-",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-boolean"
+    }
+  ]
+}

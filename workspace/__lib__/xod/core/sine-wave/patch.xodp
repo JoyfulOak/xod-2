@@ -1,0 +1,187 @@
+{
+  "description": "Generates sine wave (sinusoid) signal",
+  "links": [
+    {
+      "id": "B1uXK2FyM",
+      "input": {
+        "nodeId": "BJB_WYnYyM",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "rJZ7YnYkz",
+        "pinKey": "r1e-zV2Fyz"
+      }
+    },
+    {
+      "id": "BkYObK3tyf",
+      "input": {
+        "nodeId": "SkmuWt3FyG",
+        "pinKey": "r1W1Tw_yz"
+      },
+      "output": {
+        "nodeId": "SJbuWY3FkG",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ByhXYhK1G",
+      "input": {
+        "nodeId": "rJZ7YnYkz",
+        "pinKey": "BJUWz4nt1G"
+      },
+      "output": {
+        "nodeId": "HyMdZFnYkf",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "H1j_Ztnt1z",
+      "input": {
+        "nodeId": "SkmuWt3FyG",
+        "pinKey": "S1akTPOJf"
+      },
+      "output": {
+        "nodeId": "Sy_ZYhFkM",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "S1FQt2tyM",
+      "input": {
+        "nodeId": "SJIObF3YJz",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "rJZ7YnYkz",
+        "pinKey": "H1z-fVnFyz"
+      }
+    },
+    {
+      "id": "SJd_ZKntkM",
+      "input": {
+        "nodeId": "SkmuWt3FyG",
+        "pinKey": "HJF16v_kz"
+      },
+      "output": {
+        "nodeId": "rkVuWYnF1M",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SkPQFhtJM",
+      "input": {
+        "nodeId": "rJZ7YnYkz",
+        "pinKey": "BJNZzE3YJG"
+      },
+      "output": {
+        "nodeId": "SkmuWt3FyG",
+        "pinKey": "BJMlTDdJM"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "description": "The signal value in [0, 1] range. Starts from 0.",
+      "id": "BJB_WYnYyM",
+      "label": "OUT",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "1"
+      },
+      "description": "An interval between wave peaks, i.e. the period of the signal",
+      "id": "HyMdZFnYkf",
+      "label": "T",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": -0.05
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "description": "The number of current cycle.  Starts from 0.",
+      "id": "SJIObF3YJz",
+      "label": "N",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "True"
+      },
+      "description": "Enabled or not. If set to `false` pulses on `UPD` do not change the output value. Effectively that means the generator is paused. Set to `true` again to continue generation.\n",
+      "id": "SJbuWY3FkG",
+      "label": "EN",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": -0.05
+      },
+      "type": "xod/patch-nodes/input-boolean"
+    },
+    {
+      "id": "SkmuWt3FyG",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "@/timer"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "Continuously"
+      },
+      "description": "Triggers the generator update. It will update the output values.",
+      "id": "Sy_ZYhFkM",
+      "label": "UPD",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": -0.05
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "rJZ7YnYkz",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "@/sine-wave-map"
+    },
+    {
+      "description": "Resets the current `OUT` and `N` to zero.",
+      "id": "rkVuWYnF1M",
+      "label": "RST",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": -0.05
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "description": "Use `xod/waves/sine-wave` instead",
+      "id": "ryHXyA4T8",
+      "position": {
+        "units": "slots",
+        "x": 8,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/deprecated"
+    }
+  ]
+}

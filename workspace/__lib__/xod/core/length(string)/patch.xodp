@@ -1,0 +1,41 @@
+{
+  "description": "Calculates string size in bytes. Will be inequal to the number of glyphs if the input string is UTF-8 encoded and contains non-ASCII characters.",
+  "nodes": [
+    {
+      "id": "H1kQ1XtbQ",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "id": "HJe8KCvy4",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/tabtest"
+    },
+    {
+      "id": "r1VV1mKZm",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "id": "rkKfJ7Y-7",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-string"
+    }
+  ]
+}

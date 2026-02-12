@@ -1,0 +1,71 @@
+{
+  "comments": [
+    {
+      "content": "# Flip-flops\n\nYou can control the behavior of many nodes with pulses. A very useful node is `flip-flop`. It acts like a virtual switch, whose states can be controlled by pulses. A pulse on `SET` turns the stored `MEM` value to true. `RST` resets `MEM` to false. And a pulse on `TGL` inverses the `MEM` value.\n\nThe patch shown here toggles the output boolean value each second.\n\n## Exercise\n\nLet’s experiment with the `flip-flop` node.\n\n1. Replace `clock` node with `tweak-pulse` node.\n2. Add a couple more `tweak-pulse`s and connect them to `flip-flop`'s `SET` and `RST` pins.\n3. Run the simulation, and send pulses to each pin\n\nObserve how the `MEM` value changes when sending several pulses to the same pin in a row.\n",
+      "id": "SyRmtuAw4",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "height": 5,
+        "units": "slots",
+        "width": 7
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "HkhyP4pDV",
+      "input": {
+        "nodeId": "Hys1vVpDV",
+        "pinKey": "ryTIROHwkW"
+      },
+      "output": {
+        "nodeId": "BJMpR8VTwV",
+        "pinKey": "HJU8CE2lW"
+      }
+    },
+    {
+      "id": "SJR1PVaPV",
+      "input": {
+        "nodeId": "r1baCUE6w4",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "Hys1vVpDV",
+        "pinKey": "HkyxURuSPyW"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "BJMpR8VTwV",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 1
+      },
+      "type": "xod/core/clock"
+    },
+    {
+      "id": "Hys1vVpDV",
+      "position": {
+        "units": "slots",
+        "x": 9,
+        "y": 2
+      },
+      "type": "xod/core/flip-flop"
+    },
+    {
+      "id": "r1baCUE6w4",
+      "position": {
+        "units": "slots",
+        "x": 9,
+        "y": 3
+      },
+      "type": "xod/debug/watch"
+    }
+  ]
+}

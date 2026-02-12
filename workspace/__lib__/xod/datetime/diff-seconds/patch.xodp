@@ -1,0 +1,42 @@
+{
+  "description": "Calculates the difference between two datetimes in seconds",
+  "nodes": [
+    {
+      "id": "H1Bdc44v7",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "id": "H1nP94VwQ",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 1
+      },
+      "type": "@/input-datetime"
+    },
+    {
+      "id": "S1sPqNEwm",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 1
+      },
+      "type": "@/input-datetime"
+    },
+    {
+      "description": "Difference in seconds. It is negative if IN1 precedes IN2",
+      "id": "SJZd5VVDm",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-number"
+    }
+  ]
+}

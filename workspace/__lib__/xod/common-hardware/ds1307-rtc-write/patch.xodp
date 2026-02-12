@@ -1,0 +1,725 @@
+{
+  "description": "Writes a new date/time value to a DS1307, DS1337, DS1338, or DS3231 real-time clock IC. Useful as a throw-away node to setup the RTC once after you install a backup battery.\n\nPossible errors:\n— Invalid I2C address\n— Data too long to fit in transmit buffer\n— Received NACK on transmit of address\n— Received NACK on transmit of data\n— Other error\n— No bytes written. Probably due to buffer overflow.",
+  "links": [
+    {
+      "id": "BJkIbTGxM",
+      "input": {
+        "nodeId": "r1UrbTzlf",
+        "pinKey": "ryKV8d_1f"
+      },
+      "output": {
+        "nodeId": "H1WQ8hZlf",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "Bk1ND2-xf",
+      "input": {
+        "nodeId": "BywsI3-lz",
+        "pinKey": "Sk2oU_Vdb"
+      },
+      "output": {
+        "nodeId": "HJWkD2-xG",
+        "pinKey": "SJB3vO4uZ"
+      }
+    },
+    {
+      "id": "Bk6wqhWlG",
+      "input": {
+        "nodeId": "Hy3RF2Zef",
+        "pinKey": "H12cvhZeG"
+      },
+      "output": {
+        "nodeId": "r1nQLhbez",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "H17Zwnblf",
+      "input": {
+        "nodeId": "HyVJP3bez",
+        "pinKey": "S1dKPuVdW"
+      },
+      "output": {
+        "nodeId": "SyryPhWgz",
+        "pinKey": "SJB3vO4uZ"
+      }
+    },
+    {
+      "id": "H1C15qBlm",
+      "input": {
+        "nodeId": "rJlHkD3Zgf",
+        "pinKey": "S1FFN4nkm"
+      },
+      "output": {
+        "nodeId": "BJTpKhbeM",
+        "pinKey": "S1TsDnbgM"
+      }
+    },
+    {
+      "id": "H1UWw2Zgf",
+      "input": {
+        "nodeId": "r1QyD2WgG",
+        "pinKey": "S1dKPuVdW"
+      },
+      "output": {
+        "nodeId": "B1eXyv2Zlf",
+        "pinKey": "SJB3vO4uZ"
+      }
+    },
+    {
+      "id": "H1W8Zazlz",
+      "input": {
+        "nodeId": "HJiJ9hbez",
+        "pinKey": "H12cvhZeG"
+      },
+      "output": {
+        "nodeId": "r1UrbTzlf",
+        "pinKey": "Hku_LuOyz"
+      }
+    },
+    {
+      "id": "H1Z_93WeM",
+      "input": {
+        "nodeId": "BJTpKhbeM",
+        "pinKey": "H12cvhZeG"
+      },
+      "output": {
+        "nodeId": "Hk678nbeG",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "HJ3Kq9reX",
+      "input": {
+        "nodeId": "B1eXyv2Zlf",
+        "pinKey": "BJrcyE3y7"
+      },
+      "output": {
+        "nodeId": "Sy_d99HlQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "HJJk95Be7",
+      "input": {
+        "nodeId": "B1eXyv2Zlf",
+        "pinKey": "S1FFN4nkm"
+      },
+      "output": {
+        "nodeId": "r1-1chZlG",
+        "pinKey": "S1TsDnbgM"
+      }
+    },
+    {
+      "id": "HJuWw3bef",
+      "input": {
+        "nodeId": "rJM1Dnbgz",
+        "pinKey": "S1dKPuVdW"
+      },
+      "output": {
+        "nodeId": "r1QyD2WgG",
+        "pinKey": "SJB3vO4uZ"
+      }
+    },
+    {
+      "id": "HkTaKqBe7",
+      "input": {
+        "nodeId": "HJWkD2-xG",
+        "pinKey": "S1FFN4nkm"
+      },
+      "output": {
+        "nodeId": "HJiJ9hbez",
+        "pinKey": "S1TsDnbgM"
+      }
+    },
+    {
+      "id": "Hk_K82Zgf",
+      "input": {
+        "nodeId": "HkMt83-xG",
+        "pinKey": "BJfKruVdb"
+      },
+      "output": {
+        "nodeId": "B1h8InZgz",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "HkeZw3-lG",
+      "input": {
+        "nodeId": "rJlHkD3Zgf",
+        "pinKey": "S1dKPuVdW"
+      },
+      "output": {
+        "nodeId": "SyupI2ZeM",
+        "pinKey": "SJB3vO4uZ"
+      }
+    },
+    {
+      "id": "Hkvc55SgQ",
+      "input": {
+        "nodeId": "rJlHkD3Zgf",
+        "pinKey": "BJrcyE3y7"
+      },
+      "output": {
+        "nodeId": "Sy_d99HlQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "Hy79qqBgm",
+      "input": {
+        "nodeId": "SyryPhWgz",
+        "pinKey": "BJrcyE3y7"
+      },
+      "output": {
+        "nodeId": "Sy_d99HlQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "HyLFq9rlm",
+      "input": {
+        "nodeId": "rJM1Dnbgz",
+        "pinKey": "BJrcyE3y7"
+      },
+      "output": {
+        "nodeId": "Sy_d99HlQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "S1KLch-lf",
+      "input": {
+        "nodeId": "rkv1ch-eM",
+        "pinKey": "H12cvhZeG"
+      },
+      "output": {
+        "nodeId": "S1EQU3-lz",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "S1Yk55BeQ",
+      "input": {
+        "nodeId": "SyryPhWgz",
+        "pinKey": "S1FFN4nkm"
+      },
+      "output": {
+        "nodeId": "Hy3RF2Zef",
+        "pinKey": "S1TsDnbgM"
+      }
+    },
+    {
+      "id": "SJVJ9cSem",
+      "input": {
+        "nodeId": "HyVJP3bez",
+        "pinKey": "S1FFN4nkm"
+      },
+      "output": {
+        "nodeId": "HyRRF2ZgG",
+        "pinKey": "S1TsDnbgM"
+      }
+    },
+    {
+      "id": "SJhLcn-lz",
+      "input": {
+        "nodeId": "ByEJc3ZlG",
+        "pinKey": "H12cvhZeG"
+      },
+      "output": {
+        "nodeId": "r1SQLh-gf",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SJzWv3WgM",
+      "input": {
+        "nodeId": "SyryPhWgz",
+        "pinKey": "S1dKPuVdW"
+      },
+      "output": {
+        "nodeId": "rJlHkD3Zgf",
+        "pinKey": "SJB3vO4uZ"
+      }
+    },
+    {
+      "id": "Sk9ZwhbeG",
+      "input": {
+        "nodeId": "HJWkD2-xG",
+        "pinKey": "S1dKPuVdW"
+      },
+      "output": {
+        "nodeId": "rJM1Dnbgz",
+        "pinKey": "SJB3vO4uZ"
+      }
+    },
+    {
+      "id": "SknpI2blf",
+      "input": {
+        "nodeId": "SyupI2ZeM",
+        "pinKey": "S1dKPuVdW"
+      },
+      "output": {
+        "nodeId": "HkMt83-xG",
+        "pinKey": "HJbjB_Nd-"
+      }
+    },
+    {
+      "id": "SkwP9nbgz",
+      "input": {
+        "nodeId": "r1-1chZlG",
+        "pinKey": "H12cvhZeG"
+      },
+      "output": {
+        "nodeId": "SydXI2Wxz",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "r1BWw3Zxf",
+      "input": {
+        "nodeId": "B1eXyv2Zlf",
+        "pinKey": "S1dKPuVdW"
+      },
+      "output": {
+        "nodeId": "HyVJP3bez",
+        "pinKey": "SJB3vO4uZ"
+      }
+    },
+    {
+      "id": "r1bt95SeQ",
+      "input": {
+        "nodeId": "BywsI3-lz",
+        "pinKey": "B1vdYXhkQ"
+      },
+      "output": {
+        "nodeId": "Sy_d99HlQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "r1iht9HlQ",
+      "input": {
+        "nodeId": "HkMt83-xG",
+        "pinKey": "SyssEEhJm"
+      },
+      "output": {
+        "nodeId": "B1ENIh-eM",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "r1xc55Hlm",
+      "input": {
+        "nodeId": "HyVJP3bez",
+        "pinKey": "BJrcyE3y7"
+      },
+      "output": {
+        "nodeId": "Sy_d99HlQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "rk1o5qrgX",
+      "input": {
+        "nodeId": "HkMt83-xG",
+        "pinKey": "HJkfWmny7"
+      },
+      "output": {
+        "nodeId": "Sy_d99HlQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ry4Rt5HgQ",
+      "input": {
+        "nodeId": "rJM1Dnbgz",
+        "pinKey": "S1FFN4nkm"
+      },
+      "output": {
+        "nodeId": "rkv1ch-eM",
+        "pinKey": "S1TsDnbgM"
+      }
+    },
+    {
+      "id": "ryVK5cHxm",
+      "input": {
+        "nodeId": "HJWkD2-xG",
+        "pinKey": "BJrcyE3y7"
+      },
+      "output": {
+        "nodeId": "Sy_d99HlQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ryYYc9rgQ",
+      "input": {
+        "nodeId": "r1QyD2WgG",
+        "pinKey": "BJrcyE3y7"
+      },
+      "output": {
+        "nodeId": "Sy_d99HlQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ryhn82Zez",
+      "input": {
+        "nodeId": "SkH2Ih-ef",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "BywsI3-lz",
+        "pinKey": "ryviw_EOb"
+      }
+    },
+    {
+      "id": "ryi999SgX",
+      "input": {
+        "nodeId": "SyupI2ZeM",
+        "pinKey": "BJrcyE3y7"
+      },
+      "output": {
+        "nodeId": "Sy_d99HlQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ryq0F9rx7",
+      "input": {
+        "nodeId": "r1QyD2WgG",
+        "pinKey": "S1FFN4nkm"
+      },
+      "output": {
+        "nodeId": "ByEJc3ZlG",
+        "pinKey": "S1TsDnbgM"
+      }
+    },
+    {
+      "id": "rytDqh-xM",
+      "input": {
+        "nodeId": "HyRRF2ZgG",
+        "pinKey": "H12cvhZeG"
+      },
+      "output": {
+        "nodeId": "SyjmLn-lz",
+        "pinKey": "__out__"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "boundLiterals": {
+        "__out__": "68h"
+      },
+      "description": "I²C address of the IC",
+      "id": "B1ENIh-eM",
+      "label": "ADDR",
+      "position": {
+        "units": "slots",
+        "x": -11,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "id": "B1eXyv2Zlf",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 3
+      },
+      "type": "xod/i2c/write-byte"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "On Boot"
+      },
+      "description": "Trigger a new write of the date/time data provided",
+      "id": "B1h8InZgz",
+      "label": "UPD",
+      "position": {
+        "units": "slots",
+        "x": 15,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "BJTpKhbeM",
+      "position": {
+        "units": "slots",
+        "x": 9,
+        "y": 2
+      },
+      "type": "xod/bits/dec-to-bcd"
+    },
+    {
+      "id": "ByEJc3ZlG",
+      "position": {
+        "units": "slots",
+        "x": -3,
+        "y": 2
+      },
+      "type": "xod/bits/dec-to-bcd"
+    },
+    {
+      "id": "BywsI3-lz",
+      "position": {
+        "units": "slots",
+        "x": -10,
+        "y": 4
+      },
+      "type": "xod/i2c/end-transmission"
+    },
+    {
+      "description": "Year value in [2000, 2099] range",
+      "id": "H1WQ8hZlf",
+      "label": "YEAR",
+      "position": {
+        "units": "slots",
+        "x": -9,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "HJWkD2-xG",
+      "position": {
+        "units": "slots",
+        "x": -9,
+        "y": 3
+      },
+      "type": "xod/i2c/write-byte"
+    },
+    {
+      "id": "HJiJ9hbez",
+      "position": {
+        "units": "slots",
+        "x": -9,
+        "y": 2
+      },
+      "type": "xod/bits/dec-to-bcd"
+    },
+    {
+      "description": "Use `xod-dev/ds-rtc/write` instead",
+      "id": "HJu41wSuX",
+      "position": {
+        "units": "slots",
+        "x": -15,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/deprecated"
+    },
+    {
+      "description": "Seconds value in range [0, 59]",
+      "id": "Hk678nbeG",
+      "label": "SEC",
+      "position": {
+        "units": "slots",
+        "x": 9,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "HkMt83-xG",
+      "position": {
+        "units": "slots",
+        "x": 13,
+        "y": 2
+      },
+      "type": "xod/i2c/begin-transmission"
+    },
+    {
+      "id": "Hy3RF2Zef",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 2
+      },
+      "type": "xod/bits/dec-to-bcd"
+    },
+    {
+      "id": "HyRRF2ZgG",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 2
+      },
+      "type": "xod/bits/dec-to-bcd"
+    },
+    {
+      "id": "HyVJP3bez",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 3
+      },
+      "type": "xod/i2c/write-byte"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "1"
+      },
+      "description": "Month value in [1, 12] range",
+      "id": "S1EQU3-lz",
+      "label": "MO",
+      "position": {
+        "units": "slots",
+        "x": -6,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "description": "Pulses when the write is done",
+      "id": "SkH2Ih-ef",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": -10,
+        "y": 6
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "id": "Sy_d99HlQ",
+      "label": "I2C",
+      "position": {
+        "units": "slots",
+        "x": -13,
+        "y": 0
+      },
+      "type": "xod/i2c/input-i2c"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "1"
+      },
+      "description": "Week day value in range [1, 7]",
+      "id": "SydXI2Wxz",
+      "label": "WD",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "description": "Hours value in range [0, 23]",
+      "id": "SyjmLn-lz",
+      "label": "HOUR",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "SyryPhWgz",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 3
+      },
+      "type": "xod/i2c/write-byte"
+    },
+    {
+      "description": "Starting register address",
+      "id": "SyupI2ZeM",
+      "position": {
+        "units": "slots",
+        "x": 12,
+        "y": 3
+      },
+      "type": "xod/i2c/write-byte"
+    },
+    {
+      "id": "r1-1chZlG",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/bits/dec-to-bcd"
+    },
+    {
+      "id": "r1QyD2WgG",
+      "position": {
+        "units": "slots",
+        "x": -3,
+        "y": 3
+      },
+      "type": "xod/i2c/write-byte"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "1"
+      },
+      "description": "Day value. Valid range depends on month and can be [1, 28-31].",
+      "id": "r1SQLh-gf",
+      "label": "DAY",
+      "position": {
+        "units": "slots",
+        "x": -3,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "boundLiterals": {
+        "BJvrLOuyz": "100"
+      },
+      "id": "r1UrbTzlf",
+      "position": {
+        "units": "slots",
+        "x": -9,
+        "y": 1
+      },
+      "type": "xod/core/modulo"
+    },
+    {
+      "description": "Minutes value in range [0, 59]",
+      "id": "r1nQLhbez",
+      "label": "MIN",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "rJM1Dnbgz",
+      "position": {
+        "units": "slots",
+        "x": -6,
+        "y": 3
+      },
+      "type": "xod/i2c/write-byte"
+    },
+    {
+      "id": "rJlHkD3Zgf",
+      "position": {
+        "units": "slots",
+        "x": 9,
+        "y": 3
+      },
+      "type": "xod/i2c/write-byte"
+    },
+    {
+      "id": "rkv1ch-eM",
+      "position": {
+        "units": "slots",
+        "x": -6,
+        "y": 2
+      },
+      "type": "xod/bits/dec-to-bcd"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "authors": [
+    "XOD"
+  ],
+  "description": "Hardware drivers for popular and simple peripherals",
+  "license": "AGPL-3.0",
+  "name": "common-hardware",
+  "version": "2026.2.2"
+}

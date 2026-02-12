@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "content": "# Permanent Alarm\n\nLet's extend the alarm device and make the LED stay enabled after trigerring even after the condition is no longer met. This is useful to signalize that something gone wrong even if it was not observed immediatelly.\n\nWhen the value gets out of the range, the `or` node sends a pulse to the `SET` pin of the `flip-flop` node. So `MEM` returns `True` until we reset it, toggle it, or reboot the board.\n\n## Instructions\n\nLet's make the alarm resettable.\n\n1. Add a `button` node.\n2. Set the corresponding `PORT`.\n3. Link `PRS` with the `RST` pin.\n4. Upload the program.\n\nHeat or cool down the thermometer. Use the new button to turn the alarm off until the new trigger event is encountered.",
+      "id": "By-2_Dz_V",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "height": 5,
+        "units": "slots",
+        "width": 7
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "BJe0TwcdE",
+      "input": {
+        "nodeId": "SyAp6P9_N",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "BkejTPcd4",
+        "pinKey": "HkyxURuSPyW"
+      }
+    },
+    {
+      "id": "SJAWU_Ld4",
+      "input": {
+        "nodeId": "Byje8OL_4",
+        "pinKey": "HJCfI0dBDkb"
+      },
+      "output": {
+        "nodeId": "Hkxu3dvzuN",
+        "pinKey": "B19RYS3lW"
+      }
+    },
+    {
+      "id": "SJEg8uL_4",
+      "input": {
+        "nodeId": "BkblI_8O4",
+        "pinKey": "HJjZLRdBw1-"
+      },
+      "output": {
+        "nodeId": "Hkd2ODfu4",
+        "pinKey": "rkFgMITM-"
+      }
+    },
+    {
+      "id": "SkViTvquE",
+      "input": {
+        "nodeId": "ryZ_3dvM_E",
+        "pinKey": "HyYh1a3LZ"
+      },
+      "output": {
+        "nodeId": "BkejTPcd4",
+        "pinKey": "HkyxURuSPyW"
+      }
+    },
+    {
+      "id": "r1Xx8u8OV",
+      "input": {
+        "nodeId": "Hkxu3dvzuN",
+        "pinKey": "rJg00Nhe-"
+      },
+      "output": {
+        "nodeId": "Hkd2ODfu4",
+        "pinKey": "rkFgMITM-"
+      }
+    },
+    {
+      "id": "rkRZCPq_V",
+      "input": {
+        "nodeId": "BkejTPcd4",
+        "pinKey": "Bkh8A_Sv1-"
+      },
+      "output": {
+        "nodeId": "Byje8OL_4",
+        "pinKey": "SJyXI0OrD1-"
+      }
+    },
+    {
+      "id": "rkhZId8u4",
+      "input": {
+        "nodeId": "Byje8OL_4",
+        "pinKey": "BJaG80urD1-"
+      },
+      "output": {
+        "nodeId": "BkblI_8O4",
+        "pinKey": "HktZUCdrPkZ"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "boundLiterals": {
+        "SJqZ8COrDkW": "18"
+      },
+      "id": "BkblI_8O4",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 1
+      },
+      "type": "xod/core/less"
+    },
+    {
+      "id": "BkejTPcd4",
+      "position": {
+        "units": "slots",
+        "x": 9,
+        "y": 3
+      },
+      "type": "xod/core/flip-flop"
+    },
+    {
+      "id": "Byje8OL_4",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 2
+      },
+      "type": "xod/core/or"
+    },
+    {
+      "boundLiterals": {
+        "H1s0WI6MZ": "A1"
+      },
+      "id": "Hkd2ODfu4",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 0
+      },
+      "type": "xod/common-hardware/thermometer-tmp36"
+    },
+    {
+      "boundLiterals": {
+        "HJbACN3gb": "26"
+      },
+      "id": "Hkxu3dvzuN",
+      "position": {
+        "units": "slots",
+        "x": 13,
+        "y": 1
+      },
+      "type": "xod/core/greater"
+    },
+    {
+      "id": "SyAp6P9_N",
+      "position": {
+        "units": "slots",
+        "x": 11,
+        "y": 4
+      },
+      "type": "xod/debug/watch"
+    },
+    {
+      "boundLiterals": {
+        "B1oqkTnIb": "D11"
+      },
+      "id": "ryZ_3dvM_E",
+      "position": {
+        "units": "slots",
+        "x": 8,
+        "y": 4
+      },
+      "type": "xod/common-hardware/led"
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "description": "Checks if there is any incoming data to be read with `read-byte`",
+  "nodes": [
+    {
+      "id": "B1Dse0wbm",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "description": "The socket",
+      "id": "BkzF0dvfQ",
+      "label": "SOCK",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "xod/net/input-socket"
+    },
+    {
+      "description": "Pulses if there is no incoming data",
+      "id": "S15XzCDbQ",
+      "label": "N",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "description": "Pulses if there is at least one byte",
+      "id": "SJBQf0wZQ",
+      "label": "Y",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "description": "Perform the check",
+      "id": "rJqbl0v-m",
+      "label": "CHK",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    }
+  ]
+}

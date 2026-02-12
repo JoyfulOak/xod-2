@@ -1,0 +1,59 @@
+{
+  "description": "Transforms a number into a string with specified precision",
+  "nodes": [
+    {
+      "description": "Number to format",
+      "id": "BJlHojaWZ",
+      "label": "NUM",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "2"
+      },
+      "description": "Number of digits after dot",
+      "id": "HJTIija-W",
+      "label": "DIG",
+      "position": {
+        "units": "slots",
+        "x": 4.05,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "HJtXKRwJ4",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/tabtest"
+    },
+    {
+      "id": "S1wYijaWb",
+      "position": {
+        "units": "slots",
+        "x": 4.05,
+        "y": 1.15
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "description": "Formatted value",
+      "id": "r1H_oipZb",
+      "label": "STR",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 2.15
+      },
+      "type": "xod/patch-nodes/output-string"
+    }
+  ]
+}

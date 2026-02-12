@@ -122,6 +122,14 @@ const boards = [
   },
 ];
 
+const lowercaseFqbnBoards = boards.map(board => {
+  if (!board.FQBN) return board;
+  const copied = Object.assign({}, board);
+  copied.fqbn = copied.FQBN;
+  delete copied.FQBN;
+  return copied;
+});
+
 const expectedBoards = [
   {
     name: 'Generic ESP8266 Module',
@@ -217,5 +225,15 @@ describe('Option Parser', () => {
         { ID: 'fictional:fake', Installed: '1.2.3' },
       ],
       boards
+    ).then(res => assert.sameDeepMembers(res, expectedBoards)));
+
+  it('Correctly patches boards when arduino-cli uses lowercase fqbn', () =>
+    patchBoardsWithOptions(
+      fixtureDir,
+      [
+        { ID: 'esp8266:esp8266', Installed: '2.4.2' },
+        { ID: 'fictional:fake', Installed: '1.2.3' },
+      ],
+      lowercaseFqbnBoards
     ).then(res => assert.sameDeepMembers(res, expectedBoards)));
 });

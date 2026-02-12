@@ -30,6 +30,30 @@ const ArduinoCli = (pathToBin, config = null) => {
   const configDir = configureVal.dir;
   let runningProcesses = [];
 
+  const ensureConfigPathFile = () => {
+    if (!configPath) return;
+    try {
+      if (fse.pathExistsSync(configPath)) {
+        const stat = fse.statSync(configPath);
+        if (stat.isDirectory()) {
+          const fixedConfigPath = resolve(configPath, 'arduino-cli.yaml');
+          const saved = saveConfig(fixedConfigPath, cfg);
+          configPath = saved.path;
+          cfg = saved.config;
+        }
+        return;
+      }
+
+      const saved = saveConfig(configPath, cfg);
+      configPath = saved.path;
+      cfg = saved.config;
+    } catch (err) {
+      // ignore and let arduino-cli report actual error
+    }
+  };
+
+  ensureConfigPathFile();
+
   const appendProcess = proc => {
     runningProcesses = R.append(proc, runningProcesses);
   };
@@ -38,6 +62,7 @@ const ArduinoCli = (pathToBin, config = null) => {
   };
 
   const runWithProgress = async (onProgress, args) => {
+    ensureConfigPathFile();
     const spawnArgs = R.compose(
       R.concat([`--config-file`, configPath]),
       R.reject(R.isEmpty)
@@ -67,6 +92,7 @@ const ArduinoCli = (pathToBin, config = null) => {
   };
 
   const runAndParseJson = args => {
+    ensureConfigPathFile();
     const spawnArgs = R.compose(
       R.concat([`--config-file`, configPath]),
       R.reject(R.isEmpty)
@@ -177,6 +203,7 @@ const ArduinoCli = (pathToBin, config = null) => {
     getRunningProcesses: () => runningProcesses,
     dumpConfig: getConfig,
     updateConfig: newConfig => {
+      ensureConfigPathFile();
       const newCfg = saveConfig(configPath, newConfig);
       configPath = newCfg.path;
       cfg = newCfg.config;
@@ -206,22 +233,38 @@ const ArduinoCli = (pathToBin, config = null) => {
         }),
     listAvailableBoards: () =>
       listAvailableBoards(getConfig, cfg.directories.data),
-    compile: (onProgress, fqbn, sketchName, verbose = false) =>
-      runWithProgress(onProgress, [
+    compile: (onProgress, fqbn, sketchName, verboseOrOptions = false) => {
+      const options =
+        typeof verboseOrOptions === 'object' && verboseOrOptions !== null
+          ? verboseOrOptions
+          : { verbose: verboseOrOptions };
+      const verbose = Boolean(options.verbose);
+      const outputDir = options.outputDir || '';
+      return runWithProgress(onProgress, [
         'compile',
         `--fqbn=${fqbn}`,
         verbose ? '--verbose' : '',
+        outputDir ? `--output-dir=${outputDir}` : '',
         sketch(sketchName),
-      ]),
-    upload: (onProgress, port, fqbn, sketchName, verbose = false) =>
-      runWithProgress(onProgress, [
+      ]);
+    },
+    upload: (onProgress, port, fqbn, sketchName, verboseOrOptions = false) => {
+      const options =
+        typeof verboseOrOptions === 'object' && verboseOrOptions !== null
+          ? verboseOrOptions
+          : { verbose: verboseOrOptions };
+      const verbose = Boolean(options.verbose);
+      const inputFile = options.inputFile || '';
+      return runWithProgress(onProgress, [
         'upload',
         `--fqbn=${fqbn}`,
         `--port=${port}`,
         verbose ? '--verbose' : '',
+        inputFile ? `--input-file=${inputFile}` : '',
         '-t',
         sketch(sketchName),
-      ]),
+      ]);
+    },
     core: {
       download: (onProgress, pkgName) =>
         // TODO:

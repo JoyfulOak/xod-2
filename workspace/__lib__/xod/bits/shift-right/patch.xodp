@@ -1,0 +1,44 @@
+{
+  "description": "Performs logical right-shift of `IN` by `N` bits.",
+  "nodes": [
+    {
+      "description": "Shift bits count. Truncated to an integer. Negative values round to zero",
+      "id": "BkvUuuleG",
+      "label": "N",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "HyV6_ugef",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "id": "rJ2LddxlG",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "description": "Input number. Interpreted as a signed 32-bit interger",
+      "id": "rkXLOulgz",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-number"
+    }
+  ]
+}

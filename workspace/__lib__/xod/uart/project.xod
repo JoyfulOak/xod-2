@@ -1,0 +1,9 @@
+{
+  "authors": [
+    "XOD"
+  ],
+  "description": "Provides constructors and Nodes to interact with UARTs (Software, Hardware, USB) in XOD.",
+  "license": "AGPL-3.0",
+  "name": "uart",
+  "version": "2026.2.2"
+}

@@ -1,0 +1,68 @@
+{
+  "links": [
+    {
+      "id": "rJDD4FSZZ",
+      "input": {
+        "nodeId": "rkwIEFrWb",
+        "pinKey": "ryTIROHwkW"
+      },
+      "output": {
+        "nodeId": "By6HVYHZb",
+        "pinKey": "HJU8CE2lW"
+      }
+    },
+    {
+      "id": "ry2wNFB-Z",
+      "input": {
+        "nodeId": "SyeDNFBWZ",
+        "pinKey": "HJ6HsEngZ"
+      },
+      "output": {
+        "nodeId": "rkwIEFrWb",
+        "pinKey": "HkyxURuSPyW"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "boundLiterals": {
+        "B13SCNhl-": "0.25",
+        "BJJICN2lW": "Never"
+      },
+      "id": "By6HVYHZb",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/core/clock"
+    },
+    {
+      "boundLiterals": {
+        "HJ6HsEngZ": "False",
+        "rJjXFA9JQ": "D13"
+      },
+      "id": "SyeDNFBWZ",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/gpio/digital-write"
+    },
+    {
+      "boundLiterals": {
+        "B1RU0OrDkb": "Never",
+        "Bkh8A_Sv1-": "Never",
+        "ryTIROHwkW": "Never"
+      },
+      "id": "rkwIEFrWb",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 1
+      },
+      "type": "xod/core/flip-flop"
+    }
+  ]
+}

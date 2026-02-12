@@ -1,0 +1,3 @@
+IS_ERR	OUT1	OUT2	OUT3	CNT
+false	200	4200	42	0
+true	error	error	error	1

@@ -38,7 +38,7 @@ class PopupInstallApp extends React.PureComponent {
       <SkyLight
         hideOnOverlayClicked
         ref={this.assignPopupRef}
-        title="You need the desktop version of XOD IDE"
+        title="You need the desktop version of XOD 2 IDE"
         afterClose={this.props.onClose}
       >
         <div className="ModalBody">

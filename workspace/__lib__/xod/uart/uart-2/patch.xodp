@@ -1,0 +1,64 @@
+{
+  "description": "Constructor of HardwareUart, provides serial communication through Serial2.",
+  "nodes": [
+    {
+      "boundLiterals": {
+        "__out__": "115200"
+      },
+      "description": "Speed of data transmission in bits per second (baud rate).",
+      "id": "BytfJKIWX",
+      "label": "BAUD",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "SJQ39d8bm",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "description": "An UART object",
+      "id": "Sk450OL-X",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "@/output-uart"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "On Boot"
+      },
+      "description": "Begin UART communication",
+      "id": "SkedxFD8dQ",
+      "label": "INIT",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "description": "Pulses when UART communication began",
+      "id": "ryulYwIOQ",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    }
+  ]
+}

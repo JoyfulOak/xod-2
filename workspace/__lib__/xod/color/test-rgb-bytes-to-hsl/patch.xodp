@@ -1,0 +1,173 @@
+{
+  "links": [
+    {
+      "id": "HJce5zTwlE",
+      "input": {
+        "nodeId": "BkSg9MaPl4",
+        "pinKey": "Hklnz7WjoQ"
+      },
+      "output": {
+        "nodeId": "HJIlqfpvgN",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "HyD9MaDlE",
+      "input": {
+        "nodeId": "Hk8cG6wgV",
+        "pinKey": "SJyVaGjsQ"
+      },
+      "output": {
+        "nodeId": "BkSg9MaPl4",
+        "pinKey": "S1f7XZij7"
+      }
+    },
+    {
+      "id": "S1wjfaDxE",
+      "input": {
+        "nodeId": "BJeEsf6DlE",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "Hk8cG6wgV",
+        "pinKey": "SkeqVaziom"
+      }
+    },
+    {
+      "id": "SypeqfaDl4",
+      "input": {
+        "nodeId": "BkSg9MaPl4",
+        "pinKey": "S1Df7Wso7"
+      },
+      "output": {
+        "nodeId": "Bkxx5MpPeE",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "rkLjzpwg4",
+      "input": {
+        "nodeId": "BJVjMpDlE",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "Hk8cG6wgV",
+        "pinKey": "Hkq4azoom"
+      }
+    },
+    {
+      "id": "rkog5f6Dl4",
+      "input": {
+        "nodeId": "BkSg9MaPl4",
+        "pinKey": "rkhfmWojX"
+      },
+      "output": {
+        "nodeId": "r1xczTDxN",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "rkriGavx4",
+      "input": {
+        "nodeId": "Hkbiz6wlV",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "Hk8cG6wgV",
+        "pinKey": "S1PNaMjsX"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "BJVjMpDlE",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "id": "BJeEsf6DlE",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "id": "BkSg9MaPl4",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": 1
+      },
+      "type": "@/color-rgb-bytes"
+    },
+    {
+      "id": "Bkxx5MpPeE",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": -0.05
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "id": "HJIlqfpvgN",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": -0.05
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "id": "Hk8cG6wgV",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "@/to-hsl"
+    },
+    {
+      "id": "HkT4OBGZ4",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/tabtest"
+    },
+    {
+      "id": "Hkbiz6wlV",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "id": "r1xczTDxN",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": -0.05
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "id": "rJblcMpDg4",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/utility"
+    }
+  ]
+}

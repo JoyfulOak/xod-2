@@ -1,0 +1,34 @@
+{
+  "description": "Outputs a line of text to the board standard debug interface",
+  "nodes": [
+    {
+      "id": "HJdO9HwJ-",
+      "label": "LINE",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-string"
+    },
+    {
+      "id": "S1n95SDJb",
+      "label": "DUMP",
+      "position": {
+        "units": "slots",
+        "x": 4.05,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "noNativeImpl",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    }
+  ]
+}

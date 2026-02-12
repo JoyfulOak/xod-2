@@ -227,7 +227,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Features and enhancements
 
-* [ide] Add search for libraries within XOD IDE (#1909)
+* [ide] Add search for libraries within XOD 2 IDE (#1909)
 * [ide] Derive project name from the saved filename in desktop IDE (#1904)
 * [core] Add `=XOD_USERNAME` literal to use a XOD username in various places and assist easy sharing of the project (#1888)
 * [core] Add `=XOD_PROJECT` literal to use the current project name. For example, as a part of the feed path (#1889)
@@ -324,7 +324,7 @@ All notable changes to this project will be documented in this file. See [standa
 ### Features and enhancements
 
 * [core] The errors mechanism. (#1777, #1784, #1818)
-* [ide] Errors are visualized in XOD IDE during the simulation and debug. (#1797)
+* [ide] Errors are visualized in XOD 2 IDE during the simulation and debug. (#1797)
 * [ide] Cancel the restriction of deleting terminals in use. Now, this is allowed and will cause the patches which use the terminal to become broken which is quickly fixable by undoing the deletion or removing the offending links. (#1809)
 * [ide] Upgrade the underlying UI Electron platform from 1.8 to 4.2 which makes IDE a bit more responsive and brings Gtk3 on Linux. (#1811)
 * [ide] Link to amperka.com on the welcome banner. Should we have some profit after all! (#1820)
@@ -343,7 +343,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 * [ide] Show that patches are broken even if they are hidden by the deprecated/utility filter. (#1813)
 * [ide] Opening not-a-xod file no longer breaks workspace creation. (#1812)
-* [ide] Exclude the whole BuckleScript platform from bundling into the distro. Makes XOD IDE ⅓ smaller in size. (#1814)
+* [ide] Exclude the whole BuckleScript platform from bundling into the distro. Makes XOD 2 IDE ⅓ smaller in size. (#1814)
 * [ide] Fix nested tweaks updates ignore/collide during debugging and simulation. (#1821)
 * [ide] Respect `serial.disableRTS` option from platform’s `boards.txt` when opening the serial port for debugging. Previously it broke debugging for Arduino Leonardo, Micro, ATmega32U4 on Windows. (#1816)
 
@@ -393,7 +393,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug fixes
 
-* [ide] Fix upload to the default board on a fresh installation of XOD IDE (#1732)
+* [ide] Fix upload to the default board on a fresh installation of XOD 2 IDE (#1732)
 
 <a name="0.28.1"></a>
 
@@ -524,7 +524,7 @@ All notable changes to this project will be documented in this file. See [standa
 * [ide] Fix ugly hover color of message and header buttons. (#1492)
 * [ide] Fix the scroll position when Deployment pane is opened for the first time. (#1494)
 * [nodes] Fix `clock` hang if the `EN` pin is constantly updated. (#1496)
-* [ide] Gracefully shutdown long background processes like package installing when quitting XOD IDE. (#1500, #1523)
+* [ide] Gracefully shutdown long background processes like package installing when quitting XOD 2 IDE. (#1500, #1523)
 * [ide] Ensure Edit → Select All and its keyboard shortcut work properly on all OS’es and browsers. (#1505)
 * [ide] Do not raise DTR when opening a serial port on Windows. It caused issues with some boards using the CP2102 USB-to-Serial chip. (#1507)
 * [c++] Make port values validation softer on platforms which violate assumptions about underlying values of `A0`, `A1`, number of digital pins, etc. (#1508)
@@ -533,7 +533,7 @@ All notable changes to this project will be documented in this file. See [standa
 * [ide] Fix helpbox outputs listed in the reverse order for some nodes. (#1432)
 * [ide] Always upload to a board with the option set shown in the upload dialog: do not mess option values between different board models. (#1519)
 * [ide] Fix converting links to buses when they are going toward variadic pins. (#1520)
-* [ide] Fix offset hotkey label position in the main menu of browser XOD IDE. (#1521)
+* [ide] Fix offset hotkey label position in the main menu of browser XOD 2 IDE. (#1521)
 * [ide] Add missing labels for variadic pins in Inspector. (#1522)
 * [nodes] Make `shift-left` and `shift-right` interpret its inputs as 32-bit integers, fix pin labels and descriptions. (#1524)
 
@@ -1029,10 +1029,10 @@ Libraries for dealing with the internet connection and UART interface:
 ### Features and enhancements
 
 * Brand new tutorial. It has two versions: the first one is embedded right into the `welcome-to-xod` project you see after the desktop IDE installation or browser-based IDE launch; the second one is published statically in the [documentation](https://xod.io/docs/) section of the site.
-* The debugger and watches! Now, you can watch for value changes in real-time right inside the desktop XOD IDE. Place a `xod/core/watch` node, link it, and upload the program with “Debug after upload” checkbox set. The debugger also lets you view incoming serial data log like the Serial Monitor in Arduino IDE does.
+* The debugger and watches! Now, you can watch for value changes in real-time right inside the desktop XOD 2 IDE. Place a `xod/core/watch` node, link it, and upload the program with “Debug after upload” checkbox set. The debugger also lets you view incoming serial data log like the Serial Monitor in Arduino IDE does.
 * Bulk selection and mass actions. Hold the Ctrl key (Command on macOS) while clicking on nodes, links, or comments to select multiple entities. After that, you could move or delete them all at once.
-* Cut/copy/paste. Finally, clipboard functionality you expect from any application is here. Ctrl+C/Ctrl+V your nodes on a patch, across patches, or even across XOD IDE windows.
-* Cloud compilation. Now, rather than pull the whole compiler toolchain to your system, you can choose to compile in our cloud. Check “Compile in the cloud” box in the Upload Dialog to use it. This is the first step toward making the browser-based XOD IDE fully functional.
+* Cut/copy/paste. Finally, clipboard functionality you expect from any application is here. Ctrl+C/Ctrl+V your nodes on a patch, across patches, or even across XOD 2 IDE windows.
+* Cloud compilation. Now, rather than pull the whole compiler toolchain to your system, you can choose to compile in our cloud. Check “Compile in the cloud” box in the Upload Dialog to use it. This is the first step toward making the browser-based XOD 2 IDE fully functional.
 
 ### New nodes
 
@@ -1118,8 +1118,8 @@ Libraries for dealing with the internet connection and UART interface:
 
 ### Bug fixes
 
-* Fix upload failure if a `xod/common-hardware/text-lcd-16x2` or `xod/common-hardware/servo` node is used. XOD IDE now carries vital Arduino libraries in the distro.
-* Improve UI responsiveness, fix IDE performance degradation over time. The problem was in a developer/debugging tool integrated to XOD IDE which is not very interesting for end-users. The tool is no longer enabled in public releases.
+* Fix upload failure if a `xod/common-hardware/text-lcd-16x2` or `xod/common-hardware/servo` node is used. XOD 2 IDE now carries vital Arduino libraries in the distro.
+* Improve UI responsiveness, fix IDE performance degradation over time. The problem was in a developer/debugging tool integrated to XOD 2 IDE which is not very interesting for end-users. The tool is no longer enabled in public releases.
 * Fix bound values propagation in complex scenarios with deeply nested patches.
 
 <a name="0.12.0"></a>

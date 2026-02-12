@@ -1,0 +1,44 @@
+{
+  "description": "Calculates arc tangent.",
+  "nodes": [
+    {
+      "description": "Input tangent value",
+      "id": "B1sgpxRLW",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "BklUw6vzJ4",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/tabtest"
+    },
+    {
+      "id": "HyalpxAIW",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 1.15
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "description": "Result angle in radians.",
+      "id": "S1W-plRIZ",
+      "label": "RAD",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 2.15
+      },
+      "type": "xod/patch-nodes/output-number"
+    }
+  ]
+}

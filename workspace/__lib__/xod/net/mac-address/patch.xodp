@@ -1,0 +1,102 @@
+{
+  "description": "Assembles a MAC address from 6 octets",
+  "nodes": [
+    {
+      "boundLiterals": {
+        "__out__": "00h"
+      },
+      "description": "4th octet",
+      "id": "H1GI-g-SW7",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "id": "H1ZVeWrZ7",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "00h"
+      },
+      "description": "3rd octet",
+      "id": "HkZ8bgWBZ7",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "00h"
+      },
+      "description": "1st octet",
+      "id": "HyUblWBbQ",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "00h"
+      },
+      "description": "2nd octet",
+      "id": "HylLbx-S-X",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "00h"
+      },
+      "description": "6th octet",
+      "id": "SJVUWgWHWm",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "description": "The MAC address",
+      "id": "SJqcJZSW7",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-self"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "00h"
+      },
+      "description": "5th octet",
+      "id": "ryXU-eWSbQ",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-byte"
+    }
+  ]
+}

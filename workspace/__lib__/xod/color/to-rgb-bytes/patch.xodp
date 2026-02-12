@@ -1,0 +1,56 @@
+{
+  "description": "Destructs a color value into red, green, and blue components encoded as byte values",
+  "nodes": [
+    {
+      "id": "BkepNZjsQ",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "@/input-color"
+    },
+    {
+      "description": "Blue",
+      "id": "S1ER4-isX",
+      "label": "B",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-byte"
+    },
+    {
+      "description": "Red",
+      "id": "S1Z04Zjsm",
+      "label": "R",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-byte"
+    },
+    {
+      "description": "Green",
+      "id": "Sk7AV-ijX",
+      "label": "G",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-byte"
+    },
+    {
+      "id": "rym6VWsim",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    }
+  ]
+}

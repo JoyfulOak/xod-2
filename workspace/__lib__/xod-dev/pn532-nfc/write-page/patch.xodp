@@ -1,0 +1,96 @@
+{
+  "description": "Writes data to the specified page of a Mifare Ultralight NFC tag.\nTo write data to a tag it should be paired first (use `pair-tag`)\n\nPossible errors:\n— Can't write the value",
+  "nodes": [
+    {
+      "description": "Trigger writing to an NFC tag",
+      "id": "BklWqO6PQ",
+      "label": "UPD",
+      "position": {
+        "units": "slots",
+        "x": 9,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "H1eY1c_pw7",
+      "position": {
+        "units": "slots",
+        "x": 7,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "id": "H1rhKuaDQ",
+      "label": "DEV",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "@/input-pn532-device"
+    },
+    {
+      "id": "SkYkqO6D7",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "2"
+      },
+      "description": "A page number to write data to in range [0, 16]. Notice that first pages contains UID",
+      "id": "SyJkqdpPQ",
+      "label": "PAGE",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "description": "Fires on successful writing",
+      "id": "Syblcupvm",
+      "label": "OK",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "id": "r1_k9dTDm",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "id": "r1hkcOaDm",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "id": "rywk9upvX",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-byte"
+    }
+  ]
+}

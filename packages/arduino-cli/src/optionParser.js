@@ -198,9 +198,8 @@ export const patchBoardsWithOptions = R.curry(
     );
 
     return R.map(board => {
-      if (!R.has('FQBN', board)) return board;
-
-      const fqbn = board.FQBN;
+      const fqbn = R.propOr(null, 'FQBN', board) || R.propOr(null, 'fqbn', board);
+      if (!fqbn) return board;
       const fqbnParts = fqbn.split(':');
       const coreId = R.compose(R.join(':'), R.init)(fqbnParts);
       const boardId = R.last(fqbnParts);
@@ -223,7 +222,7 @@ export const patchBoardsWithOptions = R.curry(
           disableRts,
           fqbn,
         },
-        R.omit(['FQBN'], board)
+        R.omit(['FQBN', 'fqbn'], board)
       );
     }, boards);
   }

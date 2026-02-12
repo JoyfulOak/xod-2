@@ -1,0 +1,69 @@
+{
+  "description": "Checks if a TCP connection is open",
+  "nodes": [
+    {
+      "id": "BkXkhxTDt7",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "description": "A socket",
+      "id": "HkEhxaDYX",
+      "label": "SOCK",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 0
+      },
+      "type": "xod/net/input-socket"
+    },
+    {
+      "description": "Pulses if the connection is open",
+      "id": "Hkkhe6vYX",
+      "label": "Y",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "description": "Perform the check",
+      "id": "r1f1heaDtQ",
+      "label": "CHK",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": -0.05
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "description": "Pulses if the connection is closed",
+      "id": "rJgkhxTvKX",
+      "label": "N",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "description": "An internet connection",
+      "id": "ry4YMYoC8",
+      "label": "INET",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "@/input-esp8266-mcu-inet"
+    }
+  ]
+}

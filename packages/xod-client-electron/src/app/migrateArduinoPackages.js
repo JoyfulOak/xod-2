@@ -1,6 +1,6 @@
 /**
  * This module moves old packages stored in the UserData directory into the
- * Users workspace. It provides User to keep using XOD IDE without reinstalling
+ * Users workspace. It provides User to keep using XOD 2 IDE without reinstalling
  * packages, which he already installs earlier.
  *
  * Also, it removes stale empty packages directory in the UserData directory and

@@ -1,0 +1,155 @@
+{
+  "description": "Quickstart hardware control node for hobby RC servos.",
+  "links": [
+    {
+      "id": "B1X4egSKE",
+      "input": {
+        "nodeId": "H1gNgerY4",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "SJMllgBFN",
+        "pinKey": "S1wmRINuHV"
+      }
+    },
+    {
+      "id": "BJdFyxHF4",
+      "input": {
+        "nodeId": "ByKuJxrYN",
+        "pinKey": "HyNOLPVB4"
+      },
+      "output": {
+        "nodeId": "BkXK1eBYV",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "H1hXoiyIr",
+      "input": {
+        "nodeId": "SJMllgBFN",
+        "pinKey": "S1Q7C8NdBV"
+      },
+      "output": {
+        "nodeId": "S1kZijkUS",
+        "pinKey": "H1fx68wzB"
+      }
+    },
+    {
+      "id": "S1BmxxBFE",
+      "input": {
+        "nodeId": "SJMllgBFN",
+        "pinKey": "HkfXAUEdrN"
+      },
+      "output": {
+        "nodeId": "ByKuJxrYN",
+        "pinKey": "HJmZvD4SE"
+      }
+    },
+    {
+      "id": "S1pexlHF4",
+      "input": {
+        "nodeId": "SJMllgBFN",
+        "pinKey": "B1lXALNOS4"
+      },
+      "output": {
+        "nodeId": "Bk5lexBtE",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SyHGjiy8r",
+      "input": {
+        "nodeId": "S1kZijkUS",
+        "pinKey": "H13R3IvGB"
+      },
+      "output": {
+        "nodeId": "S1MzssyLr",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "rkDZosyUr",
+      "input": {
+        "nodeId": "S1kZijkUS",
+        "pinKey": "BytC28DfH"
+      },
+      "output": {
+        "nodeId": "Bk5lexBtE",
+        "pinKey": "__out__"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "Bk5lexBtE",
+      "label": "VAL",
+      "position": {
+        "units": "slots",
+        "x": 7,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "BkXK1eBYV",
+      "label": "PORT",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-port"
+    },
+    {
+      "id": "ByKuJxrYN",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 2
+      },
+      "type": "@/servo-device"
+    },
+    {
+      "id": "H1gNgerY4",
+      "label": "ACK",
+      "position": {
+        "units": "slots",
+        "x": 7,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "True"
+      },
+      "description": "Makes the servo react to incoming values while `ACT` is true",
+      "id": "S1MzssyLr",
+      "label": "ACT",
+      "position": {
+        "units": "slots",
+        "x": 9,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-boolean"
+    },
+    {
+      "id": "S1kZijkUS",
+      "position": {
+        "units": "slots",
+        "x": 8,
+        "y": 1
+      },
+      "type": "xod/core/act"
+    },
+    {
+      "id": "SJMllgBFN",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 2
+      },
+      "type": "@/rotate"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "content": "# Tweaks\n\nRestarting a program every time you change a value in the Inspector is inconvenient.\nWith `tweak-*` nodes, you can adjust values while the program is running.\n\nOn the current patch we added a `tweak-number` linked to `IVAL` already.\n\n## Exercise\n\nLet’s learn how to add new tweaks to your program and control them in runtime.\n\n1. Add `tweak-number` node to the patch.\n2. Link `tweak-number`'s output pin to `count`'s `STEP` pin.\n3. Start the simulation.\n4. Double click the tweak node; the text box for tweak value will focus in Inspector.\n5. Change the value to `2.0` and press Enter.\n6. Adjust the value of the tweak linked to `clock`'s `IVAL` pin.\n\nTake a note how the changes are immediately applied while you are in the simulation mode. Try some other values and see how they behave.",
+      "id": "Bk86OdKuN",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "height": 5,
+        "units": "slots",
+        "width": 8
+      }
+    },
+    {
+      "content": "## 👆 Save some typing\n\nUse Up/Down keyboard keys in the Inspector to adjust numeric values by 0.1. Hold Shift to adjust by 1.0.",
+      "id": "H1mAsFFdE",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 4
+      },
+      "size": {
+        "height": 2,
+        "units": "slots",
+        "width": 7
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "S1m_w9GawV",
+      "input": {
+        "nodeId": "H1eOP5GpPE",
+        "pinKey": "HJAq-A_8-"
+      },
+      "output": {
+        "nodeId": "SkdPczaD4",
+        "pinKey": "HJU8CE2lW"
+      }
+    },
+    {
+      "id": "SkLFcGpDV",
+      "input": {
+        "nodeId": "SkdPczaD4",
+        "pinKey": "B13SCNhl-"
+      },
+      "output": {
+        "nodeId": "r1NYczTwN",
+        "pinKey": "ByfGSDjQE"
+      }
+    },
+    {
+      "id": "SkM_DczawE",
+      "input": {
+        "nodeId": "rJWuDqG6DV",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "H1eOP5GpPE",
+        "pinKey": "r1yhZRd8W"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "H1eOP5GpPE",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 2
+      },
+      "type": "xod/core/count"
+    },
+    {
+      "id": "SkdPczaD4",
+      "position": {
+        "units": "slots",
+        "x": 11,
+        "y": 1
+      },
+      "type": "xod/core/clock"
+    },
+    {
+      "boundLiterals": {
+        "ByfGSDjQE": "1.6"
+      },
+      "id": "r1NYczTwN",
+      "position": {
+        "units": "slots",
+        "x": 12,
+        "y": 0
+      },
+      "type": "xod/debug/tweak-number"
+    },
+    {
+      "id": "rJWuDqG6DV",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 3
+      },
+      "size": {
+        "height": 1,
+        "units": "slots",
+        "width": 2
+      },
+      "type": "xod/debug/watch"
+    }
+  ]
+}

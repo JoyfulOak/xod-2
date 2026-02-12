@@ -1,0 +1,50 @@
+{
+  "description": "Waits for the transmission of outgoing serial data to complete and then clears UART buffer.",
+  "nodes": [
+    {
+      "description": "An UART object",
+      "id": "BkiJZ2wWQ",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": -0.05
+      },
+      "type": "@/input-uart"
+    },
+    {
+      "description": "Pulses when all outgoing data sent",
+      "id": "H1gsyZ3PZm",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "id": "rJZjk-hwW7",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "Never"
+      },
+      "description": "Flush outgoing buffer when all data transmitted",
+      "id": "ryGs1Z2vW7",
+      "label": "UPD",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    }
+  ]
+}

@@ -26,7 +26,8 @@ export const upload = (onProgress, cli, payload) => {
     xdb.patchFqbnWithOptions,
     payload
   );
-  return xdb.uploadThroughUSB(onProgress, cli, payloadWithUpdatedFqbn);
+  return ensureCliWorkspace(cli, payload.ws)
+    .then(() => xdb.uploadThroughUSB(onProgress, cli, payloadWithUpdatedFqbn));
 };
 
 // =============================================================================
@@ -34,10 +35,17 @@ export const upload = (onProgress, cli, payload) => {
 // Subscribers
 //
 // =============================================================================
+const ensureCliWorkspace = (cli, preferredWorkspacePath = null) =>
+  Promise.resolve(preferredWorkspacePath)
+    .then(ws => ws || loadWorkspacePath())
+    .then(ws =>
+      xdb.switchWorkspace(cli, getPathToBundledWorkspace(), ws).then(() => ws)
+    );
+
 export const subscribeListBoards = cli =>
   subscribeIpc(
-    () =>
-      loadWorkspacePath().then(ws =>
+    (_, payload) =>
+      ensureCliWorkspace(cli, R.path(['workspacePath'], payload)).then(ws =>
         xdb.listBoards(getPathToBundledWorkspace(), ws, cli)
       ),
     LIST_BOARDS
@@ -45,8 +53,8 @@ export const subscribeListBoards = cli =>
 
 export const subscribeListInstalledBoards = cli =>
   subscribeIpc(
-    () =>
-      loadWorkspacePath().then(ws =>
+    (_, payload) =>
+      ensureCliWorkspace(cli, R.path(['workspacePath'], payload)).then(ws =>
         xdb.listInstalledBoards(getPathToBundledWorkspace(), ws, cli)
       ),
     LIST_INSTALLED_BOARDS
@@ -60,8 +68,8 @@ export const subscribeUpload = cli =>
 
 export const subscribeUpdateIndexes = cli =>
   subscribeIpc(
-    () =>
-      loadWorkspacePath().then(ws =>
+    (_, payload) =>
+      ensureCliWorkspace(cli, R.path(['workspacePath'], payload)).then(ws =>
         xdb.updateIndexes(getPathToBundledWorkspace(), ws, cli)
       ),
     UPDATE_INDEXES

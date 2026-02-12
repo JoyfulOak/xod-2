@@ -1,0 +1,77 @@
+{
+  "comments": [
+    {
+      "content": "## 👆 Output formatting\n\nYou can convert Celsius to Fahrenheit using `xod/units/c-to-f` node.\n\nMoreover, you can add a `concat` node and show the temperature on the display like \"22C\" instead of a plain number. See `210-string-formatting` for more details.",
+      "id": "BykL9xbYV",
+      "position": {
+        "units": "slots",
+        "x": 14,
+        "y": 1
+      },
+      "size": {
+        "height": 3,
+        "units": "slots",
+        "width": 6
+      }
+    },
+    {
+      "content": "# Thermometer\n\nWhat if you need to control the ambient air temperature?\n\nA popular chip to measure temperature is TMP36 thermometer. XOD has a node `thermometer-tmp36` for this IC in `xod/common-hardware`. It outputs the temperature in degrees Celsius.\n\n## Exercise\n\nShowing static text on the LCD is boring. So let's make a smarter device and show the temperature on the LCD.\n\n1. Add a thermometer to your [circuit as shown](https://xod.io/docs/tutorial/109-thermometer/?utm_source=ide&utm_medium=ide_comment&utm_campaign=tutorial#circuit).\n\n2. Ensure the correct `PORT` for the `thermometer-tmp36` node.\n\n3. Link `Tc` of `thermometer-tmp36` with `L1` of `text-lcd-i2c-16x2`.\n\n4. Upload your patch.\n\nNow you have a portable thermometer.",
+      "id": "ryQEf7FyO4",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "height": 5,
+        "units": "slots",
+        "width": 7
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "SyZtEYkOE",
+      "input": {
+        "nodeId": "SJOT7K1dE",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "SJm37Fkd4",
+        "pinKey": "rkFgMITM-"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "SJOT7K1dE",
+      "position": {
+        "units": "slots",
+        "x": 8,
+        "y": 2
+      },
+      "type": "xod/debug/watch"
+    },
+    {
+      "boundLiterals": {
+        "H1s0WI6MZ": "A1"
+      },
+      "id": "SJm37Fkd4",
+      "position": {
+        "units": "slots",
+        "x": 8,
+        "y": 1
+      },
+      "type": "xod/common-hardware/thermometer-tmp36"
+    },
+    {
+      "id": "Sk_FPKxQr",
+      "position": {
+        "units": "slots",
+        "x": 8,
+        "y": 4
+      },
+      "type": "xod-dev/text-lcd/text-lcd-i2c-16x2"
+    }
+  ]
+}

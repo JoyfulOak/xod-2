@@ -229,7 +229,7 @@ class Editor extends React.Component {
                 );
 
               default:
-                // Should happen only if there’s a bug in XOD IDE
+                // Should happen only if there’s a bug in XOD 2 IDE
                 throw new Error(`Unknown attachment type ${editedAttachment}`);
             }
           }

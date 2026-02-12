@@ -1,0 +1,76 @@
+{
+  "description": "Assembles an IP address from 4 octets",
+  "nodes": [
+    {
+      "boundLiterals": {
+        "__out__": "0d"
+      },
+      "description": "3rd octet",
+      "id": "BJ-GeebB-Q",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "0d"
+      },
+      "description": "2nd octet",
+      "id": "HyMxxWSWQ",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "id": "r1wK2bgbQ",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "description": "IP address",
+      "id": "rJkt2WxZm",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-self"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "0d"
+      },
+      "description": "1st octet",
+      "id": "ryMGggZH-Q",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "0d"
+      },
+      "description": "4th octet",
+      "id": "ryefxxZBZm",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-byte"
+    }
+  ]
+}

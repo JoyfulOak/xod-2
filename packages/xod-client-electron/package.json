@@ -5,7 +5,7 @@
   "license": "AGPL-3.0",
   "main": "src-babel/app/main.js",
   "name": "xod-client-electron",
-  "version": "0.38.0",
+  "version": "2026.2.2",
   "scripts": {
     "build:workspace": "cpx \"../../workspace/**/*\" \"src-babel/workspace\"",
     "build:gui": "webpack --colors",
@@ -45,14 +45,14 @@
     "redux-thunk": "^2.1.0",
     "serialport": "^9.0.4",
     "tar": "^6.2.1",
-    "xod-arduino": "^0.38.0",
-    "xod-client": "^0.38.0",
-    "xod-deploy": "^0.38.0",
-    "xod-deploy-bin": "^0.38.0",
-    "xod-fs": "^0.38.0",
+    "xod-arduino": "^2026.2.2",
+    "xod-client": "^2026.2.2",
+    "xod-deploy": "^2026.2.2",
+    "xod-deploy-bin": "^2026.2.2",
+    "xod-fs": "^2026.2.2",
     "xod-func-tools": "^0.34.0",
-    "xod-project": "^0.38.0",
-    "xod-tethering-inet": "^0.34.0"
+    "xod-project": "^2026.2.2",
+    "xod-tethering-inet": "^2026.2.2"
   },
   "devDependencies": {
     "babel-cli": "^6.16.0",
@@ -68,7 +68,7 @@
   },
   "build": {
     "appId": "io.xod.ide",
-    "productName": "XOD IDE",
+    "productName": "XOD 2 IDE",
     "buildDependenciesFromSource": true,
     "files": [
       "**/*",
@@ -138,9 +138,9 @@
     ],
     "publish": [
       {
-        "provider": "generic",
-        "url": "https://releases.xod.io/releases/latest",
-        "channel": "latest"
+        "provider": "github",
+        "owner": "JoyfulOak",
+        "repo": "xod-2"
       }
     ]
   }

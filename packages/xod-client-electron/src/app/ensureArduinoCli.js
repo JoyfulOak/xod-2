@@ -23,13 +23,21 @@ const getBundledArchivePath = () => {
 
   if (platform === 'darwin') {
     if (arch === 'arm64') {
-      return path.join(binDir, 'arduino-cli_1.4.1_macOS_ARM64.tar');
+      return path.join(
+        binDir,
+        'mac-arm64',
+        'arduino-cli_1.4.1_macOS_ARM64.tar'
+      );
     }
-    return path.join(binDir, 'arduino-cli_1.4.1_macOS_64bit.tar');
+    return path.join(
+      binDir,
+      'mac-x64',
+      'arduino-cli_1.4.1_macOS_64bit.tar'
+    );
   }
   if (platform === 'win32') {
     if (arch === 'arm64') return null;
-    return path.join(binDir, 'arduino-cli.exe');
+    return path.join(binDir, 'windows-x64', 'arduino-cli.exe');
   }
   return null;
 };
@@ -189,13 +197,27 @@ const extractArchive = async (archivePath, installDir) => {
 
 let ensurePromise = null;
 
+const shouldUseBundledCliDirectly = () => {
+  if (IS_DEV) return false;
+
+  const platform = os.platform();
+  const arch = os.arch();
+
+  // On macOS and Windows ARM64 prefer archive/download resolution so the
+  // executable always matches the current architecture.
+  if (platform === 'darwin') return false;
+  if (platform === 'win32' && arch === 'arm64') return false;
+
+  return true;
+};
+
 const ensureArduinoCli = async () => {
   if (process.env.XOD_ARDUINO_CLI && (await fs.pathExists(process.env.XOD_ARDUINO_CLI))) {
     return process.env.XOD_ARDUINO_CLI;
   }
 
   const bundled = getBundledCliPath();
-  if (!IS_DEV && (await fs.pathExists(bundled))) {
+  if (shouldUseBundledCliDirectly() && (await fs.pathExists(bundled))) {
     process.env.XOD_ARDUINO_CLI = bundled;
     return bundled;
   }

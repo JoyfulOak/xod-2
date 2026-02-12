@@ -4,58 +4,33 @@
 1 silly flags   'reject-cycles': false,
 1 silly flags   rejectCycles: false,
 1 silly flags   stream: true,
+1 silly flags   scope: 'xod-client-electron',
+1 silly flags   'include-filtered-dependencies': true,
+1 silly flags   includeFilteredDependencies: true,
 1 silly flags   script: 'build',
 1 silly flags   args: []
 1 silly flags }
 2 verbose rootPath /Users/justin/xod
 3 info version 2.11.0
 4 silly existsSync /Users/justin/xod/VERSION
-5 silly initialize attempt
-6 silly initialize success
-7 silly execute attempt
-8 silly runScriptInPackageStreaming [ 'build', [], 'arduino-cli' ]
-9 silly getExecOpts { cwd: '/Users/justin/xod/packages/arduino-cli' }
-10 silly runScriptInPackageStreaming [ 'build', [], 'belt-holes' ]
-11 silly getExecOpts { cwd: '/Users/justin/xod/packages/belt-holes' }
-12 silly runScriptInPackageStreaming [ 'build', [], 'xod-func-tools' ]
-13 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-func-tools' }
-14 silly runScriptInPackageStreaming [ 'build', [], 'xod-project' ]
-15 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-project' }
-16 silly runScriptInPackageStreaming [ 'build', [], 'xod-tethering-inet' ]
-17 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-tethering-inet' }
-18 silly runScriptInPackageStreaming [ 'build', [], 'xod-fs' ]
-19 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-fs' }
-20 silly runScriptInPackageStreaming [ 'build', [], 'xod-pm' ]
-21 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-pm' }
-22 silly runScriptInPackageStreaming [ 'build', [], 'xod-arduino' ]
-23 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-arduino' }
-24 silly runScriptInPackageStreaming [ 'build', [], 'xod-deploy-bin' ]
-25 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-deploy-bin' }
-26 silly runScriptInPackageStreaming [ 'build', [], 'xod-deploy' ]
-27 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-deploy' }
-28 silly runScriptInPackageStreaming [ 'build', [], 'xod-patch-search' ]
-29 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-patch-search' }
-30 silly runScriptInPackageStreaming [ 'build', [], 'xod-tabtest' ]
-31 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-tabtest' }
-32 silly runScriptInPackageStreaming [ 'build', [], 'xod-cli' ]
-33 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-cli' }
-34 silly runScriptInPackageStreaming [ 'build', [], 'xod-cloud-compile' ]
-35 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-cloud-compile' }
-36 silly runScriptInPackageStreaming [ 'build', [], 'xod-client' ]
-37 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-client' }
-38 silly runScriptInPackageStreaming [ 'build', [], 'xod-client-browser' ]
-39 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-client-browser' }
-40 silly runScriptInPackageStreaming [ 'build', [], 'xod-client-electron' ]
-41 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-client-electron' }
-42 error execute callback with error
-43 error Error: Command failed: yarn run build
-43 error Tried to open not a xod file: /Users/justin/xod/workspace/welcome-to-xoderror Command failed with exit code 1.
-43 error error Command failed with exit code 1.
-43 error
-43 error $ yarn run build:tutorial-project && webpack --colors
-43 error $ node ./tools/loadTutorialProject.js
-43 error info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
-43 error info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
-43 error
-43 error     at /Users/justin/xod/node_modules/lerna/node_modules/execa/index.js:236:11
-43 error     at runMicrotasks (<anonymous>)
+5 info scope xod-client-electron
+6 silly initialize attempt
+7 silly initialize success
+8 silly execute attempt
+9 silly runScriptInPackageStreaming [ 'build', [], 'xod-tethering-inet' ]
+10 silly getExecOpts { cwd: '/Users/justin/xod/packages/xod-tethering-inet' }
+11 silly runScriptInPackageStreaming [ 'build', [], 'arduino-cli' ]
+12 silly getExecOpts { cwd: '/Users/justin/xod/packages/arduino-cli' }
+13 silly runScriptInPackageStreaming [ 'build', [], 'belt-holes' ]
+14 silly getExecOpts { cwd: '/Users/justin/xod/packages/belt-holes' }
+15 error execute callback with error
+16 error Error: Command failed: yarn run build
+16 error Fatal error: exception Unix.Unix_error(Unix.ENOENT, "execv", "/Users/justin/xod/node_modules/bs-platform/lib/ninja.exe")
+16 error Failure: /Users/justin/xod/node_modules/bs-platform/lib/ninja.exe
+16 error  Location: /Users/justin/xod/node_modules/@glennsl/bs-jest/lib/bs
+16 error error Command failed with exit code 2.
+16 error
+16 error $ bsb -make-world
+16 error info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+16 error
+16 error     at /Users/justin/xod/node_modules/lerna/node_modules/execa/index.js:236:11

@@ -65,7 +65,10 @@ import { getPathToBundledWorkspace, IS_DEV } from '../../app/utils';
 
 import getLibraryNames from '../../arduinoDependencies/getLibraryNames';
 
-import { subscribeAutoUpdaterEvents } from '../autoupdate';
+import {
+  subscribeAutoUpdaterEvents,
+  subscribeStartupUpdateEvents,
+} from '../autoupdate';
 import subscribeToTriggerMainMenuRequests from '../../testUtils/triggerMainMenu';
 import { TRIGGER_SAVE_AS, TRIGGER_LOAD_PROJECT } from '../../testUtils/events';
 
@@ -90,6 +93,13 @@ const defaultState = {
   projectPath: null,
   downloadProgressPopup: false,
   downloadProgressPopupError: null,
+  startupUpdatePopupVisible: false,
+  startupUpdatePopupTitle: '',
+  startupUpdatePopupMessage: '',
+  startupUpdatePopupClosable: false,
+  startupUpdatePopupCanInstall: false,
+  startupUpdatePopupAutoDismissMs: 0,
+  startupUpdatePopupAutoDismissRemainingSec: 0,
 };
 
 const stopDebuggerSession = () =>
@@ -100,6 +110,10 @@ class App extends client.App {
     super(props);
 
     this.state = R.clone(defaultState);
+
+    this.startupUpdatePopupAutoDismissTimer = null;
+    this.startupUpdatePopupAutoDismissInterval = null;
+    this.startupUpdatePopupAutoDismissDeadline = null;
 
     this.onResize = this.onResize.bind(this);
 
@@ -135,6 +149,7 @@ class App extends client.App {
     );
 
     this.showError = this.showError.bind(this);
+    this.onStartupUpdateInstall = this.onStartupUpdateInstall.bind(this);
 
     this.hideAllPopups = this.hideAllPopups.bind(this);
     this.showPopupSetWorkspace = this.showPopupSetWorkspace.bind(this);
@@ -253,6 +268,7 @@ class App extends client.App {
 
     // autoUpdater
     subscribeAutoUpdaterEvents(ipcRenderer, this);
+    subscribeStartupUpdateEvents(ipcRenderer, this);
 
     if (IS_DEV) {
       // Besause we can't control file dialogs in autotests
@@ -272,8 +288,89 @@ class App extends client.App {
     }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.startupUpdatePopupVisible &&
+      this.state.startupUpdatePopupAutoDismissMs > 0
+    ) {
+      const shouldRestartTimer =
+        !prevState.startupUpdatePopupVisible ||
+        prevState.startupUpdatePopupAutoDismissMs !==
+          this.state.startupUpdatePopupAutoDismissMs;
+
+      if (shouldRestartTimer) {
+        if (this.startupUpdatePopupAutoDismissTimer) {
+          clearTimeout(this.startupUpdatePopupAutoDismissTimer);
+        }
+        if (this.startupUpdatePopupAutoDismissInterval) {
+          clearInterval(this.startupUpdatePopupAutoDismissInterval);
+        }
+
+        this.startupUpdatePopupAutoDismissDeadline =
+          Date.now() + this.state.startupUpdatePopupAutoDismissMs;
+
+        const updateRemaining = () => {
+          const remainingMs =
+            this.startupUpdatePopupAutoDismissDeadline - Date.now();
+          const remainingSec = Math.max(0, Math.ceil(remainingMs / 1000));
+          this.setState({
+            startupUpdatePopupAutoDismissRemainingSec: remainingSec,
+          });
+        };
+
+        updateRemaining();
+
+        this.startupUpdatePopupAutoDismissTimer = setTimeout(() => {
+          if (
+            this.state.startupUpdatePopupVisible &&
+            this.state.startupUpdatePopupAutoDismissMs > 0
+          ) {
+            this.setState({
+              startupUpdatePopupVisible: false,
+              startupUpdatePopupClosable: false,
+              startupUpdatePopupCanInstall: false,
+              startupUpdatePopupAutoDismissMs: 0,
+              startupUpdatePopupAutoDismissRemainingSec: 0,
+            });
+          }
+        }, this.state.startupUpdatePopupAutoDismissMs);
+
+        this.startupUpdatePopupAutoDismissInterval = setInterval(
+          updateRemaining,
+          250
+        );
+      }
+    } else if (
+      prevState.startupUpdatePopupVisible &&
+      !this.state.startupUpdatePopupVisible &&
+      this.startupUpdatePopupAutoDismissTimer
+    ) {
+      clearTimeout(this.startupUpdatePopupAutoDismissTimer);
+      this.startupUpdatePopupAutoDismissTimer = null;
+    }
+
+    if (
+      (!this.state.startupUpdatePopupVisible ||
+        this.state.startupUpdatePopupAutoDismissMs === 0) &&
+      this.startupUpdatePopupAutoDismissInterval
+    ) {
+      clearInterval(this.startupUpdatePopupAutoDismissInterval);
+      this.startupUpdatePopupAutoDismissInterval = null;
+      this.startupUpdatePopupAutoDismissDeadline = null;
+    }
+  }
+
   componentWillUnmount() {
     super.componentWillUnmount();
+    if (this.startupUpdatePopupAutoDismissTimer) {
+      clearTimeout(this.startupUpdatePopupAutoDismissTimer);
+      this.startupUpdatePopupAutoDismissTimer = null;
+    }
+    if (this.startupUpdatePopupAutoDismissInterval) {
+      clearInterval(this.startupUpdatePopupAutoDismissInterval);
+      this.startupUpdatePopupAutoDismissInterval = null;
+    }
+    this.startupUpdatePopupAutoDismissDeadline = null;
     // Unsubscribe from all ipc events
     R.map(
       eventName => ipcRenderer.removeAllListeners(eventName),
@@ -308,6 +405,10 @@ class App extends client.App {
       this.currentUploadProcess.delete();
       this.currentUploadProcess = null;
     }
+  }
+
+  onStartupUpdateInstall() {
+    ipcRenderer.send(EVENTS.STARTUP_UPDATE_INSTALL_REQUEST);
   }
 
   onUploadToArduino(board, port, cloud, debug, processActions = null) {
@@ -751,7 +852,9 @@ class App extends client.App {
         {
           key: 'version',
           enabled: false,
-          label: `Version: ${packageJson.version}`,
+          label: `Version: ${
+            app && app.getVersion ? app.getVersion() : packageJson.version
+          }`,
         },
         items.separator,
         onClick(items.openTutorialProject, this.onOpenTutorialProject),
@@ -973,7 +1076,7 @@ class App extends client.App {
         isDeploymentInProgress={this.props.isDeploymentInProgress}
         getSelectedBoard={this.constructor.getSelectedBoard}
         selectedPort={this.props.selectedPort}
-        listBoards={listBoards}
+        listBoards={() => listBoards(this.state.workspace)}
         listPorts={this.constructor.listPorts}
         initialDebugAfterUpload={
           this.props.popupsData.uploadToArduinoConfig.debugAfterUpload
@@ -1060,7 +1163,7 @@ class App extends client.App {
         {/* TODO: Refactor this mess: */}
         {this.state.downloadProgressPopup ? (
           <client.PopupAlert
-            title="Downloading update for XOD IDE"
+            title="Downloading update for XOD 2 IDE"
             closeText="Close"
             onClose={() => {
               this.setState(R.assoc('downloadProgressPopup', false));
@@ -1072,16 +1175,13 @@ class App extends client.App {
               <div>
                 <p>
                   Error occured during downloading or installing the update.<br />
-                  Please report the bug on our{' '}
-                  <a href="https://forum.xod.io/" rel="noopener noreferrer">
-                    forum
-                  </a>.
+                  Please report issues at https://github.com/JoyfulOak/xod-2/issues.
                 </p>
                 <pre>{this.state.downloadProgressPopupError}</pre>
               </div>
             ) : (
               <div>
-                <p>Downloading of the update for XOD IDE is in progress.</p>
+                <p>Downloading of the update for XOD 2 IDE is in progress.</p>
                 <p>
                   After download, we will automatically install it and restart
                   the application.<br />
@@ -1090,6 +1190,43 @@ class App extends client.App {
                 <p>Keep calm and brew a tea.</p>
               </div>
             )}
+          </client.PopupAlert>
+        ) : null}
+        {this.state.startupUpdatePopupVisible ? (
+          <client.PopupAlert
+            title={this.state.startupUpdatePopupTitle}
+            closeText="Close"
+            onClose={() =>
+              this.setState({
+                startupUpdatePopupVisible: false,
+                startupUpdatePopupClosable: false,
+                startupUpdatePopupCanInstall: false,
+                startupUpdatePopupAutoDismissMs: 0,
+                startupUpdatePopupAutoDismissRemainingSec: 0,
+              })
+            }
+            isClosable={this.state.startupUpdatePopupClosable}
+          >
+            <div>
+              <p>{this.state.startupUpdatePopupMessage}</p>
+              {this.state.startupUpdatePopupAutoDismissRemainingSec > 0 ? (
+                <p>
+                  Auto close in{' '}
+                  {this.state.startupUpdatePopupAutoDismissRemainingSec}s
+                </p>
+              ) : null}
+              {this.state.startupUpdatePopupCanInstall ? (
+                <p>
+                  <a
+                    className="Button Button--primary"
+                    href="https://github.com/JoyfulOak/xod-2/releases"
+                    rel="noopener noreferrer"
+                  >
+                    Update from GitHub
+                  </a>
+                </p>
+              ) : null}
+            </div>
           </client.PopupAlert>
         ) : null}
         <SaveProgressBar progress={this.getSaveProgress()} />

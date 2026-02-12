@@ -1,0 +1,208 @@
+{
+  "comments": [
+    {
+      "content": "This example shows how to control the color of whole LED strip with a potentiometer and turn it on or off with a button.",
+      "id": "BJMAxa6eI",
+      "position": {
+        "units": "slots",
+        "x": -1,
+        "y": -1
+      },
+      "size": {
+        "height": 1,
+        "units": "slots",
+        "width": 13
+      }
+    },
+    {
+      "content": "A button turns the LEDs on or off.",
+      "id": "H1G-8pykU",
+      "position": {
+        "units": "slots",
+        "x": -1,
+        "y": 0
+      },
+      "size": {
+        "height": 1,
+        "units": "slots",
+        "width": 4
+      }
+    },
+    {
+      "content": "A quick-start node to fill all LEDs with the selected solid color.",
+      "id": "S1CbJaalU",
+      "position": {
+        "units": "slots",
+        "x": -1,
+        "y": 3
+      },
+      "size": {
+        "height": 1,
+        "units": "slots",
+        "width": 4
+      }
+    },
+    {
+      "content": "When LEDs is turned off — just fill with the black color.",
+      "id": "SyzoyppgL",
+      "position": {
+        "units": "slots",
+        "x": 9,
+        "y": 2
+      },
+      "size": {
+        "height": 1,
+        "units": "slots",
+        "width": 4
+      }
+    },
+    {
+      "content": "Potentiometer to select the Hue of the color.",
+      "id": "rJ-r1aaeL",
+      "position": {
+        "units": "slots",
+        "x": 8,
+        "y": 0
+      },
+      "size": {
+        "height": 1,
+        "units": "slots",
+        "width": 4
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "BJ2Vd3aeI",
+      "input": {
+        "nodeId": "SyPVu3TgU",
+        "pinKey": "S1yZIA_rDJZ"
+      },
+      "output": {
+        "nodeId": "rJ7Pn21kI",
+        "pinKey": "HkyxURuSPyW"
+      }
+    },
+    {
+      "id": "HkSmZ6pg8",
+      "input": {
+        "nodeId": "SyPVu3TgU",
+        "pinKey": "ryTeUROHD1b"
+      },
+      "output": {
+        "nodeId": "r1NE2hJk8",
+        "pinKey": "BJyghZosm"
+      }
+    },
+    {
+      "id": "Sk1r_nTl8",
+      "input": {
+        "nodeId": "SJ3ZO2plL",
+        "pinKey": "BJZY_6J1L"
+      },
+      "output": {
+        "nodeId": "SyPVu3TgU",
+        "pinKey": "S13xLCuHvkW"
+      }
+    },
+    {
+      "id": "r1wV2hk18",
+      "input": {
+        "nodeId": "r1NE2hJk8",
+        "pinKey": "HJgyhboim"
+      },
+      "output": {
+        "nodeId": "BybEn2kkI",
+        "pinKey": "H1sM2A12-"
+      }
+    },
+    {
+      "id": "rkBvn2ykI",
+      "input": {
+        "nodeId": "rJ7Pn21kI",
+        "pinKey": "ryTIROHwkW"
+      },
+      "output": {
+        "nodeId": "rJrUh31kL",
+        "pinKey": "BJ--G1tI-"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "boundLiterals": {
+        "Hkry2AJhW": "A2"
+      },
+      "id": "BybEn2kkI",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 0
+      },
+      "type": "xod/common-hardware/pot"
+    },
+    {
+      "boundLiterals": {
+        "rJ2uOpk1L": "16",
+        "ryD_dp118": "A4"
+      },
+      "id": "SJ3ZO2plL",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 3
+      },
+      "type": "@/ws2812-mono"
+    },
+    {
+      "boundLiterals": {
+        "r1AgIROHDJW": "#000000",
+        "ryTeUROHD1b": "#000000"
+      },
+      "id": "SyPVu3TgU",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 2
+      },
+      "type": "xod/core/if-else"
+    },
+    {
+      "boundLiterals": {
+        "Symyhboj7": "1",
+        "r1g7J3-ii7": "0.05"
+      },
+      "id": "r1NE2hJk8",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 1
+      },
+      "type": "xod/color/color-hsl"
+    },
+    {
+      "boundLiterals": {
+        "HkyxURuSPyW": "True"
+      },
+      "id": "rJ7Pn21kI",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 1
+      },
+      "type": "xod/core/flip-flop"
+    },
+    {
+      "boundLiterals": {
+        "ByNiWkt8Z": "A3"
+      },
+      "id": "rJrUh31kL",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 0
+      },
+      "type": "xod/common-hardware/button"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "description": "Maps meters to inches",
+  "links": [
+    {
+      "id": "HkqvcYd8b",
+      "input": {
+        "nodeId": "Sy8IcKdIZ",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "ByA89t_LW",
+        "pinKey": "BkQzLCurwJZ"
+      }
+    },
+    {
+      "id": "r1XPctOLZ",
+      "input": {
+        "nodeId": "ByA89t_LW",
+        "pinKey": "B1GfLR_SPk-"
+      },
+      "output": {
+        "nodeId": "SkbLqKdUW",
+        "pinKey": "__out__"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "boundLiterals": {
+        "SJ4zUC_BD1-": "39.3701"
+      },
+      "id": "ByA89t_LW",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 1.15
+      },
+      "type": "xod/core/multiply"
+    },
+    {
+      "id": "SkbLqKdUW",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "Sy8IcKdIZ",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 2.15
+      },
+      "type": "xod/patch-nodes/output-number"
+    }
+  ]
+}

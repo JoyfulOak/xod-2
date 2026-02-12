@@ -1,0 +1,198 @@
+{
+  "description": "Computes sawtooth function value",
+  "links": [
+    {
+      "id": "Bk9qI_Oyz",
+      "input": {
+        "nodeId": "r1wcUddJz",
+        "pinKey": "SkdIRuBD1b"
+      },
+      "output": {
+        "nodeId": "SJqlS__yz",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "BkCZcFd1z",
+      "input": {
+        "nodeId": "HybQBdOyf",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "rJPb9Kdyz",
+        "pinKey": "BkqLCOSw1W"
+      }
+    },
+    {
+      "id": "By-f5Fuyf",
+      "input": {
+        "nodeId": "rJPb9Kdyz",
+        "pinKey": "BytUCdHD1-"
+      },
+      "output": {
+        "nodeId": "Bk2ZBdOyf",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "HJmJwc8A4",
+      "input": {
+        "nodeId": "SyMJwcURV",
+        "pinKey": "SklxICdHP1b"
+      },
+      "output": {
+        "nodeId": "r1wcUddJz",
+        "pinKey": "BkqLCOSw1W"
+      }
+    },
+    {
+      "id": "HkrJD9LCE",
+      "input": {
+        "nodeId": "B1a7B_O1z",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "SyMJwcURV",
+        "pinKey": "rkWeUCdBDkZ"
+      }
+    },
+    {
+      "id": "Sk2FUduyf",
+      "input": {
+        "nodeId": "r1FFU_d1f",
+        "pinKey": "ryKV8d_1f"
+      },
+      "output": {
+        "nodeId": "SJqlS__yz",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "r16KL_d1G",
+      "input": {
+        "nodeId": "r1FFU_d1f",
+        "pinKey": "BJvrLOuyz"
+      },
+      "output": {
+        "nodeId": "Bk2ZBdOyf",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "rJ2cU_uyM",
+      "input": {
+        "nodeId": "r1wcUddJz",
+        "pinKey": "BytUCdHD1-"
+      },
+      "output": {
+        "nodeId": "Bk2ZBdOyf",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ryaW9FukG",
+      "input": {
+        "nodeId": "rJPb9Kdyz",
+        "pinKey": "SkdIRuBD1b"
+      },
+      "output": {
+        "nodeId": "r1FFU_d1f",
+        "pinKey": "Hku_LuOyz"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "description": "The number of a function cycle. Starts from 0.",
+      "id": "B1a7B_O1z",
+      "label": "N",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "1"
+      },
+      "description": "An iterval between sawtooth peaks, i.e. the period of the function",
+      "id": "Bk2ZBdOyf",
+      "label": "T",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "description": "The function value in [0, 1] range. Starts from 0.",
+      "id": "HybQBdOyf",
+      "label": "OUT",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "description": "An input time value, i.e. the abscissa",
+      "id": "SJqlS__yz",
+      "label": "IN",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "SyMJwcURV",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 3
+      },
+      "type": "xod/math/floor"
+    },
+    {
+      "id": "r1FFU_d1f",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 2
+      },
+      "type": "@/modulo"
+    },
+    {
+      "id": "r1wcUddJz",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 2
+      },
+      "type": "@/divide"
+    },
+    {
+      "id": "rJ18kR4TI",
+      "position": {
+        "units": "slots",
+        "x": 9,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/deprecated"
+    },
+    {
+      "id": "rJPb9Kdyz",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 3
+      },
+      "type": "@/divide"
+    }
+  ]
+}

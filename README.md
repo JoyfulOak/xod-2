@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/xodio/xod/tree/master.svg?style=shield)](https://circleci.com/gh/xodio/xod/tree/master)
 
-XOD is a visual programming language for microcontrollers. This repository contains sources for XOD language core, XOD IDE and XOD standard library.
+XOD is a visual programming language for microcontrollers. This repository contains sources for XOD language core, XOD 2 IDE and XOD standard library.
 
 ![Xoding demo](./.github/xoding.gif)
 

@@ -1,0 +1,436 @@
+{
+  "comments": [
+    {
+      "content": "Suspend the wave generator right after the last `true` without waiting for the cycle tail (`false`). Such way we avoid a short `true` triggering caused by the defer node at the end.",
+      "id": "ByJRI0Kyf",
+      "position": {
+        "units": "slots",
+        "x": -7,
+        "y": 7
+      },
+      "size": {
+        "height": 2,
+        "units": "slots",
+        "width": 6
+      }
+    }
+  ],
+  "description": "Generates `N` switches of output boolean signal. Useful to flash/blink/flip/switch something for several times in a row.",
+  "links": [
+    {
+      "id": "B1QVnQY68",
+      "input": {
+        "nodeId": "r1Is6RFkG",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "HJe-3mY6L",
+        "pinKey": "Hk7Fo6aNp8"
+      }
+    },
+    {
+      "id": "B1wmhXYa8",
+      "input": {
+        "nodeId": "BkE-fCKJG",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "HJe-3mY6L",
+        "pinKey": "SJfYoapVaU"
+      }
+    },
+    {
+      "id": "BJyG3mtaL",
+      "input": {
+        "nodeId": "HJe-3mY6L",
+        "pinKey": "BkHYoTT4TI"
+      },
+      "output": {
+        "nodeId": "BJQLDRtJf",
+        "pinKey": "ByHmL0uHPk-"
+      }
+    },
+    {
+      "id": "BkTuZkcyM",
+      "input": {
+        "nodeId": "r19PbRFkG",
+        "pinKey": "SJqZ8COrDkW"
+      },
+      "output": {
+        "nodeId": "rknsx0tyf",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "Byoyz0FkG",
+      "input": {
+        "nodeId": "HkIkG0tJz",
+        "pinKey": "ryv7IRdSP1b"
+      },
+      "output": {
+        "nodeId": "ByUpxAtJG",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "H12kzCYJf",
+      "input": {
+        "nodeId": "rJSSW0Y1f",
+        "pinKey": "B1RU0OrDkb"
+      },
+      "output": {
+        "nodeId": "HkIkG0tJz",
+        "pinKey": "ByHmL0uHPk-"
+      }
+    },
+    {
+      "id": "HJ143Qta8",
+      "input": {
+        "nodeId": "rJO3UCFkG",
+        "pinKey": "HkqmLAOrD1W"
+      },
+      "output": {
+        "nodeId": "HJe-3mY6L",
+        "pinKey": "Hk7Fo6aNp8"
+      }
+    },
+    {
+      "id": "HJhX3mF6I",
+      "input": {
+        "nodeId": "S15nBCF1G",
+        "pinKey": "S1dG8AOBPJW"
+      },
+      "output": {
+        "nodeId": "HJe-3mY6L",
+        "pinKey": "SJfYoapVaU"
+      }
+    },
+    {
+      "id": "Hkfo-yc1f",
+      "input": {
+        "nodeId": "Bk95-J9yM",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "rJSSW0Y1f",
+        "pinKey": "HkyxURuSPyW"
+      }
+    },
+    {
+      "id": "S1HbhXKTU",
+      "input": {
+        "nodeId": "HJe-3mY6L",
+        "pinKey": "rkKiaaETU"
+      },
+      "output": {
+        "nodeId": "Hkgc2CK1z",
+        "pinKey": "BJK85RY1G"
+      }
+    },
+    {
+      "id": "S1cSb0t1f",
+      "input": {
+        "nodeId": "rJSSW0Y1f",
+        "pinKey": "Bkh8A_Sv1-"
+      },
+      "output": {
+        "nodeId": "S1vneCK1z",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "S1ts2RYkz",
+      "input": {
+        "nodeId": "Hkgc2CK1z",
+        "pinKey": "BJZr50KyG"
+      },
+      "output": {
+        "nodeId": "SJ1e-CKkf",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SJO1J5BCV",
+      "input": {
+        "nodeId": "HkIkG0tJz",
+        "pinKey": "ByU7LRuSPkW"
+      },
+      "output": {
+        "nodeId": "r17k1cSCN",
+        "pinKey": "S1K8wUY9b"
+      }
+    },
+    {
+      "id": "SkDs2CYyG",
+      "input": {
+        "nodeId": "Hkgc2CK1z",
+        "pinKey": "HJ1SqAFkG"
+      },
+      "output": {
+        "nodeId": "r1v0xCYJf",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "Skja0RYJG",
+      "input": {
+        "nodeId": "S15nBCF1G",
+        "pinKey": "r1tz8CdBDkb"
+      },
+      "output": {
+        "nodeId": "r19PbRFkG",
+        "pinKey": "HktZUCdrPkZ"
+      }
+    },
+    {
+      "id": "Skvbnmt6I",
+      "input": {
+        "nodeId": "HJe-3mY6L",
+        "pinKey": "Sy4Yi6a4pI"
+      },
+      "output": {
+        "nodeId": "Hkgc2CK1z",
+        "pinKey": "Hy-vqRtJG"
+      }
+    },
+    {
+      "id": "SyCO-k9kz",
+      "input": {
+        "nodeId": "r19PbRFkG",
+        "pinKey": "HJjZLRdBw1-"
+      },
+      "output": {
+        "nodeId": "rJO3UCFkG",
+        "pinKey": "SyomIRurDJ-"
+      }
+    },
+    {
+      "id": "r1F-hXKTL",
+      "input": {
+        "nodeId": "HJe-3mY6L",
+        "pinKey": "HJxKop6EaL"
+      },
+      "output": {
+        "nodeId": "rJSSW0Y1f",
+        "pinKey": "HkyxURuSPyW"
+      }
+    },
+    {
+      "id": "rJjPD0KkG",
+      "input": {
+        "nodeId": "BJQLDRtJf",
+        "pinKey": "ByU7LRuSPkW"
+      },
+      "output": {
+        "nodeId": "HkIkG0tJz",
+        "pinKey": "ByHmL0uHPk-"
+      }
+    },
+    {
+      "id": "rkIwPAFkG",
+      "input": {
+        "nodeId": "BJQLDRtJf",
+        "pinKey": "ryv7IRdSP1b"
+      },
+      "output": {
+        "nodeId": "S1vneCK1z",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ryI11qrCV",
+      "input": {
+        "nodeId": "r17k1cSCN",
+        "pinKey": "Hk-UvIK9b"
+      },
+      "output": {
+        "nodeId": "S15nBCF1G",
+        "pinKey": "rJqfIRdHwkW"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "BJQLDRtJf",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 3
+      },
+      "type": "@/any"
+    },
+    {
+      "description": "Is flip sequence active",
+      "id": "Bk95-J9yM",
+      "label": "ACT",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 10
+      },
+      "type": "xod/patch-nodes/output-boolean"
+    },
+    {
+      "description": "The signal value. Always `false` if the flip sequence is not active.",
+      "id": "BkE-fCKJG",
+      "label": "OUT",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 10
+      },
+      "type": "xod/patch-nodes/output-boolean"
+    },
+    {
+      "description": "Cancels the flipping sequence if in progress.",
+      "id": "ByUpxAtJG",
+      "label": "RST",
+      "position": {
+        "units": "slots",
+        "x": 15,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "HJe-3mY6L",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 4
+      },
+      "type": "xod/waves/square-wave"
+    },
+    {
+      "id": "HkIkG0tJz",
+      "position": {
+        "units": "slots",
+        "x": 15,
+        "y": 2
+      },
+      "type": "@/any"
+    },
+    {
+      "id": "Hkgc2CK1z",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 2
+      },
+      "type": "@/time-to-duty"
+    },
+    {
+      "id": "S15nBCF1G",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 7
+      },
+      "type": "@/nor"
+    },
+    {
+      "description": "Runs a new flip sequence. Cancels the existing if in progress.",
+      "id": "S1vneCK1z",
+      "label": "SET",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "1"
+      },
+      "description": "Time to be OFF per cycle. In seconds.",
+      "id": "SJ1e-CKkf",
+      "label": "Toff",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "r17k1cSCN",
+      "position": {
+        "units": "slots",
+        "x": 12,
+        "y": 6
+      },
+      "type": "@/defer(pulse)"
+    },
+    {
+      "id": "r19PbRFkG",
+      "position": {
+        "units": "slots",
+        "x": -2,
+        "y": 6
+      },
+      "type": "@/less"
+    },
+    {
+      "description": "The current number of cycle. Starts from 0.",
+      "id": "r1Is6RFkG",
+      "label": "Nc",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 10
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "1"
+      },
+      "description": "Time to be ON per cycle. In seconds.",
+      "id": "r1v0xCYJf",
+      "label": "Ton",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "boundLiterals": {
+        "BJnQUR_BwyZ": "1",
+        "HkqmLAOrD1W": "1"
+      },
+      "id": "rJO3UCFkG",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 5
+      },
+      "type": "@/add"
+    },
+    {
+      "id": "rJSSW0Y1f",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 2
+      },
+      "type": "@/flip-flop"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "1"
+      },
+      "description": "Number of times the signal should pass the on-off cycle",
+      "id": "rknsx0tyf",
+      "label": "N",
+      "position": {
+        "units": "slots",
+        "x": -1,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-number"
+    }
+  ]
+}

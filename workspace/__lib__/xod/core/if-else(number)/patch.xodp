@@ -1,0 +1,80 @@
+{
+  "description": "Outputs either input value depending on condition",
+  "nodes": [
+    {
+      "description": "Use the generic `xod/core/if-else` instead",
+      "id": "Hk1ASEUc4",
+      "position": {
+        "units": "slots",
+        "x": 7,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/deprecated"
+    },
+    {
+      "boundLiterals": {
+        "__in__": "0"
+      },
+      "description": "Outputs value of `T` if `COND` is true, and `F` otherwise",
+      "id": "S13xLCuHvkW",
+      "label": "R",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 2.15
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "description": "Condition value",
+      "id": "S1yZIA_rDJZ",
+      "label": "COND",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-boolean"
+    },
+    {
+      "id": "SyQHYAvkV",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/tabtest"
+    },
+    {
+      "id": "noNativeImpl",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "description": "Value to be output if condition is false",
+      "id": "r1AgIROHDJW",
+      "label": "F",
+      "position": {
+        "units": "slots",
+        "x": 7.9,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "description": "Value to be output if condition is true",
+      "id": "ryTeUROHD1b",
+      "label": "T",
+      "position": {
+        "units": "slots",
+        "x": 4.05,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-number"
+    }
+  ]
+}

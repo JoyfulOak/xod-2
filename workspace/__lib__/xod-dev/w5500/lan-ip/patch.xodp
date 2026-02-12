@@ -1,0 +1,36 @@
+{
+  "description": "Gets a local IP address",
+  "nodes": [
+    {
+      "description": "Internet connection",
+      "id": "Sk9A4oDMm",
+      "label": "INET",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 0
+      },
+      "type": "@/input-w5500-inet"
+    },
+    {
+      "description": "The IP address",
+      "id": "r15ySjwzQ",
+      "label": "IP",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "xod/net/output-ip-address"
+    },
+    {
+      "id": "rkNlrjDfm",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    }
+  ]
+}

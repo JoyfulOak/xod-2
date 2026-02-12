@@ -1,0 +1,50 @@
+{
+  "description": "Computes bitwise AND of two or more bytes. A resulting bit at a particular position is 1 only if corresponding bits of all inputs are 1.",
+  "nodes": [
+    {
+      "id": "ByjTuuxef",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-byte"
+    },
+    {
+      "id": "HkpP80W_f",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/variadic-1"
+    },
+    {
+      "id": "S1YR_dgeG",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-byte"
+    },
+    {
+      "id": "S1_audxxf",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "id": "SkUn_Olef",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-byte"
+    }
+  ]
+}

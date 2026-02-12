@@ -1,0 +1,60 @@
+{
+  "description": "Stores a number which gets incremented on each `INC` pulse.",
+  "nodes": [
+    {
+      "id": "H1MAWAu8-",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 1.15
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "description": "Triggers a single increment.",
+      "id": "HJAq-A_8-",
+      "label": "INC",
+      "position": {
+        "units": "slots",
+        "x": 4.05,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "1"
+      },
+      "description": "Value to add on each increment. Use a negative value (e.g. -1) to make decrements.",
+      "id": "HJvqZ0dLZ",
+      "label": "STEP",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "description": "Resets the accumulated value to zero.",
+      "id": "SkUjZA_L-",
+      "label": "RST",
+      "position": {
+        "units": "slots",
+        "x": 7.9,
+        "y": 0.15
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "description": "The accumulated value.",
+      "id": "r1yhZRd8W",
+      "position": {
+        "units": "slots",
+        "x": 0.25,
+        "y": 2.15
+      },
+      "type": "xod/patch-nodes/output-number"
+    }
+  ]
+}

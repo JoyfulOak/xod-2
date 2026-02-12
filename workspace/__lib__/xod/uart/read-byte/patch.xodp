@@ -1,0 +1,61 @@
+{
+  "description": "Reads one byte from UART.\n\nPossible errors:\n— Can't read byte",
+  "nodes": [
+    {
+      "description": "An UART object",
+      "id": "HkeKDhI-7",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "@/input-uart"
+    },
+    {
+      "description": "Pulses when byte received",
+      "id": "Hkeetvn8-Q",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "description": "Received byte from UART",
+      "id": "Skw_dnU-Q",
+      "label": "BYTE",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-byte"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "On Boot"
+      },
+      "description": "Trigger reading of one byte from UART",
+      "id": "r1bXu3LWm",
+      "label": "READ",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "rJWxKD3I-X",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    }
+  ]
+}

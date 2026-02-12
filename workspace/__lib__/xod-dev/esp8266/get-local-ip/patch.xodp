@@ -1,0 +1,67 @@
+{
+  "description": "Requests local IP from ESP8266 device, that connected to some network.\n\nPossible errors:\n— Can't get local IP address",
+  "nodes": [
+    {
+      "description": "Pulses when IP address received",
+      "id": "BJ7rhkFWQ",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "description": "An ESP8266 internet provider device",
+      "id": "ByhGn1KbX",
+      "label": "DEV",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 0
+      },
+      "type": "@/input-esp8266-device"
+    },
+    {
+      "description": "Send request for local IP address",
+      "id": "HkQ7nkKbm",
+      "label": "UPD",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "r1eWhsQMm",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/utility"
+    },
+    {
+      "id": "rJCBnJK-7",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "description": "A local IP address",
+      "id": "ryWdIjmzX",
+      "label": "IP",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "xod/net/output-ip-address"
+    }
+  ]
+}

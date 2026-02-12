@@ -1,0 +1,18 @@
+{
+  "comments": [
+    {
+      "content": "# Welcome to XOD!\n\nXOD 2 is a fork of XOD IDE. A huge THANK YOU to the XOD Team for all their hard work.\n\nDid you complete the built-in tutorial? We recommend you to do it:\n\n»                                                                «\n»»                                                              ««\n»»»»              [Open Built-in Tutorial Project](xod://actions/open-tutorial)              ««««\n»»                                                              ««\n»                                                                «\n\nAlternatively, try out the [Amperka Colony Kit](https://my.amperka.com/kits/colony-kit?utm_source=ide&utm_medium=ide_comment&utm_campaign=welcome-again) to learn XOD. Help astronauts build a Mars colony on your tabletop. A microcontroller, sensors, actuators, and colorful guide with an exciting story inside.\n\n## Starting a new project?\nDelete this comment and start tinkering.\nOr use “File” menu to open an existing project.",
+      "id": "HyZlIT6Bf",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "height": 4,
+        "units": "slots",
+        "width": 12
+      }
+    }
+  ]
+}

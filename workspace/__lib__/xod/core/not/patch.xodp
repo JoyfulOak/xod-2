@@ -1,0 +1,35 @@
+{
+  "description": "Inverses a boolean value",
+  "nodes": [
+    {
+      "id": "noNativeImpl",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "boundLiterals": {
+        "__in__": "False"
+      },
+      "id": "r1if8ROSDJ-",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-boolean"
+    },
+    {
+      "id": "ry3zLA_Bv1Z",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-boolean"
+    }
+  ]
+}

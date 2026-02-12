@@ -8,8 +8,11 @@ const listBoardsIpc = promisifyIpc(LIST_BOARDS);
 
 const getPackageFromFqbn = R.pipe(R.split(':'), R.take(2), R.join(':'));
 
-export const listBoards = () =>
-  listBoardsIpc(noop, null).then(({ installed, available }) => {
+export const listBoards = workspacePath =>
+  listBoardsIpc(
+    noop,
+    workspacePath ? { workspacePath } : null
+  ).then(({ installed, available }) => {
     const installedPackages = R.compose(
       R.uniq,
       R.map(getPackageFromFqbn),

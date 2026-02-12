@@ -1,0 +1,136 @@
+{
+  "description": "Drives a digital thermometer based on TMP36 IC.\n\nPossible errors:\n— Invalid port",
+  "links": [
+    {
+      "id": "BJ2e7t8em",
+      "input": {
+        "nodeId": "S1UemY8eX",
+        "pinKey": "SyKd0E2x-"
+      },
+      "output": {
+        "nodeId": "Hk_1fUaMW",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "H1NQ7KIxm",
+      "input": {
+        "nodeId": "S1UemY8eX",
+        "pinKey": "SkuhqCqym"
+      },
+      "output": {
+        "nodeId": "H1s0WI6MZ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "S1JVzLTfb",
+      "input": {
+        "nodeId": "rkFgMITM-",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "Hys7MUTfb",
+        "pinKey": "H12bIR_SPyZ"
+      }
+    },
+    {
+      "id": "Syk-Qt8e7",
+      "input": {
+        "nodeId": "Hys7MUTfb",
+        "pinKey": "BJlzICOSv1-"
+      },
+      "output": {
+        "nodeId": "S1UemY8eX",
+        "pinKey": "SyBtREhlW"
+      }
+    },
+    {
+      "id": "r1g87Y8lm",
+      "input": {
+        "nodeId": "rkoSQYUxm",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "S1UemY8eX",
+        "pinKey": "BkGpcpcJQ"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "boundLiterals": {
+        "__out__": "A0"
+      },
+      "description": "Board ADC port with the sensor",
+      "id": "H1s0WI6MZ",
+      "label": "PORT",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-port"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "Continuously"
+      },
+      "description": "Triggers new temperature read",
+      "id": "Hk_1fUaMW",
+      "label": "UPD",
+      "position": {
+        "units": "slots",
+        "x": 7,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "boundLiterals": {
+        "HJCWLAdSwyW": "0.35",
+        "rJbGU0_Hv1Z": "25",
+        "rkpbU0OrwyZ": "125",
+        "ry1z8CuBDy-": "0.15"
+      },
+      "id": "Hys7MUTfb",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/math/map"
+    },
+    {
+      "id": "S1UemY8eX",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 1
+      },
+      "type": "xod/gpio/analog-read"
+    },
+    {
+      "description": "The last read temperature in °C",
+      "id": "rkFgMITM-",
+      "label": "Tc",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "description": "Fires on reading complete",
+      "id": "rkoSQYUxm",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    }
+  ]
+}

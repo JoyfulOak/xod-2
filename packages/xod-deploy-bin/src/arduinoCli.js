@@ -162,27 +162,21 @@ const ensureExtraTxt = async wsPath => {
   return extraTxtFilePath;
 };
 
-const copyPackageIndexes = async (wsBundledPath, wsPackageDir) => {
+const copyBundledPackagesDir = async (wsBundledPath, wsPackageDir) => {
   const bundledPackagesDir = await getArduinoPackagesPath(wsBundledPath);
-  const filesToCopy = await R.composeP(
-    R.filter(R.pipe(path.extname, R.equals('.json'))),
-    fse.readdir
-  )(bundledPackagesDir);
 
-  return Promise.all(
-    R.map(
-      fname =>
-        fse.copy(
-          path.join(bundledPackagesDir, fname),
-          path.join(wsPackageDir, fname),
-          {
-            overwrite: false,
-            errorOnExist: false,
-          }
-        ),
-      filesToCopy
-    )
-  );
+  const bundledPackagesDirExists = await fse.pathExists(bundledPackagesDir);
+  if (!bundledPackagesDirExists) {
+    await fse.ensureDir(wsPackageDir);
+    return wsPackageDir;
+  }
+
+  await fse.copy(bundledPackagesDir, wsPackageDir, {
+    overwrite: false,
+    errorOnExist: false,
+  });
+
+  return wsPackageDir;
 };
 
 /**
@@ -337,7 +331,7 @@ export const prepareSketchDir = async (wsPath = null) => {
 /**
  * Prepare `__packages__` directory inside user's workspace if
  * it does not prepared earlier:
- * - copy bundled package index json files
+ * - copy bundled workspace `__packages__` skeleton files and directories
  * - create `extra.txt` file
  *
  * Returns Path to the `__packages__` directory inside user's workspace
@@ -347,7 +341,7 @@ export const prepareSketchDir = async (wsPath = null) => {
 export const prepareWorkspacePackagesDir = async (wsBundledPath, wsPath) => {
   const packagesDirPath = getArduinoPackagesPath(wsPath);
 
-  await copyPackageIndexes(wsBundledPath, packagesDirPath);
+  await copyBundledPackagesDir(wsBundledPath, packagesDirPath);
   await ensureExtraTxt(wsPath);
 
   return packagesDirPath;
@@ -595,6 +589,35 @@ export const saveSketch = async (cli, code, cacheKey = null) => {
   return { sketchName, sketchPath };
 };
 
+const getSketchPaths = async (cli, sketchName) => {
+  const config = await cli.dumpConfig();
+  const sketchDir = path.join(config.directories.user, sketchName);
+  const sketchPath = path.join(sketchDir, `${sketchName}.ino`);
+  return { sketchDir, sketchPath };
+};
+
+const getBuildOutputDir = (sketchDir, fqbn) =>
+  path.join(sketchDir, 'build', fqbn.replace(/:/g, '.'));
+
+const isSketchUnchanged = async (sketchPath, code) => {
+  if (!(await fse.pathExists(sketchPath))) return false;
+  const existing = await fse.readFile(sketchPath, { encoding: 'utf8' });
+  return existing === code;
+};
+
+const findCompiledArtifact = async (sketchDir, fqbn) => {
+  if (!fqbn) return null;
+  const buildDir = getBuildOutputDir(sketchDir, fqbn);
+  if (!(await fse.pathExists(buildDir))) return null;
+  const entries = await fse.readdir(buildDir);
+  const pickExt = ext => entries.find(name => name.toLowerCase().endsWith(ext));
+  const preferred = pickExt('.bin') || pickExt('.hex') || pickExt('.elf');
+  return preferred ? path.join(buildDir, preferred) : null;
+};
+
+const hasCompiledArtifacts = async (sketchDir, fqbn) =>
+  (await findCompiledArtifact(sketchDir, fqbn)) !== null;
+
 const compilationBegun = boardName =>
   `Begin compiling code for the board ${boardName}`;
 
@@ -631,10 +654,42 @@ export const compile = async (onProgress, cli, payload) => {
     path.basename(payload.ws || ''),
     R.pathOr('', ['board', 'fqbn'], payload),
   ]);
-  const { sketchName, sketchPath } = await saveSketch(
+  const sketchName = cacheKey || `xod_${Date.now()}_sketch`;
+  const { sketchDir, sketchPath } = await getSketchPaths(cli, sketchName);
+  const buildOutputDir = getBuildOutputDir(sketchDir, payload.board.fqbn);
+  await fse.ensureDir(buildOutputDir);
+
+  const canSkipCompile =
+    (await isSketchUnchanged(sketchPath, payload.code)) &&
+    (await hasCompiledArtifacts(sketchDir, payload.board.fqbn));
+
+  if (canSkipCompile) {
+    const inputFile = await findCompiledArtifact(
+      sketchDir,
+      payload.board.fqbn
+    );
+    onProgress({
+      percentage: 100,
+      message: 'Compilation skipped (cache hit)',
+      tab: 'compiler',
+    });
+    return {
+      sketchName,
+      sketchPath,
+      compileLog: 'Compilation skipped (cache hit)',
+      buildOutputDir,
+      inputFile,
+      timing: {
+        libsMs: 0,
+        compileMs: 0,
+      },
+    };
+  }
+
+  const { sketchPath: savedSketchPath } = await saveSketch(
     cli,
     payload.code,
-    cacheKey || null
+    sketchName
   );
 
   onProgress({
@@ -663,7 +718,8 @@ export const compile = async (onProgress, cli, payload) => {
           tab: 'compiler',
         }),
       payload.board.fqbn,
-      sketchName
+      sketchName,
+      { outputDir: buildOutputDir }
     )
     .catch(wrapCompileError);
 
@@ -676,8 +732,10 @@ export const compile = async (onProgress, cli, payload) => {
 
   return {
     sketchName,
-    sketchPath,
+    sketchPath: savedSketchPath,
     compileLog,
+    buildOutputDir,
+    inputFile: await findCompiledArtifact(sketchDir, payload.board.fqbn),
     timing: {
       libsMs,
       compileMs,
@@ -722,11 +780,13 @@ export const listInstalledBoards = async (wsBundledPath, wsPath, cli) => {
  */
 export const uploadThroughUSB = async (onProgress, cli, payload) => {
   const uploadStart = Date.now();
-  const { sketchName, sketchPath, compileLog, timing } = await compile(
-    onProgress,
-    cli,
-    payload
-  );
+  const {
+    sketchName,
+    sketchPath,
+    compileLog,
+    timing,
+    inputFile,
+  } = await compile(onProgress, cli, payload);
 
   onProgress({
     percentage: 100,
@@ -750,7 +810,7 @@ export const uploadThroughUSB = async (onProgress, cli, payload) => {
       payload.port.path,
       payload.board.fqbn,
       sketchName,
-      true
+      inputFile ? { inputFile, verbose: true } : true
     )
     .catch(wrapUploadError);
   onProgress({

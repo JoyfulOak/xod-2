@@ -1,0 +1,32 @@
+{
+  "description": "Converts number to a 8-bit unsigned integer presented as one byte. An input for the the conversion should be between 0.00 and 255.00.",
+  "nodes": [
+    {
+      "id": "By_EX_bk7",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-byte"
+    },
+    {
+      "id": "H1immOWk7",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "id": "rktX7OWyX",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    }
+  ]
+}

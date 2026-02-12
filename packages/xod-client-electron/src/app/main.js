@@ -49,6 +49,7 @@ import {
   configureAutoUpdater,
   subscribeOnAutoUpdaterEvents,
 } from './autoupdate';
+import checkForGithubUpdateOnceOnStartup from './updateCheck';
 import createAppStore from './store/index';
 
 import { STATES, getEventNameWithState } from '../shared/eventStates';
@@ -59,8 +60,13 @@ import { STATES, getEventNameWithState } from '../shared/eventStates';
 //
 // =============================================================================
 
-const DEFAULT_APP_TITLE = 'XOD IDE';
-const AUTOUPDATE_ENABLED = false;
+const DEFAULT_APP_TITLE = 'XOD 2 IDE';
+const AUTOUPDATE_ENABLED = true;
+const GITHUB_UPDATE_PROVIDER = {
+  provider: 'github',
+  owner: 'JoyfulOak',
+  repo: 'xod-2',
+};
 
 app.setName('xod');
 
@@ -93,6 +99,51 @@ const getFileToOpen = getFilePathToOpen(app);
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
 let confirmedWindowClose = false;
+let startupUpdateStatusPayload = null;
+let startupUpdateInstallInProgress = false;
+const UPDATE_INSTALL_RETRY_LIMIT = 2;
+const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+const getMacUpdateChannel = () => {
+  const macChannelByArch = {
+    arm64: 'mac-arm64',
+    x64: 'mac-x64',
+  };
+  return macChannelByArch[process.arch] || 'latest';
+};
+
+const applyUpdaterFeedConfig = () => {
+  if (process.platform !== 'darwin') return;
+
+  const channel = getMacUpdateChannel();
+  autoUpdater.channel = channel;
+  autoUpdater.allowDowngrade = true;
+  autoUpdater.setFeedURL({
+    ...GITHUB_UPDATE_PROVIDER,
+    channel,
+  });
+  log.debug(`[update-check] using update channel: ${channel}`);
+};
+
+const applyMacReleaseFeedConfig = latestVersion => {
+  if (process.platform !== 'darwin') return;
+  if (!latestVersion) return;
+
+  const normalized = String(latestVersion).replace(/^v/i, '');
+  const tag = `v${normalized}`;
+  const channel = getMacUpdateChannel();
+
+  autoUpdater.channel = channel;
+  autoUpdater.allowDowngrade = true;
+  autoUpdater.setFeedURL({
+    provider: 'generic',
+    url: `https://github.com/JoyfulOak/xod-2/releases/download/${tag}`,
+    channel,
+  });
+  log.debug(
+    `[update-check] using release feed ${tag} with channel ${channel}`
+  );
+};
 
 function createWindow() {
   // Load the previous state with fallback to defaults
@@ -208,9 +259,45 @@ const subscribeToRemoteAction = (processName, remoteAction) => {
 };
 
 configureAutoUpdater(autoUpdater, log);
+if (AUTOUPDATE_ENABLED) {
+  applyUpdaterFeedConfig();
+}
+
+const runAutoUpdateInstallWithRetry = (attempt = 0) =>
+  (startupUpdateStatusPayload && startupUpdateStatusPayload.latestVersion
+    ? applyMacReleaseFeedConfig(startupUpdateStatusPayload.latestVersion)
+    : applyUpdaterFeedConfig(),
+  autoUpdater)
+    .checkForUpdates()
+    .then(() => autoUpdater.downloadUpdate())
+    .catch(err => {
+      const message = err && err.message ? err.message : '';
+      const isDnsResolutionError =
+        typeof message === 'string' &&
+        message.indexOf('ERR_NAME_NOT_RESOLVED') !== -1;
+
+      if (isDnsResolutionError && attempt < UPDATE_INSTALL_RETRY_LIMIT) {
+        const retryDelayMs = (attempt + 1) * 1000;
+        log.debug(
+          `[update-check] DNS failure, retrying install in ${retryDelayMs}ms`
+        );
+        return wait(retryDelayMs).then(() =>
+          runAutoUpdateInstallWithRetry(attempt + 1)
+        );
+      }
+
+      return Promise.reject(err);
+    });
 
 const onReady = () => {
   settings.setDefaults();
+
+  const publishStartupUpdateStatus = payload => {
+    startupUpdateStatusPayload = payload;
+    if (win && win.webContents) {
+      win.webContents.send(EVENTS.STARTUP_UPDATE_CHECK_STATUS, payload);
+    }
+  };
 
   subscribeToRemoteAction(EVENTS.SAVE_ALL, WA.subscribeToSaveAll(store));
 
@@ -271,8 +358,56 @@ const onReady = () => {
       path
     );
   });
+  ipcMain.on(EVENTS.STARTUP_UPDATE_INSTALL_REQUEST, () => {
+    const isSupportedPlatform =
+      process.platform === 'win32' || process.platform === 'darwin';
+
+    if (!AUTOUPDATE_ENABLED || !isSupportedPlatform) return;
+    if (startupUpdateInstallInProgress) return;
+
+    startupUpdateInstallInProgress = true;
+    log.debug('[update-check] install requested');
+
+    runAutoUpdateInstallWithRetry()
+      .then(() => {
+        if (win && win.webContents) {
+          win.webContents.send(EVENTS.APP_UPDATE_DOWNLOAD_STARTED);
+        }
+      })
+      .catch(err => {
+        log.debug('[update-check] install failed');
+        const message = err && err.message ? err.message : 'Update failed';
+        const isDnsResolutionError =
+          typeof message === 'string' &&
+          message.indexOf('ERR_NAME_NOT_RESOLVED') !== -1;
+
+        if (isDnsResolutionError) {
+          shell.openExternal(
+            'https://github.com/JoyfulOak/xod-2/releases/latest'
+          );
+        }
+
+        if (win && win.webContents) {
+          win.webContents.send(EVENTS.APP_UPDATE_ERROR, {
+            message: isDnsResolutionError
+              ? `${message}\nOpened GitHub releases page in your browser as fallback.`
+              : message,
+          });
+        }
+      })
+      .then(() => {
+        startupUpdateInstallInProgress = false;
+      });
+  });
 
   createWindow();
+
+  setTimeout(
+    () =>
+      checkForGithubUpdateOnceOnStartup(app, log, publishStartupUpdateStatus),
+    0
+  );
+
   let unsubscribers = [];
 
   // Subscribe on changing of Project path once
@@ -292,6 +427,13 @@ const onReady = () => {
   });
 
   win.webContents.on('did-finish-load', () => {
+    if (startupUpdateStatusPayload) {
+      win.webContents.send(
+        EVENTS.STARTUP_UPDATE_CHECK_STATUS,
+        startupUpdateStatusPayload
+      );
+    }
+
     WA.prepareWorkspaceOnLaunch(
       (eventName, data) => win.webContents.send(eventName, data),
       store.dispatch.updateProjectPath,
@@ -343,17 +485,30 @@ const onReady = () => {
         arduinoCliInstance = arduinoCli;
 
         const subscribeSwitchWorkspace = () => {
-          // On switching workspace -> update arduino-cli config and run migration
+          // On switching/creating workspace -> update arduino-cli config and run migration
           const onSwitchWorkspace = (event, newWsPath) =>
-            xdb.switchWorkspace(
-              arduinoCli,
-              getPathToBundledWorkspace(),
-              newWsPath
-            );
+            Promise.resolve()
+              .then(() => migrateArduinoPackages(newWsPath))
+              .then(() =>
+                xdb.switchWorkspace(
+                  arduinoCli,
+                  getPathToBundledWorkspace(),
+                  newWsPath
+                )
+              )
+              .catch(err => {
+                win.webContents.send(
+                  EVENTS.ERROR_IN_MAIN_PROCESS,
+                  errorToPlainObject(err)
+                );
+              });
           ipcMain.on(EVENTS.SWITCH_WORKSPACE, onSwitchWorkspace);
+          ipcMain.on(EVENTS.CREATE_WORKSPACE, onSwitchWorkspace);
 
-          return () =>
+          return () => {
             ipcMain.removeListener(EVENTS.SWITCH_WORKSPACE, onSwitchWorkspace);
+            ipcMain.removeListener(EVENTS.CREATE_WORKSPACE, onSwitchWorkspace);
+          };
         };
 
         // unsubscribe old listeners
@@ -384,12 +539,6 @@ const onReady = () => {
         ipcMain,
         autoUpdater
       );
-
-      // On Linux XOD auto updates are not supported.
-      // Use of OS package manager is encouraged there.
-      if (process.platform === 'win32' || process.platform === 'darwin') {
-        autoUpdater.checkForUpdates();
-      }
     }
   });
 };

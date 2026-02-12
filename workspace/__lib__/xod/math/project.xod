@@ -1,0 +1,9 @@
+{
+  "authors": [
+    "XOD"
+  ],
+  "description": "Nodes of XOD for basic mathematical operations",
+  "license": "AGPL-3.0",
+  "name": "math",
+  "version": "2026.2.2"
+}

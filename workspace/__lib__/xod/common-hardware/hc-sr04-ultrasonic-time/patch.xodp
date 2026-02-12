@@ -1,0 +1,82 @@
+{
+  "description": "Measures sound roundtrip time with HC-SR04 ultrasonic range meter. Outputs infinity on no echo.\n\nPossible errors:\n— Invalid port\n— Wrong connection",
+  "nodes": [
+    {
+      "description": "Fires when ping is done",
+      "id": "B10vYoHlQ",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "description": "Board port to which sensor’s `trig` pin is connected.",
+      "id": "Bk2zMWALZ",
+      "label": "TRIG",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-port"
+    },
+    {
+      "description": "Last measured sound roundtrip time in seconds.",
+      "id": "Syn7fWCLZ",
+      "label": "Ts",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "description": "Use nodes from the `xod-dev/hc-sr04` standard library instead.",
+      "id": "r1EjbRvLB",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/deprecated"
+    },
+    {
+      "description": "Board port to which sensor’s `echo` pin is connected.",
+      "id": "rJ0fMWALb",
+      "label": "ECHO",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-port"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "Continuously"
+      },
+      "description": "Triggers new ultrasonic ping which would result in the output update once sound echo will be captured. Pulses coming within 60 ms window after last one are ignored to fight sensor’s PCB resonance.",
+      "id": "rJPQfbCIW",
+      "label": "PING",
+      "position": {
+        "units": "slots",
+        "x": 8,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "rkJUMWRIW",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    }
+  ]
+}

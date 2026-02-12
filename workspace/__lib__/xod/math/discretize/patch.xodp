@@ -1,0 +1,266 @@
+{
+  "description": "Rounds input `X` up to the first threshold `T0`, `T1`, ..., `T𝑛` greater or equal to the `X`. If `X` is even greater than the last threshold, the value is round down to it.",
+  "links": [
+    {
+      "id": "B1JEs9l6Q",
+      "input": {
+        "nodeId": "SypQj9x67",
+        "pinKey": "S1yZIA_rDJZ"
+      },
+      "output": {
+        "nodeId": "H1LQjcx6Q",
+        "pinKey": "r1HN9cepQ"
+      }
+    },
+    {
+      "id": "B1tQj5ea7",
+      "input": {
+        "nodeId": "H1LQjcx6Q",
+        "pinKey": "rkDGq9laQ"
+      },
+      "output": {
+        "nodeId": "ryLFq6btW",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "BJqR9pWYZ",
+      "input": {
+        "nodeId": "ryua56WYb",
+        "pinKey": "r1AgIROHDJW"
+      },
+      "output": {
+        "nodeId": "r1SqqabFZ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "HJ6UIKxaX",
+      "input": {
+        "nodeId": "HJw2cTbFW",
+        "pinKey": "SJqZ8COrDkW"
+      },
+      "output": {
+        "nodeId": "rJl5qpZYZ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "HJ8vUFlT7",
+      "input": {
+        "nodeId": "ryua56WYb",
+        "pinKey": "S1yZIA_rDJZ"
+      },
+      "output": {
+        "nodeId": "HkMwLKgTQ",
+        "pinKey": "SJyXI0OrD1-"
+      }
+    },
+    {
+      "id": "HJPC5T-FZ",
+      "input": {
+        "nodeId": "ryua56WYb",
+        "pinKey": "ryTeUROHD1b"
+      },
+      "output": {
+        "nodeId": "rJl5qpZYZ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "Hy4PUtx6m",
+      "input": {
+        "nodeId": "HkMwLKgTQ",
+        "pinKey": "HJCfI0dBDkb"
+      },
+      "output": {
+        "nodeId": "SJoIUFxpQ",
+        "pinKey": "HktZUCdrPkZ"
+      }
+    },
+    {
+      "id": "HywEoqxTQ",
+      "input": {
+        "nodeId": "SypQj9x67",
+        "pinKey": "r1AgIROHDJW"
+      },
+      "output": {
+        "nodeId": "ryua56WYb",
+        "pinKey": "S13xLCuHvkW"
+      }
+    },
+    {
+      "id": "S1ePIFlTQ",
+      "input": {
+        "nodeId": "SJoIUFxpQ",
+        "pinKey": "SJqZ8COrDkW"
+      },
+      "output": {
+        "nodeId": "r1SqqabFZ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SkuVi5eaX",
+      "input": {
+        "nodeId": "rkpc9pZYb",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "SypQj9x67",
+        "pinKey": "S13xLCuHvkW"
+      }
+    },
+    {
+      "id": "r1325T-tb",
+      "input": {
+        "nodeId": "HJw2cTbFW",
+        "pinKey": "HJjZLRdBw1-"
+      },
+      "output": {
+        "nodeId": "ryLFq6btW",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "r1QP8txa7",
+      "input": {
+        "nodeId": "HkMwLKgTQ",
+        "pinKey": "BJaG80urD1-"
+      },
+      "output": {
+        "nodeId": "HJw2cTbFW",
+        "pinKey": "HktZUCdrPkZ"
+      }
+    },
+    {
+      "id": "r1R8UKgam",
+      "input": {
+        "nodeId": "SJoIUFxpQ",
+        "pinKey": "HJjZLRdBw1-"
+      },
+      "output": {
+        "nodeId": "ryLFq6btW",
+        "pinKey": "__out__"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "H1F_aDMJE",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/tabtest"
+    },
+    {
+      "id": "H1LQjcx6Q",
+      "position": {
+        "units": "slots",
+        "x": -1,
+        "y": 2
+      },
+      "type": "@/is-nan"
+    },
+    {
+      "id": "HJw2cTbFW",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 1
+      },
+      "type": "xod/core/less"
+    },
+    {
+      "id": "HkMwLKgTQ",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "xod/core/or"
+    },
+    {
+      "id": "SJoIUFxpQ",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/core/less"
+    },
+    {
+      "id": "SyLXO0Wuz",
+      "position": {
+        "units": "slots",
+        "x": 8,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/variadic-1"
+    },
+    {
+      "boundLiterals": {
+        "ryTeUROHD1b": "NaN"
+      },
+      "id": "SypQj9x67",
+      "position": {
+        "units": "slots",
+        "x": -1,
+        "y": 3
+      },
+      "type": "xod/core/if-else"
+    },
+    {
+      "id": "r1SqqabFZ",
+      "label": "T1",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "rJl5qpZYZ",
+      "label": "T0",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "description": "The rounding result. Equals to one of Tx.",
+      "id": "rkpc9pZYb",
+      "label": "T",
+      "position": {
+        "units": "slots",
+        "x": -1,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "id": "ryLFq6btW",
+      "label": "X",
+      "position": {
+        "units": "slots",
+        "x": -1,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "ryua56WYb",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 2
+      },
+      "type": "xod/core/if-else"
+    }
+  ]
+}

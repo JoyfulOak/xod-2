@@ -1,0 +1,9 @@
+{
+  "authors": [
+    "XOD"
+  ],
+  "description": "Nodes to control RC hobby servos",
+  "license": "AGPL-3.0",
+  "name": "servo",
+  "version": "2026.2.2"
+}

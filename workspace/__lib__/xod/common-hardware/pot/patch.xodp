@@ -1,0 +1,110 @@
+{
+  "description": "Reads values from a generic potentiometer. Basically a thin wrapper around `analog-input` for a simpler learning experience.\n\nPossible errors:\n— Invalid port",
+  "links": [
+    {
+      "id": "B1If3dUgX",
+      "input": {
+        "nodeId": "rJ-z2dIl7",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "ByW3idLeX",
+        "pinKey": "BkGpcpcJQ"
+      }
+    },
+    {
+      "id": "Bk-b2O8xX",
+      "input": {
+        "nodeId": "ByW3idLeX",
+        "pinKey": "SyKd0E2x-"
+      },
+      "output": {
+        "nodeId": "S1TehAk2b",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SkyWh_Lgm",
+      "input": {
+        "nodeId": "ByW3idLeX",
+        "pinKey": "SkuhqCqym"
+      },
+      "output": {
+        "nodeId": "Hkry2AJhW",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "rk7ZndUxX",
+      "input": {
+        "nodeId": "H1sM2A12-",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "ByW3idLeX",
+        "pinKey": "SyBtREhlW"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ByW3idLeX",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/gpio/analog-read"
+    },
+    {
+      "description": "The last read potentiometer position in range [0.0, 1.0].",
+      "id": "H1sM2A12-",
+      "label": "VAL",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-number"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "A0"
+      },
+      "description": "A board ADC port the potentiometer is connected to.",
+      "id": "Hkry2AJhW",
+      "label": "PORT",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-port"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "Continuously"
+      },
+      "description": "Triggers a new read.",
+      "id": "S1TehAk2b",
+      "label": "UPD",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "description": "Fires on reading complete",
+      "id": "rJ-z2dIl7",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    }
+  ]
+}

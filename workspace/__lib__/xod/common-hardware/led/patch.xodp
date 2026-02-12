@@ -1,0 +1,158 @@
+{
+  "description": "Drives a generic single color dimmable LED. The conversion between luminance and LED power is biased so that change in brightness on range 0…1 is percepted more or less uniformly by a human.\n\nPossible errors:\n— Invalid port",
+  "links": [
+    {
+      "id": "ByOBjd8lm",
+      "input": {
+        "nodeId": "HJP1juIl7",
+        "pinKey": "ByXnYHPyb"
+      },
+      "output": {
+        "nodeId": "SyqVe6hLb",
+        "pinKey": "B1QQ_nhUb"
+      }
+    },
+    {
+      "id": "Hk64xTn8-",
+      "input": {
+        "nodeId": "SyqVe6hLb",
+        "pinKey": "ByZ7_hnUb"
+      },
+      "output": {
+        "nodeId": "HyYh1a3LZ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "HkhvYs1Lr",
+      "input": {
+        "nodeId": "rkIIKi1IB",
+        "pinKey": "BytC28DfH"
+      },
+      "output": {
+        "nodeId": "HyYh1a3LZ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "r1WdYiJIB",
+      "input": {
+        "nodeId": "HJP1juIl7",
+        "pinKey": "B14R6TcyQ"
+      },
+      "output": {
+        "nodeId": "rkIIKi1IB",
+        "pinKey": "H1fx68wzB"
+      }
+    },
+    {
+      "id": "r1qcKs1IH",
+      "input": {
+        "nodeId": "rkIIKi1IB",
+        "pinKey": "H13R3IvGB"
+      },
+      "output": {
+        "nodeId": "rJIdYs1LB",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "r1rBsO8em",
+      "input": {
+        "nodeId": "HJP1juIl7",
+        "pinKey": "Syro9C9yQ"
+      },
+      "output": {
+        "nodeId": "B1oqkTnIb",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ryNuouUxX",
+      "input": {
+        "nodeId": "rJxhvs_Lx7",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "HJP1juIl7",
+        "pinKey": "SkwRqaq17"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "description": "Board port number the LED is connected to. The port should be capable of generating PWM signal.",
+      "id": "B1oqkTnIb",
+      "label": "PORT",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-port"
+    },
+    {
+      "id": "HJP1juIl7",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 3
+      },
+      "type": "xod/gpio/pwm-write"
+    },
+    {
+      "description": "Luminance (brightness) value in relative units [0.0, 1.0].",
+      "id": "HyYh1a3LZ",
+      "label": "LUM",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "SyqVe6hLb",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "xod/math/cube"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "True"
+      },
+      "description": "Updates the luminocity of the LED on incoming value change while `ACT` is true.",
+      "id": "rJIdYs1LB",
+      "label": "ACT",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-boolean"
+    },
+    {
+      "description": "Fires on writing complete",
+      "id": "rJxhvs_Lx7",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "id": "rkIIKi1IB",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 1
+      },
+      "type": "xod/core/act"
+    }
+  ]
+}

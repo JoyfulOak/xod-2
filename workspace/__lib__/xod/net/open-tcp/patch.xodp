@@ -1,0 +1,94 @@
+{
+  "description": "Open a TCP connection to the specified server.\n\nPossible errors:\n— Can't open TCP connection",
+  "nodes": [
+    {
+      "boundLiterals": {
+        "__out__": "80"
+      },
+      "description": "A destination server port number",
+      "id": "B1nXeDc0I",
+      "label": "PORT",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "description": "Pulses when the TCP connection is successfully open",
+      "id": "Bkm3QlDq0L",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "description": "An internet connection",
+      "id": "H1qQo890U",
+      "label": "INET",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-t1"
+    },
+    {
+      "description": "An internet connection",
+      "id": "S1m4sLq0I",
+      "label": "INET'",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-t1"
+    },
+    {
+      "id": "SJ8Kxw5CU",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/abstract"
+    },
+    {
+      "description": "Server name or IP address",
+      "id": "Sy-hmewq0U",
+      "label": "HOST",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-string"
+    },
+    {
+      "description": "The socket connected",
+      "id": "SyYjewc0U",
+      "label": "SOCK",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 2
+      },
+      "type": "@/output-socket"
+    },
+    {
+      "description": "Open the connection",
+      "id": "rJe2XgP9RL",
+      "label": "CONN",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    }
+  ]
+}

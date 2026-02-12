@@ -1,0 +1,69 @@
+{
+  "description": "Appends lines of text to a file on SD card.\n\nPossible errors:\n— Can't open a file\n— Initialization failed or no SD card\n— Can't write data to SD card\n",
+  "nodes": [
+    {
+      "description": "Fires when write is done",
+      "id": "B1WaLt8gm",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "description": "CS (chip select) pin the SD card reader is connected to. Also known as SS (slave select).",
+      "id": "BJGhy4lgG",
+      "label": "CS",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-port"
+    },
+    {
+      "description": "Perform file open, write, flush, close cycle",
+      "id": "BJK0yEglf",
+      "label": "W",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "description": "Line to append",
+      "id": "SJ1CkNggf",
+      "label": "LINE",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-string"
+    },
+    {
+      "id": "SkfZlVggM",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "description": "File name to append to",
+      "id": "rJbTJVxxM",
+      "label": "FILE",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-string"
+    }
+  ]
+}

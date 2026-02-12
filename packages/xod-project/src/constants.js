@@ -129,7 +129,7 @@ export const WATCH_NODETYPE = 'xod/debug/watch';
 
 // User-friendly table-log node, that uses a tsv-log inside
 export const TABLELOG_NODETYPE = 'xod/debug/table-log';
-// Utility node that actually sends a tsv data to the XOD IDE
+// Utility node that actually sends a tsv data to the XOD 2 IDE
 export const TSV_LOG_NODETYPE = 'xod/debug/tsv-log';
 
 // node types that prints values into Serial

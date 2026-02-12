@@ -1,0 +1,163 @@
+{
+  "links": [
+    {
+      "id": "Bk6WJeO-m",
+      "input": {
+        "nodeId": "H1sZygu-m",
+        "pinKey": "SJaxW1ubX"
+      },
+      "output": {
+        "nodeId": "rJGM36TvZ7",
+        "pinKey": "rycxytIZQ"
+      }
+    },
+    {
+      "id": "BkKWAFQz7",
+      "input": {
+        "nodeId": "HkdbAKXzQ",
+        "pinKey": "Sk9EvnL-7"
+      },
+      "output": {
+        "nodeId": "rJGM36TvZ7",
+        "pinKey": "rycxytIZQ"
+      }
+    },
+    {
+      "id": "HJrmJguZm",
+      "input": {
+        "nodeId": "By2yRpDbQ",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "H1sZygu-m",
+        "pinKey": "rkVBb1uZ7"
+      }
+    },
+    {
+      "id": "HJxh1_IdX",
+      "input": {
+        "nodeId": "SylfhpTDZm",
+        "pinKey": "H1VpIKnLb7"
+      },
+      "output": {
+        "nodeId": "rJGM36TvZ7",
+        "pinKey": "HJoHCvU_Q"
+      }
+    },
+    {
+      "id": "SJu-G3a6PZm",
+      "input": {
+        "nodeId": "SylfhpTDZm",
+        "pinKey": "HkT8KhLWm"
+      },
+      "output": {
+        "nodeId": "rJGM36TvZ7",
+        "pinKey": "rycxytIZQ"
+      }
+    },
+    {
+      "id": "SkMhydLd7",
+      "input": {
+        "nodeId": "rJGM36TvZ7",
+        "pinKey": "S1gjHAPL_7"
+      },
+      "output": {
+        "nodeId": "S1XgMnT6DWm",
+        "pinKey": "Bk4gU0drwJ-"
+      }
+    },
+    {
+      "id": "Sybf1l_W7",
+      "input": {
+        "nodeId": "H1sZygu-m",
+        "pinKey": "rkc7Wyu-m"
+      },
+      "output": {
+        "nodeId": "SylfhpTDZm",
+        "pinKey": "rkl6IK3L-7"
+      }
+    },
+    {
+      "id": "r1kfRKXMQ",
+      "input": {
+        "nodeId": "HkdbAKXzQ",
+        "pinKey": "HJO3D3UZX"
+      },
+      "output": {
+        "nodeId": "H1sZygu-m",
+        "pinKey": "rJ2IpKQMX"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "By2yRpDbQ",
+      "position": {
+        "units": "slots",
+        "x": -1,
+        "y": 2
+      },
+      "type": "xod/core/watch"
+    },
+    {
+      "boundLiterals": {
+        "r10MWJuW7": "10"
+      },
+      "id": "H1sZygu-m",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "@/read-bytes"
+    },
+    {
+      "id": "HkdbAKXzQ",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 3
+      },
+      "type": "@/end"
+    },
+    {
+      "boundLiterals": {
+        "SkSuD6LMb": "On Boot",
+        "Skre8ROSv1-": "1"
+      },
+      "description": "Hack to make watch nodes works on Leonardo",
+      "id": "S1XgMnT6DWm",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": -1
+      },
+      "type": "xod/core/delay"
+    },
+    {
+      "boundLiterals": {
+        "ryGwYhIZm": "\"AT\""
+      },
+      "id": "SylfhpTDZm",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 1
+      },
+      "type": "@/print"
+    },
+    {
+      "boundLiterals": {
+        "Syz-kKUWX": "D8",
+        "r1mZktLZm": "D9"
+      },
+      "id": "rJGM36TvZ7",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 0
+      },
+      "type": "@/soft-uart"
+    }
+  ]
+}

@@ -1,0 +1,325 @@
+{
+  "description": "Read a response from an opened connection as a stream of bytes until it closes\n\nPossible errors:\n— Can't receive a data from the socket\n— No available bytes to read",
+  "links": [
+    {
+      "id": "BJoojo7G7",
+      "input": {
+        "nodeId": "S1lZAxOMfm",
+        "pinKey": "rklvsoQGm"
+      },
+      "output": {
+        "nodeId": "rJMIsjQMQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "BkXbAl_ff7",
+      "input": {
+        "nodeId": "B1bRgdMMX",
+        "pinKey": "Bylu3eO9bQ"
+      },
+      "output": {
+        "nodeId": "S1lZAxOMfm",
+        "pinKey": "HkIVUAxzm"
+      }
+    },
+    {
+      "id": "ByOqqS50L",
+      "input": {
+        "nodeId": "S1Dc9S5A8",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "rJMIsjQMQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "Bypa5HcRL",
+      "input": {
+        "nodeId": "B1FpqH5AL",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "S1Dc9S5A8",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ByslctGf7",
+      "input": {
+        "nodeId": "BJN-og_zzm",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "B1bRgdMMX",
+        "pinKey": "rJRkr0xfX"
+      }
+    },
+    {
+      "id": "HkPezwqAU",
+      "input": {
+        "nodeId": "Byq1fP90U",
+        "pinKey": "rkW8SftM7"
+      },
+      "output": {
+        "nodeId": "rJMIsjQMQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "Hy-xGvcC8",
+      "input": {
+        "nodeId": "Byq1fP90U",
+        "pinKey": "Bkfix0w5b7"
+      },
+      "output": {
+        "nodeId": "S1lZAxOMfm",
+        "pinKey": "S1nVLAgMX"
+      }
+    },
+    {
+      "id": "HyGxzPq0U",
+      "input": {
+        "nodeId": "rJb-iluMG7",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "Byq1fP90U",
+        "pinKey": "HyloeRvqZX"
+      }
+    },
+    {
+      "id": "HyYgGPqR8",
+      "input": {
+        "nodeId": "Byq1fP90U",
+        "pinKey": "BJOL9baMX"
+      },
+      "output": {
+        "nodeId": "HJaAFbTzQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "Hyx-qWTG7",
+      "input": {
+        "nodeId": "B1bRgdMMX",
+        "pinKey": "Hkg0YZ6fQ"
+      },
+      "output": {
+        "nodeId": "HJaAFbTzQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "S1bgZOzGX",
+      "input": {
+        "nodeId": "SybWRluGz7",
+        "pinKey": "ByU7LRuSPkW"
+      },
+      "output": {
+        "nodeId": "H15J-_zMQ",
+        "pinKey": "HJhXDIY9-"
+      }
+    },
+    {
+      "id": "SJTgcZTGX",
+      "input": {
+        "nodeId": "S1lZAxOMfm",
+        "pinKey": "SkjkcZpfQ"
+      },
+      "output": {
+        "nodeId": "HJaAFbTzQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SkV0YKfz7",
+      "input": {
+        "nodeId": "ByXZseuGGm",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "B1bRgdMMX",
+        "pinKey": "rJEd3lucbQ"
+      }
+    },
+    {
+      "id": "Skpijo7f7",
+      "input": {
+        "nodeId": "B1bRgdMMX",
+        "pinKey": "rytFismz7"
+      },
+      "output": {
+        "nodeId": "rJMIsjQMQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SyVgbOMMX",
+      "input": {
+        "nodeId": "SybWRluGz7",
+        "pinKey": "ryv7IRdSP1b"
+      },
+      "output": {
+        "nodeId": "Byl-jxOGGQ",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "rkJxW_fMQ",
+      "input": {
+        "nodeId": "H15J-_zMQ",
+        "pinKey": "BJI7P8t9Z"
+      },
+      "output": {
+        "nodeId": "B1bRgdMMX",
+        "pinKey": "rJEd3lucbQ"
+      }
+    },
+    {
+      "id": "ryM-0xdffX",
+      "input": {
+        "nodeId": "S1lZAxOMfm",
+        "pinKey": "B1oX8RlMQ"
+      },
+      "output": {
+        "nodeId": "SybWRluGz7",
+        "pinKey": "ByHmL0uHPk-"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "description": "An internet connection",
+      "id": "B1FpqH5AL",
+      "label": "INET'",
+      "position": {
+        "units": "slots",
+        "x": -3,
+        "y": 4
+      },
+      "type": "@/output-esp8266-inet"
+    },
+    {
+      "id": "B1bRgdMMX",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 2
+      },
+      "type": "@/receive-one-byte"
+    },
+    {
+      "description": "The last read byte",
+      "id": "BJN-og_zzm",
+      "label": "CHAR",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/output-byte"
+    },
+    {
+      "description": "Pulses when a new byte is read",
+      "id": "ByXZseuGGm",
+      "label": "RCV",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "description": "Begin reading",
+      "id": "Byl-jxOGGQ",
+      "label": "BGN",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "Byq1fP90U",
+      "position": {
+        "units": "slots",
+        "x": -2,
+        "y": 3
+      },
+      "type": "@/close"
+    },
+    {
+      "id": "H15J-_zMQ",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 2
+      },
+      "type": "xod/core/defer"
+    },
+    {
+      "description": "A socket",
+      "id": "HJaAFbTzQ",
+      "label": "SOCK",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "xod/net/input-socket"
+    },
+    {
+      "id": "S1Dc9S5A8",
+      "position": {
+        "units": "slots",
+        "x": -3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/jumper"
+    },
+    {
+      "id": "S1lZAxOMfm",
+      "position": {
+        "units": "slots",
+        "x": -1,
+        "y": 2
+      },
+      "type": "@/is-open"
+    },
+    {
+      "id": "SybWRluGz7",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 1
+      },
+      "type": "xod/core/any"
+    },
+    {
+      "description": "An internet connection",
+      "id": "rJMIsjQMQ",
+      "label": "INET",
+      "position": {
+        "units": "slots",
+        "x": -1,
+        "y": 0
+      },
+      "type": "@/input-esp8266-inet"
+    },
+    {
+      "description": "Pulses when the connection is closed",
+      "id": "rJb-iluMG7",
+      "label": "CLS",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    }
+  ]
+}

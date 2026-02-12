@@ -1,0 +1,49 @@
+{
+  "nodes": [
+    {
+      "boundLiterals": {
+        "__out__": "On Boot"
+      },
+      "description": "End UART communication",
+      "id": "HJO3D3UZX",
+      "label": "UPD",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "description": "An UART object",
+      "id": "Sk9EvnL-7",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": -0.05
+      },
+      "type": "@/input-uart"
+    },
+    {
+      "description": "Pulses when UART communication ended",
+      "id": "Ske5EPhI-X",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "id": "rk-qEvnUWm",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    }
+  ]
+}

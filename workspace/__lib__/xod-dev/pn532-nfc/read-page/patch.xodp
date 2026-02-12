@@ -1,0 +1,96 @@
+{
+  "description": "Reads one page of a Mifare Ultralight NFC tag.\nTo read data from a tag it should be paired first (use `pair-tag`)\n\nPossible errors:\n— Can't read the value",
+  "nodes": [
+    {
+      "id": "B1U93P6DQ",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-byte"
+    },
+    {
+      "id": "BJlwc3w6PQ",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-byte"
+    },
+    {
+      "description": "Trigger reading from an NFC tag",
+      "id": "BysY2PaDQ",
+      "label": "READ",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "Byw9hw6wQ",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-byte"
+    },
+    {
+      "id": "H1H52DaD7",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-byte"
+    },
+    {
+      "id": "Hk1F2vTPm",
+      "label": "DEV",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "@/input-pn532-device"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "2"
+      },
+      "description": "A page number to read data from in range [0, 16]. Notice that first pages contains UID",
+      "id": "HkrKnPpwX",
+      "label": "PAGE",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "description": "Fires on successful reading",
+      "id": "SkMohwTPm",
+      "label": "OK",
+      "position": {
+        "units": "slots",
+        "x": 5,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "id": "ryx52w6w7",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    }
+  ]
+}

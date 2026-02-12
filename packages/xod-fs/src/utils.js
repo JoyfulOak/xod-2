@@ -15,6 +15,7 @@ import { PatchFileContents, Path, def } from './types';
 
 import {
   DEFAULT_WORKSPACE_PATH,
+  LEGACY_DEFAULT_WORKSPACE_PATH,
   DEFAULT_PROJECT_NAME,
   LIBS_DIRNAME,
   WORKSPACE_FILENAME,
@@ -194,12 +195,22 @@ export const resolveDefaultProjectPath = def(
   workspacePath => path.resolve(workspacePath, DEFAULT_PROJECT_NAME)
 );
 
+const normalizeWorkspacePath = workspacePath => {
+  const defaultWorkspace = resolvePath(DEFAULT_WORKSPACE_PATH);
+  const legacyWorkspace = resolvePath(LEGACY_DEFAULT_WORKSPACE_PATH);
+
+  if (!(R.is(String, workspacePath) && notEmpty(workspacePath))) {
+    return defaultWorkspace;
+  }
+
+  const resolvedWorkspace = resolvePath(workspacePath);
+  return resolvedWorkspace === legacyWorkspace
+    ? defaultWorkspace
+    : resolvedWorkspace;
+};
+
 // :: * -> Path
-export const ensureWorkspacePath = R.ifElse(
-  R.both(R.is(String), notEmpty),
-  resolvePath,
-  () => resolvePath(DEFAULT_WORKSPACE_PATH)
-);
+export const ensureWorkspacePath = normalizeWorkspacePath;
 
 const doesWorkspaceFileExist = def(
   'doesWorkspaceFileExist :: Path -> Boolean',

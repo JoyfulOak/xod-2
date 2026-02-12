@@ -1,0 +1,64 @@
+{
+  "description": "Constructor of HardwareUart, provides serial communication on default hardware serial ports.",
+  "nodes": [
+    {
+      "description": "An UART object",
+      "id": "ByJ65dU-X",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-self"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "115200"
+      },
+      "description": "Speed of data transmission in bits per second (baud rate).",
+      "id": "H1DwMu5bX",
+      "label": "BAUD",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "id": "S1taqd8Z7",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "On Boot"
+      },
+      "description": "Begin UART communication",
+      "id": "SJCqmwIO7",
+      "label": "INIT",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "description": "Pulses when UART communication began",
+      "id": "rJAd7vLOQ",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 3
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    }
+  ]
+}

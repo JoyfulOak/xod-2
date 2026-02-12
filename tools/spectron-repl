@@ -16,7 +16,7 @@ const app = new Application({
   chromeDriverArgs: ['remote-debugging-port=9222'],
 });
 
-console.log('Starting XOD IDE...');
+console.log('Starting XOD 2 IDE...');
 
 app
   .start()

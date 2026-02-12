@@ -1,0 +1,97 @@
+{
+  "description": "Open a TCP connection to the specified server\n\nPossible errors:\n— Can't open TCP connection",
+  "nodes": [
+    {
+      "description": "An internet connection",
+      "id": "BkytZ89AU",
+      "label": "INET'",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 2
+      },
+      "type": "@/output-esp8266-mcu-inet"
+    },
+    {
+      "description": "Open the connection",
+      "id": "ByZE6AjDt7",
+      "label": "CONN",
+      "position": {
+        "units": "slots",
+        "x": 9,
+        "y": -0.05
+      },
+      "type": "xod/patch-nodes/input-pulse"
+    },
+    {
+      "id": "H1BNpCiPK7",
+      "position": {
+        "units": "slots",
+        "x": -0.05,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/not-implemented-in-xod"
+    },
+    {
+      "description": "A socket",
+      "id": "H1mYNnvY7",
+      "label": "SOCK",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 2
+      },
+      "type": "xod/net/output-socket"
+    },
+    {
+      "description": "An internet connection",
+      "id": "SkEJyhvFQ",
+      "label": "INET",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "type": "@/input-esp8266-mcu-inet"
+    },
+    {
+      "description": "Pulses when the connection is successfully open",
+      "id": "r1EpRjDYQ",
+      "label": "DONE",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": 2
+      },
+      "type": "xod/patch-nodes/output-pulse"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "80"
+      },
+      "description": "A destination server port number",
+      "id": "ryL4pAjPKX",
+      "label": "PORT",
+      "position": {
+        "units": "slots",
+        "x": 6,
+        "y": -0.05
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "boundLiterals": {
+        "__out__": "\"www.google.com\""
+      },
+      "description": "Server name",
+      "id": "ryQ46CovFm",
+      "label": "HOST",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": -0.05
+      },
+      "type": "xod/patch-nodes/input-string"
+    }
+  ]
+}

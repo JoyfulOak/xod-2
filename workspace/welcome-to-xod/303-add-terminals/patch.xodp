@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "content": "## Pin naming convention\n\nConventionally XOD uses pin labels that are similar to IC leg labels. The labels contain at most four characters, and usually, they are mnemonics or abbreviations. The restriction allows rendering patches quite densely.",
+      "id": "B1nOwhZq4",
+      "position": {
+        "units": "slots",
+        "x": 13,
+        "y": 5
+      },
+      "size": {
+        "height": 2,
+        "units": "slots",
+        "width": 8
+      }
+    },
+    {
+      "content": "# Terminals\n\nWe need a way for the `between` node to get values in and put values out. In XOD patch nodes interact with the outside world using terminal nodes. You can find the terminal nodes in `xod/patch-nodes` library, they are called `input-number`, `input-pulse`, `output-boolean`, etc.\n\nOn this patch, we already placed an `input-number` and `output-boolean` instead of `tweak-number` and `watch`. The terminals give our node one number input pin and one boolean output. You can check it out by invoking the help box for the node in Project Browser.\n\n## Instructions\n\n1. Reflect the changes to your `between` patch: copy/paste the `IN` and `OUT` terminals there and link them accordingly.\n1. Add two more `input-number`s.\n2. Connect them to `less` and `greater`'s pins instead of hardcoded `0.4` and `0.7` values.\n3. Label the new terminals as `MIN` and `MAX` using Inspector.\n4. Check how the node looks now in the help panel.\n\nNote that node's pin order is determined by the order of respective terminals. Try to reorder the input terminals and look how it affects the preview in the help panel.",
+      "id": "rkyWciVFV",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": 0
+      },
+      "size": {
+        "height": 5,
+        "units": "slots",
+        "width": 8
+      }
+    }
+  ],
+  "links": [
+    {
+      "id": "BJId0a_FV",
+      "input": {
+        "nodeId": "r1gT8CaOYE",
+        "pinKey": "rJg00Nhe-"
+      },
+      "output": {
+        "nodeId": "SkX_Ca_YV",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "HyfaUCp_FE",
+      "input": {
+        "nodeId": "rk-pLC6uYV",
+        "pinKey": "r1tz8CdBDkb"
+      },
+      "output": {
+        "nodeId": "S1T8RTdKV",
+        "pinKey": "HktZUCdrPkZ"
+      }
+    },
+    {
+      "id": "SJsvAaOFN",
+      "input": {
+        "nodeId": "ByYwA6dKN",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "rk-pLC6uYV",
+        "pinKey": "rJqfIRdHwkW"
+      }
+    },
+    {
+      "id": "ryVOAp_YE",
+      "input": {
+        "nodeId": "S1T8RTdKV",
+        "pinKey": "HJjZLRdBw1-"
+      },
+      "output": {
+        "nodeId": "SkX_Ca_YV",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ryma8Cp_t4",
+      "input": {
+        "nodeId": "rk-pLC6uYV",
+        "pinKey": "S1dG8AOBPJW"
+      },
+      "output": {
+        "nodeId": "r1gT8CaOYE",
+        "pinKey": "B19RYS3lW"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "ByYwA6dKN",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 6
+      },
+      "type": "xod/patch-nodes/output-boolean"
+    },
+    {
+      "boundLiterals": {
+        "SJqZ8COrDkW": "0.4"
+      },
+      "id": "S1T8RTdKV",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 3
+      },
+      "type": "xod/core/less"
+    },
+    {
+      "id": "SkX_Ca_YV",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/input-number"
+    },
+    {
+      "boundLiterals": {
+        "HJbACN3gb": "0.7"
+      },
+      "id": "r1gT8CaOYE",
+      "position": {
+        "units": "slots",
+        "x": 13,
+        "y": 3
+      },
+      "type": "xod/core/greater"
+    },
+    {
+      "id": "rk-pLC6uYV",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 4
+      },
+      "type": "xod/core/nor"
+    }
+  ]
+}

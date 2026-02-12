@@ -1,0 +1,773 @@
+{
+  "links": [
+    {
+      "id": "BJLNeIm3v-7",
+      "input": {
+        "nodeId": "SJ-WeI72D-7",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "rk1bg8m3vbm",
+        "pinKey": "Skw_dnU-Q"
+      }
+    },
+    {
+      "id": "Bk-MgUQ2vbm",
+      "input": {
+        "nodeId": "S1xgIQ3wbQ",
+        "pinKey": "r1bXu3LWm"
+      },
+      "output": {
+        "nodeId": "S1wlL7nPbQ",
+        "pinKey": "Hkeetvn8-Q"
+      }
+    },
+    {
+      "id": "Bk3BPRv8_X",
+      "input": {
+        "nodeId": "B1ebg8Xnwbm",
+        "pinKey": "HkeKDhI-7"
+      },
+      "output": {
+        "nodeId": "S1jSD0PUO7",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "BkMgHPCP8_m",
+      "input": {
+        "nodeId": "HyQZlImnvWm",
+        "pinKey": "HkeKDhI-7"
+      },
+      "output": {
+        "nodeId": "Hyblrv0PLuX",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "BksXe872w-X",
+      "input": {
+        "nodeId": "HkKxeUX3vZ7",
+        "pinKey": "B1P1nFwaM"
+      },
+      "output": {
+        "nodeId": "SyqllLXnwWQ",
+        "pinKey": "HkyxURuSPyW"
+      }
+    },
+    {
+      "id": "Bkw4eI73vbX",
+      "input": {
+        "nodeId": "SyGWlUmhPWm",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "B1ebg8Xnwbm",
+        "pinKey": "Skw_dnU-Q"
+      }
+    },
+    {
+      "id": "BkzHlLQhwZm",
+      "input": {
+        "nodeId": "HJUe87hP-7",
+        "pinKey": "HJO3D3UZX"
+      },
+      "output": {
+        "nodeId": "BkYWgUQ2DW7",
+        "pinKey": "Hkeetvn8-Q"
+      }
+    },
+    {
+      "id": "BycVgLXhDZ7",
+      "input": {
+        "nodeId": "BJVWxLQ3P-X",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "HyQZlImnvWm",
+        "pinKey": "Skw_dnU-Q"
+      }
+    },
+    {
+      "id": "H1ASDAvIOQ",
+      "input": {
+        "nodeId": "BkHWx8m3vWm",
+        "pinKey": "HkeKDhI-7"
+      },
+      "output": {
+        "nodeId": "SJTSwAvIdX",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "H1VOCvUOm",
+      "input": {
+        "nodeId": "BJXx8Q2vWQ",
+        "pinKey": "S1gjHAPL_7"
+      },
+      "output": {
+        "nodeId": "SJlSN2v-m",
+        "pinKey": "Bk4gU0drwJ-"
+      }
+    },
+    {
+      "id": "H1jP7hDZm",
+      "input": {
+        "nodeId": "SyqllLXnwWQ",
+        "pinKey": "Bkh8A_Sv1-"
+      },
+      "output": {
+        "nodeId": "BJEPQ2PWQ",
+        "pinKey": "rkl6IK3L-7"
+      }
+    },
+    {
+      "id": "H1sVxUm3DW7",
+      "input": {
+        "nodeId": "SJ8bgU7nvZQ",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "BkHWx8m3vWm",
+        "pinKey": "Skw_dnU-Q"
+      }
+    },
+    {
+      "id": "HJgBxLQ2vZX",
+      "input": {
+        "nodeId": "HyD-xLQnP-7",
+        "pinKey": "r1bXu3LWm"
+      },
+      "output": {
+        "nodeId": "BkHWx8m3vWm",
+        "pinKey": "Hkeetvn8-Q"
+      }
+    },
+    {
+      "id": "S1-Ne8mhDWQ",
+      "input": {
+        "nodeId": "H1plx87hDZX",
+        "pinKey": "r1bXu3LWm"
+      },
+      "output": {
+        "nodeId": "S1xgIQ3wbQ",
+        "pinKey": "Hkeetvn8-Q"
+      }
+    },
+    {
+      "id": "SJ2be8mnwW7",
+      "input": {
+        "nodeId": "rJfgUm2DZQ",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "S1wlL7nPbQ",
+        "pinKey": "Skw_dnU-Q"
+      }
+    },
+    {
+      "id": "SJ9HvAwLdX",
+      "input": {
+        "nodeId": "BkYWgUQ2DW7",
+        "pinKey": "HkeKDhI-7"
+      },
+      "output": {
+        "nodeId": "B1FSwRPId7",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SJMBvCwUOQ",
+      "input": {
+        "nodeId": "S1xgIQ3wbQ",
+        "pinKey": "HkeKDhI-7"
+      },
+      "output": {
+        "nodeId": "BkWrPRv8d7",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SJRExLm2wbm",
+      "input": {
+        "nodeId": "HyQZlImnvWm",
+        "pinKey": "r1bXu3LWm"
+      },
+      "output": {
+        "nodeId": "B1ebg8Xnwbm",
+        "pinKey": "Hkeetvn8-Q"
+      }
+    },
+    {
+      "id": "SJhElI7hwb7",
+      "input": {
+        "nodeId": "SkOWxUm2DWm",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "HyD-xLQnP-7",
+        "pinKey": "Skw_dnU-Q"
+      }
+    },
+    {
+      "id": "SJhme8mnDZm",
+      "input": {
+        "nodeId": "S1wlL7nPbQ",
+        "pinKey": "r1bXu3LWm"
+      },
+      "output": {
+        "nodeId": "HkKxeUX3vZ7",
+        "pinKey": "OkPg7GDaW"
+      }
+    },
+    {
+      "id": "SJlBvCw8OQ",
+      "input": {
+        "nodeId": "S1HDCwIOQ",
+        "pinKey": "__in__"
+      },
+      "output": {
+        "nodeId": "BJXx8Q2vWQ",
+        "pinKey": "rycxytIZQ"
+      }
+    },
+    {
+      "id": "SkTNg8QhPb7",
+      "input": {
+        "nodeId": "SkcZgU7nwZX",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "BkYWgUQ2DW7",
+        "pinKey": "Skw_dnU-Q"
+      }
+    },
+    {
+      "id": "SkgNx873DW7",
+      "input": {
+        "nodeId": "SyqllLXnwWQ",
+        "pinKey": "B1RU0OrDkb"
+      },
+      "output": {
+        "nodeId": "SJhle8QnDbm",
+        "pinKey": "HJhXDIY9-"
+      }
+    },
+    {
+      "id": "SyESPAvLum",
+      "input": {
+        "nodeId": "rk1bg8m3vbm",
+        "pinKey": "HkeKDhI-7"
+      },
+      "output": {
+        "nodeId": "HJ7SvCvL_m",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "SylxBvCD8_X",
+      "input": {
+        "nodeId": "S1wlL7nPbQ",
+        "pinKey": "HkeKDhI-7"
+      },
+      "output": {
+        "nodeId": "BJJxBP0D8dm",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "r1K2CPUuQ",
+      "input": {
+        "nodeId": "BJEPQ2PWQ",
+        "pinKey": "H1VpIKnLb7"
+      },
+      "output": {
+        "nodeId": "BJXx8Q2vWQ",
+        "pinKey": "HJoHCvU_Q"
+      }
+    },
+    {
+      "id": "r1VEx8Q3wWX",
+      "input": {
+        "nodeId": "rk1bg8m3vbm",
+        "pinKey": "r1bXu3LWm"
+      },
+      "output": {
+        "nodeId": "H1plx87hDZX",
+        "pinKey": "Hkeetvn8-Q"
+      }
+    },
+    {
+      "id": "r1mEe872P-X",
+      "input": {
+        "nodeId": "H10geL73wb7",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "H1plx87hDZX",
+        "pinKey": "Skw_dnU-Q"
+      }
+    },
+    {
+      "id": "rJBVlUX3P-7",
+      "input": {
+        "nodeId": "B1ebg8Xnwbm",
+        "pinKey": "r1bXu3LWm"
+      },
+      "output": {
+        "nodeId": "rk1bg8m3vbm",
+        "pinKey": "Hkeetvn8-Q"
+      }
+    },
+    {
+      "id": "rJJgpQWxS",
+      "input": {
+        "nodeId": "SJhle8QnDbm",
+        "pinKey": "BJI7P8t9Z"
+      },
+      "output": {
+        "nodeId": "HJUe87hP-7",
+        "pinKey": "Ske5EPhI-X"
+      }
+    },
+    {
+      "id": "rJRZlImhPZm",
+      "input": {
+        "nodeId": "BkVg8XhwWm",
+        "pinKey": "HkXK-dGob"
+      },
+      "output": {
+        "nodeId": "S1xgIQ3wbQ",
+        "pinKey": "Skw_dnU-Q"
+      }
+    },
+    {
+      "id": "rJdHvCwUum",
+      "input": {
+        "nodeId": "HyD-xLQnP-7",
+        "pinKey": "HkeKDhI-7"
+      },
+      "output": {
+        "nodeId": "S1vHw0D8um",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "rkl5DAD8dQ",
+      "input": {
+        "nodeId": "BJEPQ2PWQ",
+        "pinKey": "HkT8KhLWm"
+      },
+      "output": {
+        "nodeId": "Bk5w0PL_Q",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ry-rlI73DW7",
+      "input": {
+        "nodeId": "BkYWgUQ2DW7",
+        "pinKey": "r1bXu3LWm"
+      },
+      "output": {
+        "nodeId": "HyD-xLQnP-7",
+        "pinKey": "Hkeetvn8-Q"
+      }
+    },
+    {
+      "id": "ry8rwCwI_m",
+      "input": {
+        "nodeId": "H1plx87hDZX",
+        "pinKey": "HkeKDhI-7"
+      },
+      "output": {
+        "nodeId": "HJBrD0PLO7",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ryVlBv0PIOX",
+      "input": {
+        "nodeId": "HJUe87hP-7",
+        "pinKey": "Sk9EvnL-7"
+      },
+      "output": {
+        "nodeId": "rJQgrPADI_7",
+        "pinKey": "__out__"
+      }
+    },
+    {
+      "id": "ryyBe8Q3D-7",
+      "input": {
+        "nodeId": "BkHWx8m3vWm",
+        "pinKey": "r1bXu3LWm"
+      },
+      "output": {
+        "nodeId": "HyQZlImnvWm",
+        "pinKey": "Hkeetvn8-Q"
+      }
+    }
+  ],
+  "nodes": [
+    {
+      "id": "B1FSwRPId7",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 25,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
+      "id": "B1ebg8Xnwbm",
+      "position": {
+        "units": "slots",
+        "x": 13,
+        "y": 5
+      },
+      "type": "@/read-byte"
+    },
+    {
+      "boundLiterals": {
+        "ryGwYhIZm": "\"AT\""
+      },
+      "id": "BJEPQ2PWQ",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 2
+      },
+      "type": "@/print"
+    },
+    {
+      "id": "BJJxBP0D8dm",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
+      "id": "BJVWxLQ3P-X",
+      "position": {
+        "units": "slots",
+        "x": 16,
+        "y": 6
+      },
+      "type": "xod/core/watch"
+    },
+    {
+      "boundLiterals": {
+        "Syz-kKUWX": "D8",
+        "r1mZktLZm": "D9"
+      },
+      "id": "BJXx8Q2vWQ",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": -1
+      },
+      "type": "@/soft-uart"
+    },
+    {
+      "id": "Bk5w0PL_Q",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 1
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
+      "id": "BkHWx8m3vWm",
+      "position": {
+        "units": "slots",
+        "x": 19,
+        "y": 5
+      },
+      "type": "@/read-byte"
+    },
+    {
+      "id": "BkVg8XhwWm",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 6
+      },
+      "type": "xod/core/watch"
+    },
+    {
+      "id": "BkWrPRv8d7",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
+      "id": "BkYWgUQ2DW7",
+      "position": {
+        "units": "slots",
+        "x": 25,
+        "y": 5
+      },
+      "type": "@/read-byte"
+    },
+    {
+      "id": "H10geL73wb7",
+      "position": {
+        "units": "slots",
+        "x": 7,
+        "y": 6
+      },
+      "type": "xod/core/watch"
+    },
+    {
+      "id": "H1plx87hDZX",
+      "position": {
+        "units": "slots",
+        "x": 7,
+        "y": 5
+      },
+      "type": "@/read-byte"
+    },
+    {
+      "id": "HJ7SvCvL_m",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
+      "id": "HJBrD0PLO7",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 7,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
+      "id": "HJUe87hP-7",
+      "position": {
+        "units": "slots",
+        "x": 29,
+        "y": 5
+      },
+      "type": "@/end"
+    },
+    {
+      "boundLiterals": {
+        "SJ-1mZPTz": "Continuously"
+      },
+      "id": "HkKxeUX3vZ7",
+      "position": {
+        "units": "slots",
+        "x": 2,
+        "y": 4
+      },
+      "type": "xod/core/gate"
+    },
+    {
+      "id": "HyD-xLQnP-7",
+      "position": {
+        "units": "slots",
+        "x": 22,
+        "y": 5
+      },
+      "type": "@/read-byte"
+    },
+    {
+      "id": "HyQZlImnvWm",
+      "position": {
+        "units": "slots",
+        "x": 16,
+        "y": 5
+      },
+      "type": "@/read-byte"
+    },
+    {
+      "id": "Hyblrv0PLuX",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 16,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
+      "id": "S1HDCwIOQ",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 0
+      },
+      "type": "xod/patch-nodes/to-bus"
+    },
+    {
+      "id": "S1jSD0PUO7",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 13,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
+      "id": "S1vHw0D8um",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 22,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
+      "id": "S1wlL7nPbQ",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 5
+      },
+      "type": "@/read-byte"
+    },
+    {
+      "id": "S1xgIQ3wbQ",
+      "position": {
+        "units": "slots",
+        "x": 4,
+        "y": 5
+      },
+      "type": "@/read-byte"
+    },
+    {
+      "id": "SJ-WeI72D-7",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 6
+      },
+      "type": "xod/core/watch"
+    },
+    {
+      "id": "SJ8bgU7nvZQ",
+      "position": {
+        "units": "slots",
+        "x": 19,
+        "y": 6
+      },
+      "type": "xod/core/watch"
+    },
+    {
+      "id": "SJTSwAvIdX",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 19,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
+      "id": "SJhle8QnDbm",
+      "position": {
+        "units": "slots",
+        "x": 29,
+        "y": 6
+      },
+      "type": "xod/core/defer"
+    },
+    {
+      "boundLiterals": {
+        "SkSuD6LMb": "On Boot",
+        "Skre8ROSv1-": "3"
+      },
+      "description": "Hack to make watch nodes works on Leonardo",
+      "id": "SJlSN2v-m",
+      "position": {
+        "units": "slots",
+        "x": 0,
+        "y": -1
+      },
+      "type": "xod/core/delay"
+    },
+    {
+      "id": "SkOWxUm2DWm",
+      "position": {
+        "units": "slots",
+        "x": 22,
+        "y": 6
+      },
+      "type": "xod/core/watch"
+    },
+    {
+      "id": "SkcZgU7nwZX",
+      "position": {
+        "units": "slots",
+        "x": 25,
+        "y": 6
+      },
+      "type": "xod/core/watch"
+    },
+    {
+      "id": "SyGWlUmhPWm",
+      "position": {
+        "units": "slots",
+        "x": 13,
+        "y": 6
+      },
+      "type": "xod/core/watch"
+    },
+    {
+      "id": "SyqllLXnwWQ",
+      "position": {
+        "units": "slots",
+        "x": 3,
+        "y": 3
+      },
+      "type": "xod/core/flip-flop"
+    },
+    {
+      "id": "rJQgrPADI_7",
+      "label": "UART",
+      "position": {
+        "units": "slots",
+        "x": 29,
+        "y": 4
+      },
+      "type": "xod/patch-nodes/from-bus"
+    },
+    {
+      "id": "rJfgUm2DZQ",
+      "position": {
+        "units": "slots",
+        "x": 1,
+        "y": 6
+      },
+      "type": "xod/core/watch"
+    },
+    {
+      "id": "rk1bg8m3vbm",
+      "position": {
+        "units": "slots",
+        "x": 10,
+        "y": 5
+      },
+      "type": "@/read-byte"
+    }
+  ]
+}

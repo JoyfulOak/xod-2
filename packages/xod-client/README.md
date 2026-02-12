@@ -2,7 +2,7 @@
 
 This package is a part of the [XOD](https://github.com/xodio/xod) project.
 
-The package contains the most of code related to the XOD IDE user interface. `xod-client` is build on React + Redux stack.
+The package contains the most of code related to the XOD 2 IDE user interface. `xod-client` is build on React + Redux stack.
 
 `xod-client` is neutral to platform. That means it doesn’t contain code specific to a particular execution environment like browser or electron.
 
