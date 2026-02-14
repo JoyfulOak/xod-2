@@ -2,5 +2,5 @@
   "description": "Support for RFID/NFC modules based on a PN532 chip.",
   "license": "MIT",
   "name": "pn532-nfc",
-  "version": "2026.2.2"
+  "version": "2026.2.0"
 }

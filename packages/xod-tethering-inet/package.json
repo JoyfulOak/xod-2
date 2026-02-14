@@ -1,6 +1,6 @@
 {
   "name": "xod-tethering-inet",
-  "version": "2026.2.2",
+  "version": "2026.2.0",
   "scripts": {
     "refmt": "find src/ test/ -name '*.re*' -exec refmt --in-place {} +",
     "build:re": "bsb -make-world",

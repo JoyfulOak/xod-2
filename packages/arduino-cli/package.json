@@ -1,6 +1,6 @@
 {
   "name": "arduino-cli",
-  "version": "2026.2.2",
+  "version": "2026.2.0",
   "description": "JS-wrapper over arduino-cli",
   "main": "dist/index.js",
   "files": [

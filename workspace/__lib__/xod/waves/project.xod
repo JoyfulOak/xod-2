@@ -5,5 +5,5 @@
   "description": "A collection of nodes that generate wave signals",
   "license": "AGPL",
   "name": "waves",
-  "version": "2026.2.2"
+  "version": "2026.2.0"
 }

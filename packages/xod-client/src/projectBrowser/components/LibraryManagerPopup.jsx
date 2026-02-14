@@ -25,12 +25,14 @@ class LibraryManagerPopup extends React.PureComponent {
       patchPath: defaultPatchPath,
       libName: defaultLibName,
       hiddenLibName: defaultHiddenLibName,
+      deleteLibName: '',
     };
 
     this.onPatchChange = this.onPatchChange.bind(this);
     this.onLibNameChange = this.onLibNameChange.bind(this);
     this.onMoveClicked = this.onMoveClicked.bind(this);
     this.onDeleteLibrary = this.onDeleteLibrary.bind(this);
+    this.onDeleteLibraryChange = this.onDeleteLibraryChange.bind(this);
     this.onHiddenLibChange = this.onHiddenLibChange.bind(this);
     this.onUnhideLibraryNodes = this.onUnhideLibraryNodes.bind(this);
   }
@@ -46,6 +48,7 @@ class LibraryManagerPopup extends React.PureComponent {
         patchPath: defaultPatchPath,
         libName: defaultLibName,
         hiddenLibName: defaultHiddenLibName,
+        deleteLibName: '',
       });
     }
   }
@@ -103,6 +106,10 @@ class LibraryManagerPopup extends React.PureComponent {
     this.setState({ hiddenLibName: event.target.value });
   }
 
+  onDeleteLibraryChange(event) {
+    this.setState({ deleteLibName: event.target.value });
+  }
+
   onMoveClicked() {
     const { patchPath, libName } = this.state;
     if (!patchPath || !libName) return;
@@ -119,8 +126,9 @@ class LibraryManagerPopup extends React.PureComponent {
     }
   }
 
-  onDeleteLibrary(event) {
-    const libName = event.target.value;
+  onDeleteLibrary() {
+    const { deleteLibName } = this.state;
+    const libName = deleteLibName;
     if (!libName) return;
     const shouldDelete = window.confirm(
       `Delete library "${libName}" and all its patches?`
@@ -155,7 +163,11 @@ class LibraryManagerPopup extends React.PureComponent {
           <div className="LibraryManagerPopup-sectionTitle">Move Patch</div>
           <div className="LibraryManagerPopup-row">
             <label>Patch</label>
-            <select value={this.state.patchPath} onChange={this.onPatchChange}>
+            <select
+              value={this.state.patchPath}
+              onChange={this.onPatchChange}
+              className="inspectorSelectInput inspectorInput--full-width"
+            >
               {patchOptions.map(option => (
                 <option key={option.value} value={option.value}>
                   {option.label}
@@ -165,13 +177,17 @@ class LibraryManagerPopup extends React.PureComponent {
           </div>
           <div className="LibraryManagerPopup-row">
             <label>Target Library</label>
-            <select value={this.state.libName} onChange={this.onLibNameChange}>
+            <select
+              value={this.state.libName}
+              onChange={this.onLibNameChange}
+              className="inspectorSelectInput inspectorInput--full-width"
+            >
               <option value={MANAGED_LIBRARY}>{MANAGED_LIBRARY}</option>
             </select>
           </div>
           <div className="LibraryManagerPopup-actions">
             <button
-              className="LibraryManagerPopup-primary"
+              className="Button Button--primary"
               onClick={this.onMoveClicked}
               disabled={!this.state.patchPath || !this.state.libName}
             >
@@ -191,6 +207,7 @@ class LibraryManagerPopup extends React.PureComponent {
               value={this.state.hiddenLibName}
               onChange={this.onHiddenLibChange}
               disabled={!hasHiddenLibraries}
+              className="inspectorSelectInput inspectorInput--full-width"
             >
               {!hasHiddenLibraries ? (
                 <option value="" disabled>
@@ -206,7 +223,7 @@ class LibraryManagerPopup extends React.PureComponent {
           </div>
           <div className="LibraryManagerPopup-actions">
             <button
-              className="LibraryManagerPopup-primary"
+              className="Button Button--primary"
               onClick={this.onUnhideLibraryNodes}
               disabled={!this.state.hiddenLibName}
             >
@@ -222,7 +239,11 @@ class LibraryManagerPopup extends React.PureComponent {
           <div className="LibraryManagerPopup-sectionTitle">Delete Library</div>
           <div className="LibraryManagerPopup-row">
             <label>Library</label>
-            <select defaultValue="" onChange={this.onDeleteLibrary}>
+            <select
+              value={this.state.deleteLibName}
+              onChange={this.onDeleteLibraryChange}
+              className="inspectorSelectInput inspectorInput--full-width"
+            >
               <option value="" disabled>
                 Select library
               </option>
@@ -232,6 +253,15 @@ class LibraryManagerPopup extends React.PureComponent {
                 </option>
               ))}
             </select>
+          </div>
+          <div className="LibraryManagerPopup-actions">
+            <button
+              className="Button Button--primary"
+              onClick={this.onDeleteLibrary}
+              disabled={!this.state.deleteLibName}
+            >
+              Delete
+            </button>
           </div>
           <div className="LibraryManagerPopup-hint">
             Deleting a library removes all patches from your project.

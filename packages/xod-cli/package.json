@@ -1,6 +1,6 @@
 {
   "name": "xod-cli",
-  "version": "2026.2.2",
+  "version": "2026.2.0",
   "description": "XOD project: Command Line Interface",
   "author": "XOD Team <dev@xod.io>",
   "bin": {
@@ -24,12 +24,12 @@
     "node-fetch": "^2.3.0",
     "ramda": "^0.24.1",
     "source-map-support": "^0.5.9",
-    "xod-arduino": "^2026.2.2",
-    "xod-deploy-bin": "^2026.2.2",
-    "xod-fs": "^2026.2.2",
+    "xod-arduino": "^2026.2.0",
+    "xod-deploy-bin": "^2026.2.0",
+    "xod-fs": "^2026.2.0",
     "xod-func-tools": "^0.34.0",
-    "xod-project": "^2026.2.2",
-    "xod-tabtest": "^2026.2.2"
+    "xod-project": "^2026.2.0",
+    "xod-tabtest": "^2026.2.0"
   },
   "devDependencies": {
     "@oclif/dev-cli": "^1.19.4",

@@ -78,6 +78,7 @@
     "node-gyp": "^7.1.0",
     "node-sass": "^4.14.1",
     "sass": "^1.69.7",
+    "sass": "^1.32.13",
     "postcss": "^6.0.16",
     "postcss-loader": "^2.0.10",
     "prettier": "^1.11.1",

@@ -5,5 +5,5 @@
   "description": "Nodes to work with graphics in XOD",
   "license": "AGPL-3.0",
   "name": "graphics",
-  "version": "2026.2.2"
+  "version": "2026.2.0"
 }

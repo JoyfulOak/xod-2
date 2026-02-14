@@ -1,6 +1,6 @@
 {
   "name": "xod-project",
-  "version": "2026.2.2",
+  "version": "2026.2.0",
   "description": "API functions to work on XOD project state",
   "keywords": [],
   "license": "AGPL-3.0",
@@ -22,7 +22,7 @@
     "test:watch": "yarn run test --watch"
   },
   "dependencies": {
-    "belt-holes": "^2026.2.2",
+    "belt-holes": "^2026.2.0",
     "hm-def": "^0.3.2",
     "ramda": "^0.24.1",
     "ramda-fantasy": "^0.8.0",

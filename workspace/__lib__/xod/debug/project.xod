@@ -5,5 +5,5 @@
   "description": "Debug nodes for XOD",
   "license": "AGPL-3.0",
   "name": "debug",
-  "version": "2026.2.2"
+  "version": "2026.2.0"
 }
